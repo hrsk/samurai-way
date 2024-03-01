@@ -1,11 +1,12 @@
 import { Posts } from "./posts/Posts";
+import bg from "./../../assets/background/profile_bg_image.jpg"
 
 export const Profile = () => {
     return (
-        <div>
+        <>
             PROFILE
-            <img alt='background' />
+            <img style={{ width: "100%" }} src={bg} alt='background' />
             <Posts />
-        </div>
+        </>
     );
 };
