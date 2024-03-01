@@ -1,4 +1,8 @@
 import './App.css';
+import { Content } from './components/content/Content';
+import { Footer } from './components/footer/Footer';
+import { Header } from './components/header/Header';
+import { Navbar } from './components/navbar/Navbar';
 
 export const App = () => {
   return (
@@ -7,52 +11,6 @@ export const App = () => {
       <Navbar />
       <Content />
       <Footer />
-    </div>
-  );
-}
-
-export const Header = () => {
-  return (
-    <div className='header'>
-      HEADER
-    </div>
-  );
-}
-export const Navbar = () => {
-  return (
-    <div className='nav'>
-      NAVBAR
-    </div>
-  );
-}
-export const Content = () => {
-  return (
-    <div className='app-wrapper-content'>
-      CONTENT
-      <Profile />
-      <Dialogs />
-    </div>
-  );
-}
-export const Footer = () => {
-  return (
-    <div className='footer'>
-      FOOTER
-    </div>
-  );
-}
-export const Profile = () => {
-  return (
-    <div>
-      PROFILE
-    </div>
-  );
-}
-
-export const Dialogs = () => {
-  return (
-    <div>
-      DIALOGS
     </div>
   );
 }
