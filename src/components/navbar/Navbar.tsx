@@ -1,29 +1,32 @@
 import { NavLink } from "react-router-dom";
 
+type navbarItem = {
+    id: number
+    title: string
+}
+
+const arrayNavbarItems: navbarItem[] = [
+    { id: 1, title: 'Profile' },
+    { id: 2, title: 'News' },
+    { id: 3, title: 'Friends' },
+    { id: 4, title: 'Messages' },
+    { id: 5, title: 'Music' },
+    { id: 6, title: 'Video' },
+    { id: 7, title: 'Settings' },
+]
+
+const navbarItems = arrayNavbarItems.map(item => {
+    return (
+        <NavLink to={`/${item.title.toLowerCase()}`} style={{ textDecoration: 'none', color: 'gold' }}>
+            <span style={{ textTransform: 'uppercase' }}>{item.title}</span>
+        </NavLink>
+    )
+})
+
 export const Navbar = () => {
     return (
         <div className='nav'>
-            <NavLink to="/profile" style={{ textDecoration: 'none', color: 'gold' }}>
-                <span style={{ textTransform: 'uppercase' }}>Profile</span>
-            </NavLink>
-            <NavLink to="/news" style={{ textDecoration: 'none', color: 'gold' }}>
-                <span style={{ textTransform: 'uppercase' }}>News</span>
-            </NavLink>
-            <NavLink to="/dialogs" style={{ textDecoration: 'none', color: 'gold' }}>
-                <span style={{ textTransform: 'uppercase' }}>Friends</span>
-            </NavLink>
-            <NavLink to="/dialogs" style={{ textDecoration: 'none', color: 'gold' }}>
-                <span style={{ textTransform: 'uppercase' }}>Messages</span>
-            </NavLink>
-            <NavLink to="/music" style={{ textDecoration: 'none', color: 'gold' }}>
-                <span style={{ textTransform: 'uppercase' }}>Music</span>
-            </NavLink>
-            <NavLink to="/video" style={{ textDecoration: 'none', color: 'gold' }}>
-                <span style={{ textTransform: 'uppercase' }}>Video</span>
-            </NavLink>
-            <NavLink to="/settings" style={{ textDecoration: 'none', color: 'gold' }}>
-                <span style={{ textTransform: 'uppercase' }}>Settings</span>
-            </NavLink>
+            {navbarItems}
         </div>
     );
 };
