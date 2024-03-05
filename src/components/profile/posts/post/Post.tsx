@@ -1,4 +1,4 @@
-import { PostType } from "../Posts";
+import { PostType } from "../../../..";
 import avatar from "./../../../../assets/avatar_images/rocket_ship_icon.png"
 
 type PropsType = {
