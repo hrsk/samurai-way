@@ -1,9 +1,9 @@
 import { Posts } from "./posts/Posts";
 import bg from "./../../assets/background/profile_bg_image.jpg"
-import { PostType } from "../..";
+import { PostType } from "../../state/state";
 
 type PropsType = {
-    arrayPosts: PostType[]
+    posts: PostType[]
 }
 
 export const Profile = (props: PropsType) => {
@@ -11,7 +11,7 @@ export const Profile = (props: PropsType) => {
         <>
             PROFILE
             <img style={{ width: "100%" }} src={bg} alt='background' />
-            <Posts arrayPosts={props.arrayPosts} />
+            <Posts posts={props.posts} />
         </>
     );
 };

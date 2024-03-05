@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { NavbarItemType } from "../..";
+import { NavbarItemType } from "../../state/state";
 
 type PropsType = {
     arrayNavbarItems: NavbarItemType[]

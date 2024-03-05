@@ -1,19 +1,19 @@
 import { Route } from 'react-router-dom';
+import { MessagesPageType, ProfilePageType } from '../../state/state';
 import { Dialogs } from '../dialogs/Dialogs';
 import { Profile } from '../profile/Profile';
-import { DialogType, MessageType, PostType } from '../..';
 
 type PropsType = {
-    arrayDialogs: DialogType[]
-    arrayMessages: MessageType[]
-    arrayPosts: PostType[]
+    profilePage: ProfilePageType
+    messagesPage: MessagesPageType
 }
 
 export const Content = (props: PropsType) => {
     return (
         <div className='app-wrapper-content'>
-            <Route exact path={'/profile'} component={() => <Profile arrayPosts={props.arrayPosts} />} />
-            <Route exact path={'/messages'} component={() => <Dialogs arrayDialogs={props.arrayDialogs} arrayMessages={props.arrayMessages} />} />
+            <Route exact path={'/profile'} component={() => <Profile posts={props.profilePage.posts} />} />
+            <Route exact path={'/messages'} component={() => <Dialogs dialogs={props.messagesPage.dialogs}
+                messages={props.messagesPage.messages} />} />
         </div>
     );
 }

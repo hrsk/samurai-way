@@ -1,16 +1,16 @@
-import { DialogType, MessageType } from "../..";
+import { DialogType, MessageType } from "../../state/state";
 import { Dialog } from "./dialog/Dialog";
 import { Message } from "./message/Message";
 
 type PropsType = {
-    arrayDialogs: DialogType[]
-    arrayMessages: MessageType[]
+    dialogs: DialogType[]
+    messages: MessageType[]
 }
 
 export const Dialogs = (props: PropsType) => {
 
-    const gialogs = props.arrayDialogs.map(item => <Dialog key={item.id} userName={item.userName} />)
-    const messages = props.arrayMessages.map(item => <Message key={item.id} message={item.message} />)
+    const gialogs = props.dialogs.map(item => <Dialog key={item.id} userName={item.userName} />)
+    const messages = props.messages.map(item => <Message key={item.id} message={item.message} />)
 
     return (
         <div style={{ display: 'flex', gap: '100px' }}>

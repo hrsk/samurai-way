@@ -1,13 +1,13 @@
-import { PostType } from "../../..";
+import { PostType } from "../../../state/state";
 import { Post } from "./post/Post";
 
 type PropsType = {
-    arrayPosts: PostType[]
+    posts: PostType[]
 }
 
 export const Posts = (props: PropsType) => {
 
-    const posts = props.arrayPosts.map(post => <Post key={post.id} post={post} />)
+    const posts = props.posts.map(post => <Post key={post.id} post={post} />)
 
     return (
         <div>
