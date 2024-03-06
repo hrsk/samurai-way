@@ -1,0 +1,5 @@
+.contentWrapper {
+    grid-area: content;
+    padding: 10px;
+    border: rgb(255, 243, 15) solid 2px;
+}

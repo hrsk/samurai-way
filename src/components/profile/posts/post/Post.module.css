@@ -1,0 +1,23 @@
+.postText {
+    padding-left: 7px;
+}
+
+.likesCount {
+    padding-left: 7px;
+    color: crimson;
+}
+
+.imgSize {
+    width: 48px;
+    height: 48px;
+}
+
+.ul {
+    list-style: none;
+    padding: 0;
+}
+
+.li {
+    display: flex;
+    align-items: center;
+}

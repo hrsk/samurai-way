@@ -1,6 +1,7 @@
 import { DialogType, MessageType } from "../../state/state";
 import { Dialog } from "./dialog/Dialog";
 import { Message } from "./message/Message";
+import style from "./Dialog.module.css"
 
 type PropsType = {
     dialogs: DialogType[]
@@ -13,11 +14,11 @@ export const Dialogs = (props: PropsType) => {
     const messages = props.messages.map(item => <Message key={item.id} message={item.message} />)
 
     return (
-        <div style={{ display: 'flex', gap: '100px' }}>
-            <ul style={{ listStyle: 'none', padding: 0 }}>
+        <div className={style.wrapper}>
+            <ul className={style.ul}>
                 {gialogs}
             </ul>
-            <ul style={{ listStyle: 'none', padding: 0 }}>
+            <ul className={style.ul}>
                 {messages}
             </ul>
         </div>

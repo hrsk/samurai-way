@@ -1,5 +1,6 @@
 import { PostType } from "../../../../state/state";
 import avatar from "./../../../../assets/avatar_images/rocket_ship_icon.png"
+import style from "./Post.module.css"
 
 type PropsType = {
     post: PostType
@@ -7,11 +8,11 @@ type PropsType = {
 
 export const Post = ({ post }: PropsType) => {
     return (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-            <li style={{ display: "flex", alignItems: "center" }}>
-                <img src={avatar} alt="avatar" style={{ width: "48px", height: "48px" }} />
-                <span style={{ paddingLeft: "7px" }}>{post.text}</span>
-                <span style={{ paddingLeft: "7px", color: "crimson" }}>{post.likesCount}</span>
+        <ul className={style.ul}>
+            <li className={style.li}>
+                <img className={style.imgSize} src={avatar} alt="avatar" />
+                <span className={style.postText}>{post.text}</span>
+                <span className={style.likesCount}>{post.likesCount}</span>
             </li>
         </ul>
     );

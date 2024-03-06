@@ -11,25 +11,3 @@
   grid-template-columns: 1fr 6fr;
   grid-gap: 10px;
 }
-
-.app-wrapper-content {
-  grid-area: content;
-  padding: 10px;
-  border: rgb(255, 243, 15) solid 2px;
-}
-.header {
-  grid-area: header;
-  border: pink solid 2px;
-}
-.nav {
-    display: grid;
-    border: rosybrown solid 2px;
-    grid-area: nav;
-    padding: 20px;
-    grid-template-rows: 1fr;
-    grid-template-columns: 8fr;
-}
-.footer {
-  grid-area: footer;
-  border: black solid 2px;
-}

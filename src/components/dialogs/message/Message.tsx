@@ -1,3 +1,4 @@
+import style from "./Message.module.css"
 
 type PropsType = {
     message: string
@@ -6,7 +7,7 @@ type PropsType = {
 export const Message = ({ message }: PropsType) => {
 
     return (
-        <li style={{ paddingBottom: '10px' }}>
+        <li className={style.li}>
             {message}
         </li>
     );

@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import style from "./Dialog.module.css"
 
 type PropsType = {
     userName: string
@@ -7,8 +8,8 @@ type PropsType = {
 export const Dialog = ({ userName }: PropsType) => {
 
     return (
-        <li style={{ paddingBottom: '10px' }}>
-            <NavLink to={`/dialogs/${userName}`} style={{ textDecoration: 'none' }}>
+        <li className={style.li}>
+            <NavLink className={style.link} to={`/dialogs/${userName}`}>
                 {userName}
             </NavLink>
         </li>

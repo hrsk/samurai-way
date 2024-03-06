@@ -1,0 +1,9 @@
+.wrapper {
+    display: flex;
+    gap: 100px;
+}
+
+.ul {
+    list-style: none;
+    padding: 0;
+}
