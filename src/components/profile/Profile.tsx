@@ -4,7 +4,9 @@ import { PostType } from "../../state/state";
 
 type PropsType = {
     posts: PostType[]
-    addPost: (value: string) => void
+    addPost: () => void
+    changePostText: (value: string) => void
+    newPostText: string
 }
 
 export const Profile = (props: PropsType) => {
@@ -12,7 +14,10 @@ export const Profile = (props: PropsType) => {
         <>
             PROFILE
             <img style={{ width: "100%" }} src={bg} alt='background' />
-            <Posts posts={props.posts} addPost={props.addPost} />
+            <Posts posts={props.posts}
+                newPostText={props.newPostText}
+                addPost={props.addPost}
+                changePostText={props.changePostText} />
         </>
     );
 };

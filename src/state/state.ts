@@ -1,3 +1,5 @@
+import { renderThree } from ".."
+
 export const state: AppStateType = {
     navbar: {
         navbarItems: [
@@ -27,6 +29,7 @@ export const state: AppStateType = {
         ],
     },
     profilePage: {
+        newPostText: '',
         posts: [
             { id: 1, text: 'asdasdasd', likesCount: 99 },
             { id: 2, text: 'asdasdzxc', likesCount: 11 },
@@ -37,13 +40,19 @@ export const state: AppStateType = {
     },
 }
 
-export const addPost = (value: string) => {
+export const changePostText = (value: string) => {
+    state.profilePage.newPostText = value
+    renderThree(state)
+}
+
+export const addPost = () => {
     const newPost: PostType = {
         id: 6,
-        text: value,
+        text: state.profilePage.newPostText,
         likesCount: 0,
     }
     state.profilePage.posts.push(newPost)
+    renderThree(state)
     console.log(state.profilePage.posts)
 }
 
@@ -68,6 +77,7 @@ export type PostType = {
 }
 
 export type ProfilePageType = {
+    newPostText: string
     posts: PostType[]
 }
 

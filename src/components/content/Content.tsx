@@ -7,13 +7,19 @@ import style from "./Content.module.css"
 type PropsType = {
     profilePage: ProfilePageType
     messagesPage: MessagesPageType
-    addPost: (value: string) => void
+    addPost: () => void
+    changePostText: (value: string) => void
+    newPostText: string
 }
 
 export const Content = (props: PropsType) => {
     return (
         <div className={style.contentWrapper}>
-            <Route exact path={'/profile'} component={() => <Profile posts={props.profilePage.posts} addPost={props.addPost} />} />
+            <Route exact path={'/profile'} component={() => <Profile posts={props.profilePage.posts}
+                changePostText={props.changePostText}
+                addPost={props.addPost}
+                newPostText={props.newPostText} />}
+            />
             <Route exact path={'/messages'} component={() => <Dialogs dialogs={props.messagesPage.dialogs}
                 messages={props.messagesPage.messages} />} />
         </div>

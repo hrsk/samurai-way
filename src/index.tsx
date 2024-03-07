@@ -2,11 +2,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { App } from './App';
 import { BrowserRouter } from 'react-router-dom';
-import { state } from './state/state'
+import { AppStateType, addPost, changePostText, state } from './state/state'
 
-ReactDOM.render(
-  <BrowserRouter>
-    <App state={state} />
-  </BrowserRouter>,
-  document.getElementById('root')
-);
+export const renderThree = (state: AppStateType) => {
+  ReactDOM.render(
+    <BrowserRouter>
+      <App state={state}
+        addPost={addPost}
+        changePostText={changePostText}
+        newPostText={state.profilePage.newPostText} />
+    </BrowserRouter>,
+    document.getElementById('root')
+  );
+}
+renderThree(state)

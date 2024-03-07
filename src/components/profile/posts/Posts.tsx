@@ -1,29 +1,34 @@
-import { createRef } from "react";
+import { ChangeEvent, createRef } from "react";
 import { PostType } from "../../../state/state";
 import { Post } from "./post/Post";
 
 type PropsType = {
     posts: PostType[]
-    addPost: (value: string) => void
+    addPost: () => void
+    changePostText: (value: string) => void
+    newPostText: string
 }
 
 export const Posts = (props: PropsType) => {
 
     const posts = props.posts.map(post => <Post key={post.id} post={post} />)
 
-    const postText = createRef<HTMLTextAreaElement>();
+    const changePostTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.changePostText(e.currentTarget.value)
 
-    const addPost = () => {
-        if (postText.current) {
-            props.addPost(postText.current?.value)
-        }
+    }
+
+    const addPostHandler = () => {
+        props.addPost()
+        props.changePostText('')
     }
 
     return (
         <div>
             {posts}
-            <textarea ref={postText} />
-            <button onClick={addPost}>add post</button>
+            <textarea value={props.newPostText}
+                onChange={changePostTextHandler} />
+            <button onClick={addPostHandler}>add post</button>
         </div>
     );
 }
