@@ -2,9 +2,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { App } from './App';
 import { BrowserRouter } from 'react-router-dom';
-import { AppStateType, addPost, changePostText, state } from './state/state'
+import { AppStateType, addPost, changePostText, state, subscribe } from './state/state'
 
-export const renderThree = (state: AppStateType) => {
+export const rerenderEntireThree = (state: AppStateType) => {
   ReactDOM.render(
     <BrowserRouter>
       <App state={state}
@@ -15,4 +15,7 @@ export const renderThree = (state: AppStateType) => {
     document.getElementById('root')
   );
 }
-renderThree(state)
+rerenderEntireThree(state)
+subscribe(() => rerenderEntireThree(state))
+//@ts-ignore
+window.state = state;

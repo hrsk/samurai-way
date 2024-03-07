@@ -1,4 +1,3 @@
-import { renderThree } from ".."
 
 export const state: AppStateType = {
     navbar: {
@@ -38,6 +37,13 @@ export const state: AppStateType = {
             { id: 5, text: 'hgjfhjfgh', likesCount: 5 },
         ]
     },
+}
+
+let renderThree = (state: AppStateType) => {
+    console.log('state changed')
+}
+export const subscribe = (observer: () => void) => {
+    renderThree = observer;
 }
 
 export const changePostText = (value: string) => {
