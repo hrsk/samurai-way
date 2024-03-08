@@ -12,6 +12,7 @@ export const store: AppStoreType = {
             ],
         },
         messagesPage: {
+            newMessageText: '',
             dialogs: [
                 { id: 1, userName: 'Dimych' },
                 { id: 2, userName: 'Maria' },
@@ -51,6 +52,18 @@ export const store: AppStoreType = {
         this._state.profilePage.posts.push(newPost)
         this._renderThree(this._state)
     },
+    changeMessageText(value: string) {
+        this._state.messagesPage.newMessageText = value
+        this._renderThree(this._state)
+    },
+    sendMessage() {
+        const newMessage: MessageType = {
+            id: Math.random(),
+            message: this._state.messagesPage.newMessageText,
+        }
+        this._state.messagesPage.messages.push(newMessage)
+        this._renderThree(this._state)
+    },
     _renderThree() {
 
     },
@@ -69,6 +82,8 @@ export type AppStoreType = {
     getState: () => AppStateType
     changePostText: (value: string) => void
     addPost: () => void
+    changeMessageText: (value: string) => void
+    sendMessage: () => void
 }
 export type AppStateType = {
     navbar: NavbarType
@@ -105,6 +120,7 @@ export type MessageType = {
 }
 
 export type MessagesPageType = {
+    newMessageText: string
     dialogs: DialogType[]
     messages: MessageType[]
 }

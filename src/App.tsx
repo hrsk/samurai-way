@@ -10,6 +10,9 @@ type PropsType = {
   addPost: () => void
   changePostText: (value: string) => void
   newPostText: string
+  sendMessage: () => void
+  changeMessageText: (value: string) => void
+  newMessageText: string
   // arrayNavbarItems: NavbarItemType[]
   // arrayDialogs: DialogType[]
   // arrayMessages: MessageType[]
@@ -25,7 +28,10 @@ export const App = (props: PropsType) => {
         messagesPage={props.state.messagesPage}
         changePostText={props.changePostText}
         addPost={props.addPost}
-        newPostText={props.newPostText} />
+        newPostText={props.newPostText}
+        changeMessageText={props.changeMessageText}
+        sendMessage={props.sendMessage}
+        newMessageText={props.newMessageText} />
       <Footer />
     </div>
   );

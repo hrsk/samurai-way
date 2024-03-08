@@ -10,7 +10,10 @@ export const rerenderEntireThree = () => {
       <App state={store.getState()}
         addPost={store.addPost.bind(store)}
         changePostText={store.changePostText.bind(store)}
-        newPostText={store._state.profilePage.newPostText} />
+        newPostText={store._state.profilePage.newPostText}
+        sendMessage={store.sendMessage.bind(store)}
+        changeMessageText={store.changeMessageText.bind(store)}
+        newMessageText={store._state.messagesPage.newMessageText} />
     </BrowserRouter>,
     document.getElementById('root')
   );

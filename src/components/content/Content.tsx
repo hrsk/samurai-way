@@ -10,6 +10,9 @@ type PropsType = {
     addPost: () => void
     changePostText: (value: string) => void
     newPostText: string
+    sendMessage: () => void
+    changeMessageText: (value: string) => void
+    newMessageText: string
 }
 
 export const Content = (props: PropsType) => {
@@ -21,7 +24,10 @@ export const Content = (props: PropsType) => {
                 newPostText={props.newPostText} />}
             />
             <Route exact path={'/messages'} component={() => <Dialogs dialogs={props.messagesPage.dialogs}
-                messages={props.messagesPage.messages} />} />
+                messages={props.messagesPage.messages}
+                changeMessageText={props.changeMessageText}
+                sendMessage={props.sendMessage}
+                newMessageText={props.newMessageText} />} />
         </div>
     );
 }
