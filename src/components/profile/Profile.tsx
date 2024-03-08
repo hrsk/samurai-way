@@ -1,6 +1,6 @@
 import { Posts } from "./posts/Posts";
 import bg from "./../../assets/background/profile_bg_image.jpg"
-import { PostType } from "../../state/state";
+import { PostType } from "../../store/store";
 
 type PropsType = {
     posts: PostType[]

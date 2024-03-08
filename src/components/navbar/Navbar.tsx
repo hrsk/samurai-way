@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { NavbarItemType } from "../../state/state";
+import { NavbarItemType } from "../../store/store";
 import style from "./Navbar.module.css"
 
 type PropsType = {

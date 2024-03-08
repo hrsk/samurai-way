@@ -1,5 +1,5 @@
 import { ChangeEvent, createRef } from "react";
-import { PostType } from "../../../state/state";
+import { PostType } from "../../../store/store";
 import { Post } from "./post/Post";
 
 type PropsType = {

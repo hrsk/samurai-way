@@ -1,5 +1,5 @@
 import { Route } from 'react-router-dom';
-import { MessagesPageType, ProfilePageType } from '../../state/state';
+import { MessagesPageType, ProfilePageType } from '../../store/store';
 import { Dialogs } from '../dialogs/Dialogs';
 import { Profile } from '../profile/Profile';
 import style from "./Content.module.css"

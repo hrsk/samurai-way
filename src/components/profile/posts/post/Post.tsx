@@ -1,4 +1,4 @@
-import { PostType } from "../../../../state/state";
+import { PostType } from "../../../../store/store";
 import avatar from "./../../../../assets/avatar_images/rocket_ship_icon.png"
 import style from "./Post.module.css"
 

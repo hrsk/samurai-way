@@ -3,7 +3,7 @@ import { Content } from './components/content/Content';
 import { Footer } from './components/footer/Footer';
 import { Header } from './components/header/Header';
 import { Navbar } from './components/navbar/Navbar';
-import { AppStateType } from './state/state';
+import { AppStateType } from './store/store';
 
 type PropsType = {
   state: AppStateType

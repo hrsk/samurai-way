@@ -1,4 +1,4 @@
-import { DialogType, MessageType } from "../../state/state";
+import { DialogType, MessageType } from "../../store/store";
 import { Dialog } from "./dialog/Dialog";
 import { Message } from "./message/Message";
 import style from "./Dialog.module.css"
