@@ -3,7 +3,7 @@ import { Content } from './components/content/Content';
 import { Footer } from './components/footer/Footer';
 import { Header } from './components/header/Header';
 import { Navbar } from './components/navbar/Navbar';
-import { AppStateType } from './store/store';
+import { ActionsType, AppStateType } from './store/store';
 
 type PropsType = {
   state: AppStateType
@@ -13,7 +13,7 @@ type PropsType = {
   sendMessage: () => void
   changeMessageText: (value: string) => void
   newMessageText: string
-  dispatch: (action: any) => void
+  dispatch: (action: ActionsType) => void
   // arrayNavbarItems: NavbarItemType[]
   // arrayDialogs: DialogType[]
   // arrayMessages: MessageType[]

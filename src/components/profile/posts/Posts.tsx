@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { PostType } from "../../../store/store";
+import { ActionsType, PostType, addPostActionCreator, changePostTextActionCreator } from "../../../store/store";
 import { Post } from "./post/Post";
 
 type PropsType = {
@@ -7,7 +7,7 @@ type PropsType = {
     addPost: () => void
     changePostText: (value: string) => void
     newPostText: string
-    dispatch: (action: any) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const Posts = (props: PropsType) => {
@@ -16,12 +16,15 @@ export const Posts = (props: PropsType) => {
 
     const changePostTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         // props.changePostText(e.currentTarget.value)
-        const value = e.currentTarget.value
-        props.dispatch({ type: 'CHANGE_POST_TEXT', value })
+        // const value = e.currentTarget.value
+        // props.dispatch({ type: 'CHANGE_POST_TEXT', value })
+        props.dispatch(changePostTextActionCreator(e.currentTarget.value))
     }
 
     const addPostHandler = () => {
-        props.dispatch({ type: 'ADD_POST' })
+        // props.dispatch({ type: 'ADD_POST' })
+        props.dispatch(addPostActionCreator())
+        props.dispatch(changePostTextActionCreator(''))
         // props.addPost()
         // props.changePostText('')
     }

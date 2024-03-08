@@ -1,5 +1,5 @@
 import { Route } from 'react-router-dom';
-import { MessagesPageType, ProfilePageType } from '../../store/store';
+import { ActionsType, MessagesPageType, ProfilePageType } from '../../store/store';
 import { Dialogs } from '../dialogs/Dialogs';
 import { Profile } from '../profile/Profile';
 import style from "./Content.module.css";
@@ -13,7 +13,7 @@ type PropsType = {
     sendMessage: () => void
     changeMessageText: (value: string) => void
     newMessageText: string
-    dispatch: (action: any) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const Content = (props: PropsType) => {

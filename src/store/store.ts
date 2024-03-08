@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD_POST'
+const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
+
 export const store: AppStoreType = {
     _state: {
         navbar: {
@@ -73,9 +76,9 @@ export const store: AppStoreType = {
     getState() {
         return this._state
     },
-    dispatch(action: any) {
+    dispatch(action: ActionsType) {
         switch (action.type) {
-            case 'ADD_POST': {
+            case ADD_POST: {
                 const newPost: PostType = {
                     id: 6,
                     text: this._state.profilePage.newPostText,
@@ -85,7 +88,7 @@ export const store: AppStoreType = {
                 this._renderThree(this._state)
                 return this._state
             }
-            case 'CHANGE_POST_TEXT': {
+            case CHANGE_POST_TEXT: {
                 this._state.profilePage.newPostText = action.value
                 this._renderThree(this._state)
                 return this._state
@@ -95,6 +98,31 @@ export const store: AppStoreType = {
     }
 }
 
+//action type
+export type ActionsType = AddPostActionType | ChangePostTextActionType
+
+type AddPostActionType = {
+    type: 'ADD_POST'
+}
+type ChangePostTextActionType = {
+    type: 'CHANGE_POST_TEXT'
+    value: string
+}
+
+//action creators
+export const addPostActionCreator = (): AddPostActionType => {
+    return {
+        type: ADD_POST
+    }
+}
+export const changePostTextActionCreator = (value: string): ChangePostTextActionType => {
+    return {
+        type: CHANGE_POST_TEXT,
+        value,
+    }
+}
+
+//types
 export type AppStoreType = {
     _state: AppStateType
     _renderThree: (_state: AppStateType) => void
