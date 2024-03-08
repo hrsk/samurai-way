@@ -13,7 +13,8 @@ export const rerenderEntireThree = () => {
         newPostText={store._state.profilePage.newPostText}
         sendMessage={store.sendMessage.bind(store)}
         changeMessageText={store.changeMessageText.bind(store)}
-        newMessageText={store._state.messagesPage.newMessageText} />
+        newMessageText={store._state.messagesPage.newMessageText}
+        dispatch={store.dispatch.bind(store)} />
     </BrowserRouter>,
     document.getElementById('root')
   );

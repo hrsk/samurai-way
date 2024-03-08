@@ -2,7 +2,7 @@ import { Route } from 'react-router-dom';
 import { MessagesPageType, ProfilePageType } from '../../store/store';
 import { Dialogs } from '../dialogs/Dialogs';
 import { Profile } from '../profile/Profile';
-import style from "./Content.module.css"
+import style from "./Content.module.css";
 
 type PropsType = {
     profilePage: ProfilePageType
@@ -13,6 +13,7 @@ type PropsType = {
     sendMessage: () => void
     changeMessageText: (value: string) => void
     newMessageText: string
+    dispatch: (action: any) => void
 }
 
 export const Content = (props: PropsType) => {
@@ -21,7 +22,8 @@ export const Content = (props: PropsType) => {
             <Route exact path={'/profile'} component={() => <Profile posts={props.profilePage.posts}
                 changePostText={props.changePostText}
                 addPost={props.addPost}
-                newPostText={props.newPostText} />}
+                newPostText={props.newPostText}
+                dispatch={props.dispatch} />}
             />
             <Route exact path={'/messages'} component={() => <Dialogs dialogs={props.messagesPage.dialogs}
                 messages={props.messagesPage.messages}

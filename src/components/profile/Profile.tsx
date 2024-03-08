@@ -1,12 +1,13 @@
-import { Posts } from "./posts/Posts";
-import bg from "./../../assets/background/profile_bg_image.jpg"
 import { PostType } from "../../store/store";
+import bg from "./../../assets/background/profile_bg_image.jpg";
+import { Posts } from "./posts/Posts";
 
 type PropsType = {
     posts: PostType[]
     addPost: () => void
     changePostText: (value: string) => void
     newPostText: string
+    dispatch: (action: any) => void
 }
 
 export const Profile = (props: PropsType) => {
@@ -17,7 +18,8 @@ export const Profile = (props: PropsType) => {
             <Posts posts={props.posts}
                 newPostText={props.newPostText}
                 addPost={props.addPost}
-                changePostText={props.changePostText} />
+                changePostText={props.changePostText}
+                dispatch={props.dispatch} />
         </>
     );
 };

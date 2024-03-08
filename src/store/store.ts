@@ -72,6 +72,26 @@ export const store: AppStoreType = {
     },
     getState() {
         return this._state
+    },
+    dispatch(action: any) {
+        switch (action.type) {
+            case 'ADD_POST': {
+                const newPost: PostType = {
+                    id: 6,
+                    text: this._state.profilePage.newPostText,
+                    likesCount: 0,
+                }
+                this._state.profilePage.posts.push(newPost)
+                this._renderThree(this._state)
+                return this._state
+            }
+            case 'CHANGE_POST_TEXT': {
+                this._state.profilePage.newPostText = action.value
+                this._renderThree(this._state)
+                return this._state
+            }
+            default: return this._state
+        }
     }
 }
 
@@ -84,6 +104,7 @@ export type AppStoreType = {
     addPost: () => void
     changeMessageText: (value: string) => void
     sendMessage: () => void
+    dispatch: (action: any) => AppStateType
 }
 export type AppStateType = {
     navbar: NavbarType
