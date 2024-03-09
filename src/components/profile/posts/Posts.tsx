@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { ActionsType, PostType, addPostActionCreator, changePostTextActionCreator } from "../../../store/store";
+import { ActionsType, AppStateType, PostType, addPostActionCreator, changePostTextActionCreator } from "../../../store/store";
 import { Post } from "./post/Post";
 
 type PropsType = {
@@ -7,7 +7,7 @@ type PropsType = {
     addPost: () => void
     changePostText: (value: string) => void
     newPostText: string
-    dispatch: (action: ActionsType) => void
+    dispatch: (action: ActionsType) => AppStateType
 }
 
 export const Posts = (props: PropsType) => {

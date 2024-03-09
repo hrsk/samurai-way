@@ -1,4 +1,4 @@
-import { DialogType, MessageType } from "../../store/store";
+import { ActionsType, AppStateType, DialogType, MessageType, changeMessageTextActionCreator, sendMessageActionCreator } from "../../store/store";
 import { Dialog } from "./dialog/Dialog";
 import { Message } from "./message/Message";
 import style from "./Dialog.module.css"
@@ -10,6 +10,7 @@ type PropsType = {
     sendMessage: () => void
     changeMessageText: (value: string) => void
     newMessageText: string
+    dispatch: (action: ActionsType) => AppStateType
 }
 
 export const Dialogs = (props: PropsType) => {
@@ -19,12 +20,14 @@ export const Dialogs = (props: PropsType) => {
 
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.changeMessageText(e.currentTarget.value)
-
+        // props.changeMessageText(e.currentTarget.value)
+        props.dispatch(changeMessageTextActionCreator(e.currentTarget.value))
     }
     const sendMessageHandler = () => {
-        props.sendMessage()
-        props.changeMessageText('')
+        props.dispatch(sendMessageActionCreator())
+        props.dispatch(changeMessageTextActionCreator(''))
+        // props.sendMessage()
+        // props.changeMessageText('')
     }
 
     return (

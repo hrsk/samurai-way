@@ -1,5 +1,7 @@
 const ADD_POST = 'ADD_POST'
 const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
+const SEND_MESSAGE = 'SEND_MESSAGE'
+const CHANGE_MESSAGE_TEXT = 'CHANGE_MESSAGE_TEXT'
 
 export const store: AppStoreType = {
     _state: {
@@ -93,19 +95,37 @@ export const store: AppStoreType = {
                 this._renderThree(this._state)
                 return this._state
             }
+            case SEND_MESSAGE: {
+                this.sendMessage()
+                return this._state
+            }
+            case CHANGE_MESSAGE_TEXT: {
+                this.changeMessageText(action.value)
+                return this._state
+            }
             default: return this._state
         }
     }
 }
 
 //action type
-export type ActionsType = AddPostActionType | ChangePostTextActionType
+export type ActionsType = AddPostActionType
+    | ChangePostTextActionType
+    | SendMessageActionType
+    | ChangeMessageTextActionType
 
 type AddPostActionType = {
     type: 'ADD_POST'
 }
 type ChangePostTextActionType = {
     type: 'CHANGE_POST_TEXT'
+    value: string
+}
+type SendMessageActionType = {
+    type: 'SEND_MESSAGE'
+}
+type ChangeMessageTextActionType = {
+    type: 'CHANGE_MESSAGE_TEXT'
     value: string
 }
 
@@ -118,6 +138,17 @@ export const addPostActionCreator = (): AddPostActionType => {
 export const changePostTextActionCreator = (value: string): ChangePostTextActionType => {
     return {
         type: CHANGE_POST_TEXT,
+        value,
+    }
+}
+export const sendMessageActionCreator = (): SendMessageActionType => {
+    return {
+        type: SEND_MESSAGE
+    }
+}
+export const changeMessageTextActionCreator = (value: string): ChangeMessageTextActionType => {
+    return {
+        type: CHANGE_MESSAGE_TEXT,
         value,
     }
 }

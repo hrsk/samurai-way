@@ -13,7 +13,7 @@ type PropsType = {
   sendMessage: () => void
   changeMessageText: (value: string) => void
   newMessageText: string
-  dispatch: (action: ActionsType) => void
+  dispatch: (action: ActionsType) => AppStateType
   // arrayNavbarItems: NavbarItemType[]
   // arrayDialogs: DialogType[]
   // arrayMessages: MessageType[]
