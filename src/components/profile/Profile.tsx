@@ -4,9 +4,7 @@ import { Posts } from "./posts/Posts";
 
 type PropsType = {
     posts: PostType[]
-    addPost: () => void
-    changePostText: (value: string) => void
-    newPostText: string
+    postText: string
     dispatch: (action: ActionsType) => AppStateType
 }
 
@@ -16,9 +14,7 @@ export const Profile = (props: PropsType) => {
             PROFILE
             <img style={{ width: "100%" }} src={bg} alt='background' />
             <Posts posts={props.posts}
-                newPostText={props.newPostText}
-                addPost={props.addPost}
-                changePostText={props.changePostText}
+                postText={props.postText}
                 dispatch={props.dispatch} />
         </>
     );

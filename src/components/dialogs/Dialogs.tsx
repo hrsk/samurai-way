@@ -7,9 +7,7 @@ import { ChangeEvent } from "react";
 type PropsType = {
     dialogs: DialogType[]
     messages: MessageType[]
-    sendMessage: () => void
-    changeMessageText: (value: string) => void
-    newMessageText: string
+    messageText: string
     dispatch: (action: ActionsType) => AppStateType
 }
 
@@ -20,14 +18,10 @@ export const Dialogs = (props: PropsType) => {
 
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        // props.changeMessageText(e.currentTarget.value)
         props.dispatch(changeMessageTextActionCreator(e.currentTarget.value))
     }
     const sendMessageHandler = () => {
         props.dispatch(sendMessageActionCreator())
-        props.dispatch(changeMessageTextActionCreator(''))
-        // props.sendMessage()
-        // props.changeMessageText('')
     }
 
     return (
@@ -41,7 +35,7 @@ export const Dialogs = (props: PropsType) => {
                 </ul>
             </div>
             <div className={style.textarea}>
-                <textarea placeholder="Enter your message" value={props.newMessageText} onChange={onChangeHandler} />
+                <textarea placeholder="Enter your message" value={props.messageText} onChange={onChangeHandler} />
                 <button onClick={sendMessageHandler}>send message</button>
             </div>
         </>

@@ -17,7 +17,7 @@ export const store: AppStoreType = {
             ],
         },
         messagesPage: {
-            newMessageText: '',
+            messageText: '',
             dialogs: [
                 { id: 1, userName: 'Dimych' },
                 { id: 2, userName: 'Maria' },
@@ -34,7 +34,7 @@ export const store: AppStoreType = {
             ],
         },
         profilePage: {
-            newPostText: '',
+            postText: '',
             posts: [
                 { id: 1, text: 'asdasdasd', likesCount: 99 },
                 { id: 2, text: 'asdasdzxc', likesCount: 11 },
@@ -44,29 +44,31 @@ export const store: AppStoreType = {
             ]
         },
     },
-    changePostText(value: string) {
-        this._state.profilePage.newPostText = value
+    _changePostText(value: string) {
+        this._state.profilePage.postText = value
         this._renderThree(this._state)
     },
-    addPost() {
+    _addPost() {
         const newPost: PostType = {
             id: 6,
-            text: this._state.profilePage.newPostText,
+            text: this._state.profilePage.postText,
             likesCount: 0,
         }
         this._state.profilePage.posts.push(newPost)
+        this._state.profilePage.postText = ''
         this._renderThree(this._state)
     },
-    changeMessageText(value: string) {
-        this._state.messagesPage.newMessageText = value
+    _changeMessageText(value: string) {
+        this._state.messagesPage.messageText = value
         this._renderThree(this._state)
     },
-    sendMessage() {
+    _sendMessage() {
         const newMessage: MessageType = {
             id: Math.random(),
-            message: this._state.messagesPage.newMessageText,
+            message: this._state.messagesPage.messageText,
         }
         this._state.messagesPage.messages.push(newMessage)
+        this._state.messagesPage.messageText = ''
         this._renderThree(this._state)
     },
     _renderThree() {
@@ -81,26 +83,19 @@ export const store: AppStoreType = {
     dispatch(action: ActionsType) {
         switch (action.type) {
             case ADD_POST: {
-                const newPost: PostType = {
-                    id: 6,
-                    text: this._state.profilePage.newPostText,
-                    likesCount: 0,
-                }
-                this._state.profilePage.posts.push(newPost)
-                this._renderThree(this._state)
+                this._addPost()
                 return this._state
             }
             case CHANGE_POST_TEXT: {
-                this._state.profilePage.newPostText = action.value
-                this._renderThree(this._state)
+                this._changePostText(action.value)
                 return this._state
             }
             case SEND_MESSAGE: {
-                this.sendMessage()
+                this._sendMessage()
                 return this._state
             }
             case CHANGE_MESSAGE_TEXT: {
-                this.changeMessageText(action.value)
+                this._changeMessageText(action.value)
                 return this._state
             }
             default: return this._state
@@ -159,10 +154,10 @@ export type AppStoreType = {
     _renderThree: (_state: AppStateType) => void
     subscribe: (observer: () => void) => void
     getState: () => AppStateType
-    changePostText: (value: string) => void
-    addPost: () => void
-    changeMessageText: (value: string) => void
-    sendMessage: () => void
+    _changePostText: (value: string) => void
+    _addPost: () => void
+    _changeMessageText: (value: string) => void
+    _sendMessage: () => void
     dispatch: (action: any) => AppStateType
 }
 export type AppStateType = {
@@ -186,7 +181,7 @@ export type PostType = {
 }
 
 export type ProfilePageType = {
-    newPostText: string
+    postText: string
     posts: PostType[]
 }
 
@@ -200,7 +195,7 @@ export type MessageType = {
 }
 
 export type MessagesPageType = {
-    newMessageText: string
+    messageText: string
     dialogs: DialogType[]
     messages: MessageType[]
 }

@@ -8,12 +8,6 @@ export const rerenderEntireThree = () => {
   ReactDOM.render(
     <BrowserRouter>
       <App state={store.getState()}
-        addPost={store.addPost.bind(store)}
-        changePostText={store.changePostText.bind(store)}
-        newPostText={store._state.profilePage.newPostText}
-        sendMessage={store.sendMessage.bind(store)}
-        changeMessageText={store.changeMessageText.bind(store)}
-        newMessageText={store._state.messagesPage.newMessageText}
         dispatch={store.dispatch.bind(store)} />
     </BrowserRouter>,
     document.getElementById('root')
