@@ -1,3 +1,6 @@
+import { dialogsReducer } from "../components/reducers/dialogsReducer"
+import { profileReducer } from "../components/reducers/profileReducer"
+
 const ADD_POST = 'ADD_POST'
 const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
 const SEND_MESSAGE = 'SEND_MESSAGE'
@@ -81,25 +84,31 @@ export const store: AppStoreType = {
         return this._state
     },
     dispatch(action: ActionsType) {
-        switch (action.type) {
-            case ADD_POST: {
-                this._addPost()
-                return this._state
-            }
-            case CHANGE_POST_TEXT: {
-                this._changePostText(action.value)
-                return this._state
-            }
-            case SEND_MESSAGE: {
-                this._sendMessage()
-                return this._state
-            }
-            case CHANGE_MESSAGE_TEXT: {
-                this._changeMessageText(action.value)
-                return this._state
-            }
-            default: return this._state
-        }
+
+        profileReducer(this._state.profilePage, action)
+        dialogsReducer(this._state.messagesPage, action)
+
+        return this._renderThree(this._state)
+
+        // switch (action.type) {
+        //     case ADD_POST: {
+        //         this._addPost()
+        //         return this._state
+        //     }
+        //     case CHANGE_POST_TEXT: {
+        //         this._changePostText(action.value)
+        //         return this._state
+        //     }
+        //     case SEND_MESSAGE: {
+        //         this._sendMessage()
+        //         return this._state
+        //     }
+        //     case CHANGE_MESSAGE_TEXT: {
+        //         this._changeMessageText(action.value)
+        //         return this._state
+        //     }
+        //     default: return this._state
+        // }
     }
 }
 
@@ -158,7 +167,7 @@ export type AppStoreType = {
     _addPost: () => void
     _changeMessageText: (value: string) => void
     _sendMessage: () => void
-    dispatch: (action: any) => AppStateType
+    dispatch: (action: any) => any
 }
 export type AppStateType = {
     navbar: NavbarType
