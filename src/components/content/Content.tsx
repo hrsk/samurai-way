@@ -1,5 +1,5 @@
 import { Route } from 'react-router-dom';
-import { ActionsType, AppStateType, MessagesPageType, ProfilePageType } from '../../store/store';
+import { MessagesPageType, ProfilePageType } from '../../store/store';
 import { Dialogs } from '../dialogs/Dialogs';
 import { Profile } from '../profile/Profile';
 import style from "./Content.module.css";
@@ -7,7 +7,7 @@ import style from "./Content.module.css";
 type PropsType = {
     profilePage: ProfilePageType
     messagesPage: MessagesPageType
-    dispatch: (action: ActionsType) => AppStateType
+    dispatch: (action: any) => any
 }
 
 export const Content = (props: PropsType) => {

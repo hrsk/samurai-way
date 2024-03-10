@@ -1,11 +1,11 @@
-import { ActionsType, AppStateType, PostType } from "../../store/store";
+import { PostType } from "../../store/store";
 import bg from "./../../assets/background/profile_bg_image.jpg";
 import { Posts } from "./posts/Posts";
 
 type PropsType = {
     posts: PostType[]
     postText: string
-    dispatch: (action: ActionsType) => AppStateType
+    dispatch: (action: any) => any
 }
 
 export const Profile = (props: PropsType) => {

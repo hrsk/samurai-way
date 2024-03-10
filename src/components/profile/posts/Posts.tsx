@@ -1,11 +1,12 @@
 import { ChangeEvent } from "react";
-import { ActionsType, AppStateType, PostType, addPostActionCreator, changePostTextActionCreator } from "../../../store/store";
+import { PostType } from "../../../store/store";
 import { Post } from "./post/Post";
+import { addPostActionCreator, changePostTextActionCreator } from "../../reducers/profileReducer";
 
 type PropsType = {
     posts: PostType[]
     postText: string
-    dispatch: (action: ActionsType) => AppStateType
+    dispatch: (action: any) => any
 }
 
 export const Posts = (props: PropsType) => {

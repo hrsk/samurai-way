@@ -3,11 +3,11 @@ import { Content } from './components/content/Content';
 import { Footer } from './components/footer/Footer';
 import { Header } from './components/header/Header';
 import { Navbar } from './components/navbar/Navbar';
-import { ActionsType, AppStateType } from './store/store';
+import { AppStateType } from './store/store';
 
 type PropsType = {
   state: AppStateType
-  dispatch: (action: ActionsType) => AppStateType
+  dispatch: (action: any) => any
 }
 
 export const App = (props: PropsType) => {

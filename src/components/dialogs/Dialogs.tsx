@@ -1,14 +1,15 @@
-import { ActionsType, AppStateType, DialogType, MessageType, changeMessageTextActionCreator, sendMessageActionCreator } from "../../store/store";
+import { ChangeEvent } from "react";
+import { DialogType, MessageType } from "../../store/store";
+import style from "./Dialog.module.css";
 import { Dialog } from "./dialog/Dialog";
 import { Message } from "./message/Message";
-import style from "./Dialog.module.css"
-import { ChangeEvent } from "react";
+import { changeMessageTextActionCreator, sendMessageActionCreator } from "../reducers/dialogsReducer";
 
 type PropsType = {
     dialogs: DialogType[]
     messages: MessageType[]
     messageText: string
-    dispatch: (action: ActionsType) => AppStateType
+    dispatch: (action: any) => any
 }
 
 export const Dialogs = (props: PropsType) => {

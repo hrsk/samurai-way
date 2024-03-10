@@ -1,11 +1,6 @@
 import { dialogsReducer } from "../components/reducers/dialogsReducer"
 import { profileReducer } from "../components/reducers/profileReducer"
 
-const ADD_POST = 'ADD_POST'
-const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
-const SEND_MESSAGE = 'SEND_MESSAGE'
-const CHANGE_MESSAGE_TEXT = 'CHANGE_MESSAGE_TEXT'
-
 export const store: AppStoreType = {
     _state: {
         navbar: {
@@ -47,33 +42,6 @@ export const store: AppStoreType = {
             ]
         },
     },
-    _changePostText(value: string) {
-        this._state.profilePage.postText = value
-        this._renderThree(this._state)
-    },
-    _addPost() {
-        const newPost: PostType = {
-            id: 6,
-            text: this._state.profilePage.postText,
-            likesCount: 0,
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.postText = ''
-        this._renderThree(this._state)
-    },
-    _changeMessageText(value: string) {
-        this._state.messagesPage.messageText = value
-        this._renderThree(this._state)
-    },
-    _sendMessage() {
-        const newMessage: MessageType = {
-            id: Math.random(),
-            message: this._state.messagesPage.messageText,
-        }
-        this._state.messagesPage.messages.push(newMessage)
-        this._state.messagesPage.messageText = ''
-        this._renderThree(this._state)
-    },
     _renderThree() {
 
     },
@@ -83,77 +51,13 @@ export const store: AppStoreType = {
     getState() {
         return this._state
     },
-    dispatch(action: ActionsType) {
+    dispatch(action: any) {
 
         profileReducer(this._state.profilePage, action)
         dialogsReducer(this._state.messagesPage, action)
 
         return this._renderThree(this._state)
 
-        // switch (action.type) {
-        //     case ADD_POST: {
-        //         this._addPost()
-        //         return this._state
-        //     }
-        //     case CHANGE_POST_TEXT: {
-        //         this._changePostText(action.value)
-        //         return this._state
-        //     }
-        //     case SEND_MESSAGE: {
-        //         this._sendMessage()
-        //         return this._state
-        //     }
-        //     case CHANGE_MESSAGE_TEXT: {
-        //         this._changeMessageText(action.value)
-        //         return this._state
-        //     }
-        //     default: return this._state
-        // }
-    }
-}
-
-//action type
-export type ActionsType = AddPostActionType
-    | ChangePostTextActionType
-    | SendMessageActionType
-    | ChangeMessageTextActionType
-
-type AddPostActionType = {
-    type: 'ADD_POST'
-}
-type ChangePostTextActionType = {
-    type: 'CHANGE_POST_TEXT'
-    value: string
-}
-type SendMessageActionType = {
-    type: 'SEND_MESSAGE'
-}
-type ChangeMessageTextActionType = {
-    type: 'CHANGE_MESSAGE_TEXT'
-    value: string
-}
-
-//action creators
-export const addPostActionCreator = (): AddPostActionType => {
-    return {
-        type: ADD_POST
-    }
-}
-export const changePostTextActionCreator = (value: string): ChangePostTextActionType => {
-    return {
-        type: CHANGE_POST_TEXT,
-        value,
-    }
-}
-export const sendMessageActionCreator = (): SendMessageActionType => {
-    return {
-        type: SEND_MESSAGE
-    }
-}
-export const changeMessageTextActionCreator = (value: string): ChangeMessageTextActionType => {
-    return {
-        type: CHANGE_MESSAGE_TEXT,
-        value,
     }
 }
 
@@ -163,10 +67,6 @@ export type AppStoreType = {
     _renderThree: (_state: AppStateType) => void
     subscribe: (observer: () => void) => void
     getState: () => AppStateType
-    _changePostText: (value: string) => void
-    _addPost: () => void
-    _changeMessageText: (value: string) => void
-    _sendMessage: () => void
     dispatch: (action: any) => any
 }
 export type AppStateType = {
