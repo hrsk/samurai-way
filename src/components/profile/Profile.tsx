@@ -1,6 +1,6 @@
 import { PostType } from "../../store/store";
 import bg from "./../../assets/background/profile_bg_image.jpg";
-import { Posts } from "./posts/Posts";
+import { PostsContainerComponent } from "./posts/PostsContainerComponent";
 
 type PropsType = {
     posts: PostType[]
@@ -13,7 +13,7 @@ export const Profile = (props: PropsType) => {
         <>
             PROFILE
             <img style={{ width: "100%" }} src={bg} alt='background' />
-            <Posts posts={props.posts}
+            <PostsContainerComponent posts={props.posts}
                 postText={props.postText}
                 dispatch={props.dispatch} />
         </>

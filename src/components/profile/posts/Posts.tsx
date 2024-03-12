@@ -1,12 +1,12 @@
 import { ChangeEvent } from "react";
 import { PostType } from "../../../store/store";
 import { Post } from "./post/Post";
-import { addPostActionCreator, changePostTextActionCreator } from "../../reducers/profileReducer";
 
 type PropsType = {
     posts: PostType[]
     postText: string
-    dispatch: (action: any) => any
+    addPost: () => void
+    changePostText: (value: string) => void
 }
 
 export const Posts = (props: PropsType) => {
@@ -14,11 +14,13 @@ export const Posts = (props: PropsType) => {
     const posts = props.posts.map(post => <Post key={post.id} post={post} />)
 
     const changePostTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changePostTextActionCreator(e.currentTarget.value))
+        props.changePostText(e.currentTarget.value)
+        // props.dispatch(changePostTextActionCreator(e.currentTarget.value))
     }
 
     const addPostHandler = () => {
-        props.dispatch(addPostActionCreator())
+        props.addPost()
+        // props.dispatch(addPostActionCreator())
     }
 
     return (
