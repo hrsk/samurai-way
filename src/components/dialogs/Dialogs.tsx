@@ -3,13 +3,13 @@ import { DialogType, MessageType } from "../../store/store";
 import style from "./Dialog.module.css";
 import { Dialog } from "./dialog/Dialog";
 import { Message } from "./message/Message";
-import { changeMessageTextActionCreator, sendMessageActionCreator } from "../reducers/dialogsReducer";
 
 type PropsType = {
     dialogs: DialogType[]
     messages: MessageType[]
     messageText: string
-    dispatch: (action: any) => any
+    changeMessageText: (value: string) => void
+    sendMessage: () => void
 }
 
 export const Dialogs = (props: PropsType) => {
@@ -17,12 +17,13 @@ export const Dialogs = (props: PropsType) => {
     const gialogs = props.dialogs.map(item => <Dialog key={item.id} userName={item.userName} />)
     const messages = props.messages.map(item => <Message key={item.id} message={item.message} />)
 
-
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changeMessageTextActionCreator(e.currentTarget.value))
+        props.changeMessageText(e.currentTarget.value)
+        // props.dispatch(changeMessageTextActionCreator(e.currentTarget.value))
     }
     const sendMessageHandler = () => {
-        props.dispatch(sendMessageActionCreator())
+        props.sendMessage()
+        // props.dispatch(sendMessageActionCreator())
     }
 
     return (

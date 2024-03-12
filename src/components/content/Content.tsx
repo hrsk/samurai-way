@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom';
 import { MessagesPageType, ProfilePageType } from '../../store/store';
-import { Dialogs } from '../dialogs/Dialogs';
+import { DialogsContainerComponent } from '../dialogs/DialogContainerComponent';
 import { Profile } from '../profile/Profile';
 import style from "./Content.module.css";
 
@@ -17,7 +17,7 @@ export const Content = (props: PropsType) => {
                 postText={props.profilePage.postText}
                 dispatch={props.dispatch} />}
             />
-            <Route exact path={'/messages'} component={() => <Dialogs dialogs={props.messagesPage.dialogs}
+            <Route exact path={'/messages'} component={() => <DialogsContainerComponent dialogs={props.messagesPage.dialogs}
                 messages={props.messagesPage.messages}
                 messageText={props.messagesPage.messageText}
                 dispatch={props.dispatch} />} />
