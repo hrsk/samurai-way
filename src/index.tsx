@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { App } from './App';
 import { BrowserRouter } from 'react-router-dom';
-import { store } from './store/store';
+import { store } from './store/redux-store';
 
 export const rerenderEntireThree = () => {
   ReactDOM.render(

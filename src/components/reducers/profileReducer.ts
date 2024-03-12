@@ -1,10 +1,26 @@
-import { PostType, ProfilePageType } from "../../store/store"
+import { PostType } from "../../store/store"
 
 const ADD_POST = 'ADD_POST'
 const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
 
+type InitialStateType = {
+    postText: string
+    posts: PostType[]
+}
 
-export const profileReducer = (state: ProfilePageType, action: ProfileReducerActionsType): ProfilePageType => {
+const initialState: InitialStateType = {
+    postText: '',
+    posts: [
+        { id: 1, text: 'asdasdasd', likesCount: 99 },
+        { id: 2, text: 'asdasdzxc', likesCount: 11 },
+        { id: 3, text: 'zxccv', likesCount: 22 },
+        { id: 4, text: 'cvbcvbcvb', likesCount: 3 },
+        { id: 5, text: 'hgjfhjfgh', likesCount: 5 },
+    ],
+}
+
+
+export const profileReducer = (state = initialState, action: ProfileReducerActionsType): InitialStateType => {
     switch (action.type) {
         case ADD_POST: {
             const newPost: PostType = {

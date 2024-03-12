@@ -1,9 +1,33 @@
-import { MessageType, MessagesPageType } from "../../store/store"
+import { DialogType, MessageType } from "../../store/store"
 
 const SEND_MESSAGE = 'SEND_MESSAGE'
 const CHANGE_MESSAGE_TEXT = 'CHANGE_MESSAGE_TEXT'
 
-export const dialogsReducer = (state: MessagesPageType, action: DialogsReducerActionsType): MessagesPageType => {
+type InitialStateType = {
+    messageText: string
+    dialogs: DialogType[]
+    messages: MessageType[]
+}
+
+const initialState: InitialStateType = {
+    messageText: '',
+    dialogs: [
+        { id: 1, userName: 'Dimych' },
+        { id: 2, userName: 'Maria' },
+        { id: 3, userName: 'Katya' },
+        { id: 4, userName: 'Igor' },
+        { id: 5, userName: 'Viktor' },
+    ],
+    messages: [
+        { id: 1, message: 'Lorem ipsum' },
+        { id: 2, message: 'Lorem ipsum' },
+        { id: 3, message: 'Lorem ipsum' },
+        { id: 4, message: 'Lorem ipsum' },
+        { id: 5, message: 'Lorem ipsum' },
+    ],
+}
+
+export const dialogsReducer = (state = initialState, action: DialogsReducerActionsType): InitialStateType => {
     switch (action.type) {
         case SEND_MESSAGE: {
             const newMessage: MessageType = {

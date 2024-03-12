@@ -3,7 +3,7 @@ import { Content } from './components/content/Content';
 import { Footer } from './components/footer/Footer';
 import { Header } from './components/header/Header';
 import { Navbar } from './components/navbar/Navbar';
-import { AppStateType } from './store/store';
+import { AppStateType } from './store/redux-store';
 
 type PropsType = {
   state: AppStateType
@@ -14,7 +14,7 @@ export const App = (props: PropsType) => {
   return (
     <div className={"app-wrapper"}>
       <Header />
-      <Navbar arrayNavbarItems={props.state.navbar.navbarItems} />
+      <Navbar arrayNavbarItems={props.state.navbar.items} />
       <Content profilePage={props.state.profilePage}
         messagesPage={props.state.messagesPage}
         dispatch={props.dispatch} />
