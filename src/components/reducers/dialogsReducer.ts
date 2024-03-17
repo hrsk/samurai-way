@@ -1,4 +1,4 @@
-import { DialogType, MessageType } from "../../store/store"
+import { DialogType, MessageType } from "../../types"
 
 const SEND_MESSAGE = 'SEND_MESSAGE'
 const CHANGE_MESSAGE_TEXT = 'CHANGE_MESSAGE_TEXT'

@@ -1,4 +1,4 @@
-import { PostType } from "../../store/store"
+import { PostType } from "../../types"
 
 const ADD_POST = 'ADD_POST'
 const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'

@@ -1,6 +1,4 @@
-import { useDispatch } from "react-redux";
-import { PostType } from "../../../store/store";
-import { addPostActionCreator, changePostTextActionCreator } from "../../reducers/profileReducer";
+import { PostType } from "../../../types";
 import { Posts } from "./Posts";
 
 type PropsType = {
@@ -8,7 +6,6 @@ type PropsType = {
     postText: string
     changePostText: (value: string) => void
     addPost: () => void
-    // dispatch: (action: any) => any
 }
 
 export const PostsContainerComponent = (props: PropsType) => {

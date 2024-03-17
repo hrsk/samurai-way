@@ -1,6 +1,4 @@
-import { useDispatch } from "react-redux";
-import { DialogType, MessageType } from "../../store/store";
-import { changeMessageTextActionCreator, sendMessageActionCreator } from "../reducers/dialogsReducer";
+import { DialogType, MessageType } from "../../types";
 import { Dialogs } from "./Dialogs";
 
 type PropsType = {
@@ -9,7 +7,6 @@ type PropsType = {
     messageText: string
     changeMessageText: (value: string) => void
     sendMessage: () => void
-    // dispatch: (action: any) => any
 }
 
 export const DialogsContainerComponent = (props: PropsType) => {

@@ -1,9 +1,10 @@
 import { connect } from "react-redux"
 import { Dispatch } from "redux"
-import { AppStateType, MessagesPageType, ProfilePageType } from "../../store/store"
+import { MessagesPageType, ProfilePageType } from "../../types"
 import { Content } from "./Content"
 import { addPostActionCreator, changePostTextActionCreator } from "../reducers/profileReducer"
 import { changeMessageTextActionCreator, sendMessageActionCreator } from "../reducers/dialogsReducer"
+import { AppStateType } from "../../store/redux-store"
 
 
 export const ContentConnectComponent = (props: ConnectedProps) => {

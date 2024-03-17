@@ -1,11 +1,12 @@
 import { connect } from "react-redux"
 import { Dispatch } from "redux"
-import { AppStateType, NavbarItemType } from "../../store/store"
+import { NavbarItemType } from "../../types"
 import { Navbar } from "./Navbar"
+import { AppStateType } from "../../store/redux-store"
 
 
 export const NavbarConnectComponent = (props: ConnectedPropsType) => {
-    return <Navbar arrayNavbarItems={props.navbarItems} />
+    return <Navbar navbarItems={props.navbarItems} />
 }
 
 type MapStateToPropsType = {

@@ -1,4 +1,4 @@
-import { PostType } from "../../store/store";
+import { PostType } from "../../types";
 import bg from "./../../assets/background/profile_bg_image.jpg";
 import { PostsContainerComponent } from "./posts/PostsContainerComponent";
 
@@ -7,7 +7,6 @@ type PropsType = {
     postText: string
     changePostText: (value: string) => void
     addPost: () => void
-    // dispatch: (action: any) => any
 }
 
 export const Profile = (props: PropsType) => {

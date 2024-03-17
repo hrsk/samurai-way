@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { DialogType, MessageType } from "../../store/store";
+import { DialogType, MessageType } from "../../types";
 import style from "./Dialog.module.css";
 import { Dialog } from "./dialog/Dialog";
 import { Message } from "./message/Message";

@@ -1,4 +1,4 @@
-import { NavbarItemType } from "../../store/store"
+import { NavbarItemType } from "../../types"
 
 type InitialStateType = {
     navbarItems: NavbarItemType[]
