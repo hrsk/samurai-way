@@ -17,7 +17,6 @@ const initialState: InitialStateType = {
     ],
 }
 export const navbarReducer = (state = initialState, action: any): InitialStateType => {
-    debugger
     switch (action.type) {
         default: return state
     }

@@ -17,7 +17,6 @@ type MapDispatchToPropsType = {
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    debugger
     return {
         navbarItems: state.navbar.navbarItems,
     }

@@ -5,7 +5,6 @@ import { Header } from './components/header/Header';
 import { NavbarContainer } from './components/navbar/NavbarContainer';
 
 export const App = () => {
-  debugger
   return (
     <div className={"app-wrapper"}>
       <Header />
