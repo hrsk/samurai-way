@@ -7,18 +7,18 @@ type PropsType = {
     dialogs: DialogType[]
     messages: MessageType[]
     messageText: string
+    changeMessageText: (value: string) => void
+    sendMessage: () => void
     // dispatch: (action: any) => any
 }
 
 export const DialogsContainerComponent = (props: PropsType) => {
 
-    const dispatch = useDispatch()
-
     const changeMessageText = (value: string) => {
-        dispatch(changeMessageTextActionCreator(value))
+        props.changeMessageText(value)
     }
     const sendMessage = () => {
-        dispatch(sendMessageActionCreator())
+        props.sendMessage()
     }
 
     return <Dialogs dialogs={props.dialogs}

@@ -6,19 +6,19 @@ import { Posts } from "./Posts";
 type PropsType = {
     posts: PostType[]
     postText: string
+    changePostText: (value: string) => void
+    addPost: () => void
     // dispatch: (action: any) => any
 }
 
 export const PostsContainerComponent = (props: PropsType) => {
 
-    const dispatch = useDispatch()
-
     const changePostText = (value: string) => {
-        dispatch(changePostTextActionCreator(value))
+        props.changePostText(value)
     }
 
     const addPost = () => {
-        dispatch(addPostActionCreator())
+        props.addPost()
     }
 
     return <Posts posts={props.posts}

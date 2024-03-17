@@ -2,10 +2,13 @@ import { connect } from "react-redux"
 import { Dispatch } from "redux"
 import { AppStateType, MessagesPageType, ProfilePageType } from "../../store/store"
 import { Content } from "./Content"
+import { addPostActionCreator, changePostTextActionCreator } from "../reducers/profileReducer"
+import { changeMessageTextActionCreator, sendMessageActionCreator } from "../reducers/dialogsReducer"
 
 
 export const ContentConnectComponent = (props: ConnectedProps) => {
-    return <Content profilePage={props.profilePage} messagesPage={props.messagesPage} />
+
+    return <Content {...props} />
 }
 
 type MapStateToPropsType = {
@@ -14,6 +17,10 @@ type MapStateToPropsType = {
 }
 
 type MapDispatchToPropsType = {
+    changePostText: (value: string) => void
+    addPost: () => void,
+    changeMessageText: (value: string) => void
+    sendMessage: () => void
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
@@ -25,10 +32,13 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-
+        changePostText: (value: string) => dispatch(changePostTextActionCreator(value)),
+        addPost: () => dispatch(addPostActionCreator()),
+        changeMessageText: (value: string) => dispatch(changeMessageTextActionCreator(value)),
+        sendMessage: () => dispatch(sendMessageActionCreator()),
     }
 }
 
-type ConnectedProps = MapDispatchToPropsType & MapStateToPropsType
+export type ConnectedProps = MapDispatchToPropsType & MapStateToPropsType
 
-export const ContentContainer = connect(mapStateToProps)(ContentConnectComponent)
+export const ContentContainer = connect(mapStateToProps, mapDispatchToProps)(ContentConnectComponent)
