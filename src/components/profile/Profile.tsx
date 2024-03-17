@@ -5,7 +5,7 @@ import { PostsContainerComponent } from "./posts/PostsContainerComponent";
 type PropsType = {
     posts: PostType[]
     postText: string
-    dispatch: (action: any) => any
+    // dispatch: (action: any) => any
 }
 
 export const Profile = (props: PropsType) => {
@@ -14,8 +14,7 @@ export const Profile = (props: PropsType) => {
             PROFILE
             <img style={{ width: "100%" }} src={bg} alt='background' />
             <PostsContainerComponent posts={props.posts}
-                postText={props.postText}
-                dispatch={props.dispatch} />
+                postText={props.postText} />
         </>
     );
 };

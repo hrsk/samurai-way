@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import { PostType } from "../../../store/store";
 import { addPostActionCreator, changePostTextActionCreator } from "../../reducers/profileReducer";
 import { Posts } from "./Posts";
@@ -5,17 +6,19 @@ import { Posts } from "./Posts";
 type PropsType = {
     posts: PostType[]
     postText: string
-    dispatch: (action: any) => any
+    // dispatch: (action: any) => any
 }
 
 export const PostsContainerComponent = (props: PropsType) => {
 
+    const dispatch = useDispatch()
+
     const changePostText = (value: string) => {
-        props.dispatch(changePostTextActionCreator(value))
+        dispatch(changePostTextActionCreator(value))
     }
 
     const addPost = () => {
-        props.dispatch(addPostActionCreator())
+        dispatch(addPostActionCreator())
     }
 
     return <Posts posts={props.posts}

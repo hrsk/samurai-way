@@ -1,11 +1,11 @@
 import { NavbarItemType } from "../../store/store"
 
 type InitialStateType = {
-    items: NavbarItemType[]
+    navbarItems: NavbarItemType[]
 }
 
 const initialState: InitialStateType = {
-    items: [
+    navbarItems: [
         { id: 1, title: 'Profile' },
         { id: 2, title: 'News' },
         { id: 3, title: 'Friends' },
@@ -16,6 +16,7 @@ const initialState: InitialStateType = {
     ],
 }
 export const navbarReducer = (state = initialState, action: any): InitialStateType => {
+    debugger
     switch (action.type) {
         default: return state
     }
