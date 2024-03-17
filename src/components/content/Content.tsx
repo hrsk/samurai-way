@@ -3,6 +3,7 @@ import { DialogsContainerComponent } from '../dialogs/DialogContainerComponent';
 import { Profile } from '../profile/Profile';
 import style from "./Content.module.css";
 import { ConnectedProps } from './ContentContainer';
+import { UsersContainer } from '../users/UsersContainer';
 
 interface PropsType extends ConnectedProps {
 }
@@ -20,6 +21,7 @@ export const Content = (props: PropsType) => {
                 changeMessageText={props.changeMessageText}
                 sendMessage={props.sendMessage}
                 messageText={props.messagesPage.messageText} />} />
+            <Route exact path={'/users'} component={() => <UsersContainer />} />
         </div>
     );
 }
