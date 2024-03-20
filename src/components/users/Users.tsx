@@ -1,3 +1,4 @@
+import { Pagination } from "../pagination/Pagination"
 import { ConnectedPropsType } from "./UsersContainer"
 
 interface PropsType extends ConnectedPropsType {
@@ -6,32 +7,28 @@ interface PropsType extends ConnectedPropsType {
 
 export const Users = (props: PropsType) => {
     return <>
-
+        <Pagination totalCount={props.totalCount}
+            pageSize={10}
+            currentPage={1}
+            selectPage={props.selectPage}
+        />
         {
             props.users.map(user => {
                 return (
-                    <>
-                        {
-                            props.users.map(user => {
-                                return (
-                                    <div key={user.id}>
-                                        <div>
-                                            <div>{user.id}</div>
-                                            <div>{user.name}</div>
-                                            <div>{user.status}</div>
-                                        </div>
-                                        <div>
-                                            {
-                                                user.followed
-                                                    ? <button onClick={() => { }}>FOLLOW</button>
-                                                    : <button onClick={() => { }}>UNFOLLOW</button>
-                                            }
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </>
+                    <div key={user.id}>
+                        <div>
+                            <div>{user.id}</div>
+                            <div>{user.name}</div>
+                            <div>{user.status}</div>
+                        </div>
+                        <div>
+                            {
+                                user.followed
+                                    ? <button onClick={() => { }}>FOLLOW</button>
+                                    : <button onClick={() => { }}>UNFOLLOW</button>
+                            }
+                        </div>
+                    </div>
                 )
             })
         }
