@@ -2,7 +2,7 @@ import { Pagination } from "../pagination/Pagination"
 import { ConnectedPropsType } from "./UsersContainer"
 
 interface PropsType extends ConnectedPropsType {
-
+    setPage: (pageNumber: number) => void
 }
 
 export const Users = (props: PropsType) => {
@@ -10,7 +10,7 @@ export const Users = (props: PropsType) => {
         <Pagination totalCount={props.totalCount}
             pageSize={10}
             currentPage={1}
-            selectPage={props.selectPage}
+            setPage={props.setPage}
         />
         {
             props.users.map(user => {

@@ -15,9 +15,16 @@ export class UsersConnectedComponent extends React.Component<ConnectedPropsType,
             })
     }
 
+    setPage = (pageNumber: number) => {
+        this.props.selectPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then((response) => {
+                this.props.getUsers(response.data.items, response.data.totalCount, response.data.error)
+            })
+    }
 
     render() {
-        return <Users {...this.props} />
+        return <Users {...this.props} setPage={this.setPage} />
     }
 
 }
