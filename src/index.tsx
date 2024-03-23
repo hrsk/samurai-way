@@ -5,17 +5,17 @@ import { App } from './App';
 import './index.css';
 import { store } from './store/redux-store';
 
-export const rerenderEntireThree = () => {
-  ReactDOM.render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>,
-    document.getElementById('root')
-  );
-}
-rerenderEntireThree()
-store.subscribe(() => rerenderEntireThree())
-//@ts-ignore
-window.state = store.getState();
+// export const rerenderEntireThree = () => {
+ReactDOM.render(
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>,
+  document.getElementById('root')
+);
+// }
+// rerenderEntireThree()
+// store.subscribe(() => rerenderEntireThree())
+// //@ts-ignore
+// window.state = store.getState();

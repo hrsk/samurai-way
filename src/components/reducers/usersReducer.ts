@@ -1,6 +1,8 @@
 
 const GET_USERS = 'GET_USERS'
 const SELECT_PAGE = 'SELECT_PAGE'
+const FOLLOW_USER = 'FOLLOW_USER'
+const UNFOLLOW_USER = 'UNFOLLOW_USER'
 
 type Nullable<T> = null | T
 
@@ -51,13 +53,21 @@ export const usersReducer = (state = initialState, action: UsersReducerActionTyp
         case SELECT_PAGE: return {
             ...state, currentPage: action.pageNumber
         }
+        case FOLLOW_USER: return {
+            ...state, items: state.items.map(user =>
+                user.id === action.userId ? { ...user, followed: true } : user)
+        }
+        case UNFOLLOW_USER: return {
+            ...state, items: state.items.map(user =>
+                user.id === action.userId ? { ...user, followed: false } : user)
+        }
         default: return state
     }
 }
 
 //types 
 
-export type UsersReducerActionType = GetUsersActionType | SelectPageActionType
+export type UsersReducerActionType = GetUsersActionType | SelectPageActionType | FollowUserActionType | UnfollowUserActionType
 
 type GetUsersActionType = {
     type: 'GET_USERS'
@@ -69,6 +79,14 @@ type GetUsersActionType = {
 type SelectPageActionType = {
     type: 'SELECT_PAGE'
     pageNumber: number
+}
+type FollowUserActionType = {
+    type: 'FOLLOW_USER'
+    userId: number
+}
+type UnfollowUserActionType = {
+    type: 'UNFOLLOW_USER'
+    userId: number
 }
 
 
@@ -86,6 +104,18 @@ export const selectPageActionCreator = (pageNumber: number): SelectPageActionTyp
     return {
         type: SELECT_PAGE,
         pageNumber,
+    }
+}
+export const followUserActionCreator = (userId: number): FollowUserActionType => {
+    return {
+        type: FOLLOW_USER,
+        userId,
+    }
+}
+export const unfollowUserActionCreator = (userId: number): UnfollowUserActionType => {
+    return {
+        type: UNFOLLOW_USER,
+        userId,
     }
 }
 
