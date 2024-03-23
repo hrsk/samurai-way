@@ -4,18 +4,9 @@ import { Users } from "./Users"
 import { connect } from "react-redux"
 import React from "react"
 import axios from "axios"
-import { UserType, followUserActionCreator, getUserActionCreator, selectPageActionCreator, unfollowUserActionCreator } from "../reducers/usersReducer"
-
-const settings = {
-    withCredentials: true,
-    'API-KEY': '4e5fa66a-7057-4e21-83cd-4056273fcd0e'
-}
-
-export type ResponseType<T = {}> = {
-    resultCode: number,
-    messages: string[],
-    data: T
-}
+import { followUserActionCreator, getUserActionCreator, selectPageActionCreator, unfollowUserActionCreator } from "../reducers/usersReducer"
+import { API } from "../../api/API"
+import { UserType } from "../../types"
 
 export class UsersConnectedComponent extends React.Component<ConnectedPropsType, AppStateType> {
 
@@ -28,24 +19,22 @@ export class UsersConnectedComponent extends React.Component<ConnectedPropsType,
 
     setPage = (pageNumber: number) => {
         this.props.selectPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then((response) => {
-                this.props.getUsers(response.data.items, response.data.totalCount, response.data.error)
-            })
+        API.getUsers(pageNumber, this.props.pageSize)
+            .then(response => this.props.getUsers(response.data.items, response.data.totalCount, response.data.error))
     }
 
     follow = (userId: number) => {
-        axios.post<ResponseType>(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, settings)
-            .then(res => {
-                if (res.data.resultCode === 0) {
+        API.followUser(userId)
+            .then(response => {
+                if (response.data.resultCode === 0) {
                     this.props.follow(userId)
                 }
             })
     }
     unfollow = (userId: number) => {
-        axios.delete<ResponseType>(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, settings)
-            .then(res => {
-                if (res.data.resultCode === 0) {
+        API.unfollowUser(userId)
+            .then(response => {
+                if (response.data.resultCode === 0) {
                     this.props.unfollow(userId)
                 }
             })

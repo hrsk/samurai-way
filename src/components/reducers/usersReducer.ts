@@ -1,29 +1,9 @@
+import { Nullable, UserType } from "../../types"
 
 const GET_USERS = 'GET_USERS'
 const SELECT_PAGE = 'SELECT_PAGE'
 const FOLLOW_USER = 'FOLLOW_USER'
 const UNFOLLOW_USER = 'UNFOLLOW_USER'
-
-type Nullable<T> = null | T
-
-export type ResponseType = {
-
-    items: UserType[]
-    totalCount: number
-    error: string
-}
-
-export type UserType = {
-    id: number
-    name: string
-    status: string
-    photos: {
-        small: Nullable<string>
-        large: Nullable<string>
-    }
-    followed: boolean
-}
-
 
 type InitialStateType = {
     items: UserType[]

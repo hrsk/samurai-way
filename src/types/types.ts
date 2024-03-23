@@ -31,3 +31,28 @@ export type MessagesPageType = {
     dialogs: DialogType[]
     messages: MessageType[]
 }
+
+export type Nullable<T> = null | T
+
+export type GetUsersResponseType = {
+    items: UserType[]
+    totalCount: number
+    error: string
+}
+
+export type ResponseType<T = {}> = {
+    resultCode: number,
+    messages: string[],
+    data: T
+}
+
+export type UserType = {
+    id: number
+    name: string
+    status: string
+    photos: {
+        small: Nullable<string>
+        large: Nullable<string>
+    }
+    followed: boolean
+}
