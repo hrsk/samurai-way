@@ -51,8 +51,8 @@ export type UserType = {
     name: string
     status: string
     photos: {
-        small: Nullable<string>
-        large: Nullable<string>
+        small: string
+        large: string
     }
     followed: boolean
 }

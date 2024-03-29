@@ -1,14 +1,15 @@
+import { useState } from 'react';
+
 type PropsType = {
     totalCount: number;
     pageSize: number;
     currentPage: number;
-    setPage: (pageNumber: number) => void
+    setPage: (page: number) => void
 }
 
 export const Pagination = (props: PropsType) => {
 
     const pagesCount = Math.ceil(props.totalCount / props.pageSize);
-
 
     const pages: number[] = []
 
@@ -16,8 +17,23 @@ export const Pagination = (props: PropsType) => {
         pages.push(i)
     }
 
+    let [pagesOutput, setPagesOutput] = useState<number>(1);
 
-    const previousPage = () => {
+    let pagesInLine = 7;
+
+    const prevCountPageOutput = (pagesOutput - 1) * pagesInLine + 1;
+    const nextCountPageOutput = pagesOutput * pagesInLine;
+
+    const prevPortionPages = () => {
+        setPagesOutput(pagesOutput - 1)
+
+    }
+
+    const nextPortionPages = () => {
+        setPagesOutput(pagesOutput + 1)
+    }
+
+    const prevPage = () => {
         props.setPage(props.currentPage - 1)
     }
 
@@ -25,24 +41,24 @@ export const Pagination = (props: PropsType) => {
         props.setPage(props.currentPage + 1)
     }
 
-    const changePage = (pageNumber: number) => {
-        props.setPage(pageNumber)
+    const selectPage = (page: number) => {
+        props.setPage(page);
     }
 
     return (
         <div>
-            <button onClick={previousPage}>Prev</button>
+            <button onClick={prevPortionPages}>{'<<'}</button>
+            <button onClick={prevPage}>Prev</button>
             {
                 pages
-                    .map((number, index) => {
-                        return (
-                            <span key={index} onClick={() => changePage(number)}>
-                                {number}
-                            </span>
-                        )
-                    })
+                    .filter(page => page >= prevCountPageOutput && page <= nextCountPageOutput)
+                    .map((page, index) => <button key={index} onClick={() => selectPage(page)}>
+                        {page}
+                    </button>
+                    )
             }
             <button onClick={nextPage}>Next</button>
+            <button onClick={nextPortionPages}>{'>>'}</button>
         </div>
     );
 };

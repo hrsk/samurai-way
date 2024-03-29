@@ -1,5 +1,6 @@
 import { Pagination } from "../pagination/Pagination"
 import { ConnectedPropsType } from "./UsersContainer"
+import no_avatar from "../../assets/avatar_images/no_avatar.png"
 
 interface PropsType extends ConnectedPropsType {
     setPage: (pageNumber: number) => void
@@ -17,6 +18,9 @@ export const Users = (props: PropsType) => {
                 return (
                     <div key={user.id}>
                         <div>
+                            <img style={{ width: '64px', height: '64px' }}
+                                src={user.photos.small ? user.photos.large : no_avatar}
+                                alt="" />
                             <div>{user.id}</div>
                             <div>{user.name}</div>
                             <div>{user.status}</div>
