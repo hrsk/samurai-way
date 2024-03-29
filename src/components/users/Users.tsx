@@ -1,6 +1,7 @@
 import { Pagination } from "../pagination/Pagination"
 import { ConnectedPropsType } from "./UsersContainer"
 import no_avatar from "../../assets/avatar_images/no_avatar.png"
+import { Preloader } from "../../features/Preloader"
 
 interface PropsType extends ConnectedPropsType {
     setPage: (pageNumber: number) => void
@@ -13,6 +14,9 @@ export const Users = (props: PropsType) => {
             currentPage={props.currentPage}
             setPage={props.setPage}
         />
+        {
+            props.isFetching && <Preloader />
+        }
         {
             props.users.map(user => {
                 return (
