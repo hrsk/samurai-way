@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import style from './Pagination.module.css'
 
 type PropsType = {
     totalCount: number;
@@ -52,7 +53,7 @@ export const Pagination = (props: PropsType) => {
             {
                 pages
                     .filter(page => page >= prevCountPageOutput && page <= nextCountPageOutput)
-                    .map((page, index) => <button key={index} onClick={() => selectPage(page)}>
+                    .map((page, index) => <button className={props.currentPage === page ? style.selected : ''} key={index} onClick={() => selectPage(page)}>
                         {page}
                     </button>
                     )

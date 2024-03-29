@@ -9,8 +9,8 @@ interface PropsType extends ConnectedPropsType {
 export const Users = (props: PropsType) => {
     return <>
         <Pagination totalCount={props.totalCount}
-            pageSize={10}
-            currentPage={1}
+            pageSize={props.pageSize}
+            currentPage={props.currentPage}
             setPage={props.setPage}
         />
         {
