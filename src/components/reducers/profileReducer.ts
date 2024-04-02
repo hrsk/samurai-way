@@ -31,13 +31,24 @@ export const profileReducer = (state = initialState, action: ProfileReducerActio
                 text: state.postText,
                 likesCount: 0,
             }
-            state.posts.push(newPost)
-            state.postText = ''
-            return state
+            return {
+                ...state, posts: [newPost, ...state.posts], postText: ''
+            }
+            // const newPost: PostType = {
+            //     id: 6,
+            //     text: state.postText,
+            //     likesCount: 0,
+            // }
+
+
+            // state.posts.push(newPost)
+            // state.postText = ''
+            // return state
         }
         case CHANGE_POST_TEXT: {
-            state.postText = action.value
-            return state
+            return { ...state, postText: action.value }
+            // state.postText = action.value
+            // return state
         }
         case GET_USER_PROFILE: return {
             ...state, user: { ...action.user }
@@ -65,12 +76,12 @@ type GetUserProfileActionType = {
 
 //actions 
 
-export const addPostActionCreator = (): AddPostActionType => {
+export const addPost = (): AddPostActionType => {
     return {
-        type: ADD_POST
+        type: ADD_POST,
     }
 }
-export const changePostTextActionCreator = (value: string): ChangePostTextActionType => {
+export const changePostText = (value: string): ChangePostTextActionType => {
     return {
         type: CHANGE_POST_TEXT,
         value,

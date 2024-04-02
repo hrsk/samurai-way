@@ -1,13 +1,8 @@
-import { PostType } from "../../types";
 import bg from "./../../assets/background/profile_bg_image.jpg";
+import { ConnectedPropsType } from "./ProfileContainer";
 import { PostsContainerComponent } from "./posts/PostsContainerComponent";
 
-type PropsType = {
-    posts: PostType[]
-    postText: string
-    changePostText: (value: string) => void
-    addPost: () => void
-}
+interface PropsType extends ConnectedPropsType { }
 
 export const Profile = (props: PropsType) => {
     return (
