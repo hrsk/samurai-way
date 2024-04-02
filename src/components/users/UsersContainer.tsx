@@ -1,13 +1,12 @@
-import { Dispatch } from "redux"
-import { AppStateType } from "../../store/redux-store"
-import { Users } from "./Users"
-import { connect } from "react-redux"
-import React from "react"
 import axios from "axios"
-import { followUserActionCreator, getUserActionCreator, selectPageActionCreator, unfollowUserActionCreator } from "../reducers/usersReducer"
+import React, { ClassAttributes } from "react"
+import { ConnectedProps, connect } from "react-redux"
 import { API } from "../../api/API"
+import { AppStateType } from "../../store/redux-store"
 import { UserType } from "../../types"
-import { isFetchingActionCreator } from "../reducers/appReducer"
+import { fetching } from "../reducers/appReducer"
+import { followUser, getUsers, selectPage, unfollowUser } from "../reducers/usersReducer"
+import { Users } from "./Users"
 
 export class UsersConnectedComponent extends React.Component<ConnectedPropsType, AppStateType> {
 
@@ -32,7 +31,7 @@ export class UsersConnectedComponent extends React.Component<ConnectedPropsType,
         API.followUser(userId)
             .then(response => {
                 if (response.data.resultCode === 0) {
-                    this.props.follow(userId)
+                    this.props.followUser(userId)
                 }
             })
     }
@@ -40,7 +39,7 @@ export class UsersConnectedComponent extends React.Component<ConnectedPropsType,
         API.unfollowUser(userId)
             .then(response => {
                 if (response.data.resultCode === 0) {
-                    this.props.unfollow(userId)
+                    this.props.unfollowUser(userId)
                 }
             })
     }
@@ -60,13 +59,13 @@ type MapStateToPropsType = {
     isFetching: boolean
 }
 
-type MapDispatchToPropsType = {
-    getUsers: (users: UserType[], totalCount: number, error: string | null) => void
-    selectPage: (pageNumber: number) => void
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    fetching: (isFetching: boolean) => void
-}
+// type MapDispatchToPropsType = {
+//     getUsers: (users: UserType[], totalCount: number, error: string | null) => void
+//     selectPage: (pageNumber: number) => void
+//     follow: (userId: number) => void
+//     unfollow: (userId: number) => void
+//     fetching: (isFetching: boolean) => void
+// }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
@@ -79,16 +78,27 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-    return {
-        getUsers: (users: UserType[], totalCount: number, error: string | null) => dispatch(getUserActionCreator(users, totalCount, error)),
-        selectPage: (pageNumber: number) => dispatch(selectPageActionCreator(pageNumber)),
-        follow: (userId: number) => dispatch(followUserActionCreator(userId)),
-        unfollow: (userId: number) => dispatch(unfollowUserActionCreator(userId)),
-        fetching: (isFetching: boolean) => dispatch(isFetchingActionCreator(isFetching))
-    }
-}
+// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+//     return {
+//         getUsers: (users: UserType[], totalCount: number, error: string | null) => dispatch(getUserActionCreator(users, totalCount, error)),
+//         selectPage: (pageNumber: number) => dispatch(selectPageActionCreator(pageNumber)),
+//         follow: (userId: number) => dispatch(followUserActionCreator(userId)),
+//         unfollow: (userId: number) => dispatch(unfollowUserActionCreator(userId)),
+//         fetching: (isFetching: boolean) => dispatch(isFetchingActionCreator(isFetching))
+//     }
+// }
 
-export type ConnectedPropsType = MapDispatchToPropsType & MapStateToPropsType
+// export type ConnectedPropsType = MapDispatchToPropsType & MapStateToPropsType
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersConnectedComponent)
+interface OwnProps extends ClassAttributes<UsersConnectedComponent> { }
+type PropsFromRedux = ConnectedProps<typeof connector>
+export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux & OwnProps
+
+const connector = connect(mapStateToProps, {
+    getUsers, selectPage, followUser, unfollowUser, fetching
+});
+
+
+
+// export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersConnectedComponent)
+export const UsersContainer = connector(UsersConnectedComponent)

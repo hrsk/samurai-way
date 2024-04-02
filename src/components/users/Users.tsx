@@ -5,6 +5,8 @@ import { Preloader } from "../../features/Preloader"
 
 interface PropsType extends ConnectedPropsType {
     setPage: (pageNumber: number) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
 }
 
 export const Users = (props: PropsType) => {

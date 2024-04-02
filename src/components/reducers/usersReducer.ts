@@ -72,7 +72,7 @@ type UnfollowUserActionType = {
 
 //actions 
 
-export const getUserActionCreator = (users: UserType[], totalCount: number, error: Nullable<string>): GetUsersActionType => {
+export const getUsers = (users: UserType[], totalCount: number, error: Nullable<string>): GetUsersActionType => {
     return {
         type: GET_USERS,
         users,
@@ -80,19 +80,19 @@ export const getUserActionCreator = (users: UserType[], totalCount: number, erro
         error,
     }
 }
-export const selectPageActionCreator = (pageNumber: number): SelectPageActionType => {
+export const selectPage = (pageNumber: number): SelectPageActionType => {
     return {
         type: SELECT_PAGE,
         pageNumber,
     }
 }
-export const followUserActionCreator = (userId: number): FollowUserActionType => {
+export const followUser = (userId: number): FollowUserActionType => {
     return {
         type: FOLLOW_USER,
         userId,
     }
 }
-export const unfollowUserActionCreator = (userId: number): UnfollowUserActionType => {
+export const unfollowUser = (userId: number): UnfollowUserActionType => {
     return {
         type: UNFOLLOW_USER,
         userId,

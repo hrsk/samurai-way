@@ -31,7 +31,7 @@ type IsFetchingActionType = {
 
 //actions 
 
-export const isFetchingActionCreator = (isFetching: boolean): IsFetchingActionType => {
+export const fetching = (isFetching: boolean): IsFetchingActionType => {
     return {
         type: IS_FETCHING,
         isFetching
