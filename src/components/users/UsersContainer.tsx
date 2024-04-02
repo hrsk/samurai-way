@@ -7,6 +7,7 @@ import { UserType } from "../../types"
 import { fetching } from "../reducers/appReducer"
 import { followUser, getUsers, selectPage, unfollowUser } from "../reducers/usersReducer"
 import { Users } from "./Users"
+import { getUserProfile } from "../reducers/profileReducer"
 
 export class UsersConnectedComponent extends React.Component<ConnectedPropsType, AppStateType> {
 
@@ -15,6 +16,15 @@ export class UsersConnectedComponent extends React.Component<ConnectedPropsType,
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then((response) => {
                 this.props.getUsers(response.data.items, response.data.totalCount, response.data.error)
+                this.props.fetching(false)
+            })
+    }
+
+    selectUserProfile = (userId: number) => {
+        this.props.fetching(true)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users/${userId}`)
+            .then((response) => {
+                this.props.getUserProfile(response.data)
                 this.props.fetching(false)
             })
     }
@@ -45,7 +55,7 @@ export class UsersConnectedComponent extends React.Component<ConnectedPropsType,
     }
 
     render() {
-        return <Users {...this.props} setPage={this.setPage} follow={this.follow} unfollow={this.unfollow} />
+        return <Users {...this.props} setPage={this.setPage} follow={this.follow} unfollow={this.unfollow} selectUserProfile={this.selectUserProfile} />
     }
 
 }
@@ -95,7 +105,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux & OwnProps
 
 const connector = connect(mapStateToProps, {
-    getUsers, selectPage, followUser, unfollowUser, fetching
+    getUsers, selectPage, followUser, unfollowUser, fetching, getUserProfile,
 });
 
 

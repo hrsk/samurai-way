@@ -1,14 +1,17 @@
-import { PostType } from "../../types"
+import { PostType, UserProfileType } from "../../types"
 
 const ADD_POST = 'ADD_POST'
 const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
+const GET_USER_PROFILE = 'GET_USER_PROFILE'
 
 type InitialStateType = {
+    user: UserProfileType
     postText: string
     posts: PostType[]
 }
 
 const initialState: InitialStateType = {
+    user: {} as UserProfileType,
     postText: '',
     posts: [
         { id: 1, text: 'asdasdasd', likesCount: 99 },
@@ -36,13 +39,16 @@ export const profileReducer = (state = initialState, action: ProfileReducerActio
             state.postText = action.value
             return state
         }
+        case GET_USER_PROFILE: return {
+            ...state, user: { ...action.user }
+        }
         default: return state
     }
 }
 
 //types 
 
-export type ProfileReducerActionsType = AddPostActionType | ChangePostTextActionType
+export type ProfileReducerActionsType = AddPostActionType | ChangePostTextActionType | GetUserProfileActionType
 
 type AddPostActionType = {
     type: 'ADD_POST'
@@ -50,6 +56,11 @@ type AddPostActionType = {
 type ChangePostTextActionType = {
     type: 'CHANGE_POST_TEXT'
     value: string
+}
+
+type GetUserProfileActionType = {
+    type: 'GET_USER_PROFILE'
+    user: UserProfileType
 }
 
 //actions 
@@ -65,3 +76,10 @@ export const changePostTextActionCreator = (value: string): ChangePostTextAction
         value,
     }
 }
+
+export const getUserProfile = (user: UserProfileType) => {
+    return {
+        type: GET_USER_PROFILE,
+        user,
+    }
+} 

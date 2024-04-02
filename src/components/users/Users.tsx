@@ -2,11 +2,13 @@ import { Pagination } from "../pagination/Pagination"
 import { ConnectedPropsType } from "./UsersContainer"
 import no_avatar from "../../assets/avatar_images/no_avatar.png"
 import { Preloader } from "../../features/Preloader"
+import { NavLink } from "react-router-dom"
 
 interface PropsType extends ConnectedPropsType {
     setPage: (pageNumber: number) => void
     follow: (userId: number) => void
     unfollow: (userId: number) => void
+    selectUserProfile: (userId: number) => void
 }
 
 export const Users = (props: PropsType) => {
@@ -24,9 +26,15 @@ export const Users = (props: PropsType) => {
                 return (
                     <div key={user.id}>
                         <div>
-                            <img style={{ width: '64px', height: '64px' }}
+                            <NavLink to={`users/${user.id}`}>
+                                <img style={{ width: '64px', height: '64px' }}
+                                    src={user.photos.small ? user.photos.large : no_avatar}
+                                    alt=""
+                                    onClick={() => props.selectUserProfile(user.id)} />
+                            </NavLink>
+                            {/* <img style={{ width: '64px', height: '64px' }}
                                 src={user.photos.small ? user.photos.large : no_avatar}
-                                alt="" />
+                                alt="" /> */}
                             <div>{user.id}</div>
                             <div>{user.name}</div>
                             <div>{user.status}</div>

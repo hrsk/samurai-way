@@ -1,5 +1,6 @@
 import { dialogsReducer } from "../components/reducers/dialogsReducer"
 import { profileReducer } from "../components/reducers/profileReducer"
+import { UserProfileType } from "../types"
 
 export const store: AppStoreType = {
     _state: {
@@ -32,6 +33,7 @@ export const store: AppStoreType = {
             ],
         },
         profilePage: {
+            user: {} as UserProfileType,
             postText: '',
             posts: [
                 { id: 1, text: 'asdasdasd', likesCount: 99 },
@@ -90,6 +92,7 @@ export type PostType = {
 }
 
 export type ProfilePageType = {
+    user: UserProfileType
     postText: string
     posts: PostType[]
 }
