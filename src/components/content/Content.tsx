@@ -12,7 +12,7 @@ interface PropsType extends ConnectedProps {
 export const Content = (props: PropsType) => {
     return (
         <div className={style.contentWrapper}>
-            <Route exact path={'/profile'} component={() => <ProfileContainer />} />
+            <Route exact path={'/profile/:userId?'} component={() => <ProfileContainer />} />
             {/* <Route exact path={'/profile'} component={() => <Profile posts={props.profilePage.posts}
                 changePostText={props.changePostText}
                 addPost={props.addPost}

@@ -26,11 +26,10 @@ export const Users = (props: PropsType) => {
                 return (
                     <div key={user.id}>
                         <div>
-                            <NavLink to={`users/${user.id}`}>
+                            <NavLink to={`profile/${user.id}`}>
                                 <img style={{ width: '64px', height: '64px' }}
                                     src={user.photos.small ? user.photos.large : no_avatar}
-                                    alt=""
-                                    onClick={() => props.selectUserProfile(user.id)} />
+                                    alt="" />
                             </NavLink>
                             {/* <img style={{ width: '64px', height: '64px' }}
                                 src={user.photos.small ? user.photos.large : no_avatar}

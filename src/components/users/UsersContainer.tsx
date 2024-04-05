@@ -22,7 +22,7 @@ export class UsersConnectedComponent extends React.Component<ConnectedPropsType,
 
     selectUserProfile = (userId: number) => {
         this.props.fetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users/${userId}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}}`)
             .then((response) => {
                 this.props.getUserProfile(response.data)
                 this.props.fetching(false)

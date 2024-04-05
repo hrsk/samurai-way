@@ -7,18 +7,41 @@ import { PostType, UserProfileType } from "../../types";
 import axios from "axios";
 import { fetching } from "../reducers/appReducer";
 import { Preloader } from "../../features/Preloader";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
 export class ProfileConnectedComponent extends React.Component<ConnectedPropsType, AppStateType> {
 
-    componentDidMount(): void {
-        const userId = 2
+    // componentDidMount(): void {
+    //     debugger
+    //     const userId = this.props.match.params.userId
 
-        this.props.fetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+    //     this.props.fetching(true)
+    //     axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+    //         .then((response) => {
+    //             this.props.getUserProfile(response.data)
+    //             this.props.fetching(false)
+    //         })
+    // }
+
+    refreshProfile() {
+        let userId = this.props.match.params.userId
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${Number(userId)}`)
             .then((response) => {
                 this.props.getUserProfile(response.data)
                 this.props.fetching(false)
             })
+    }
+
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: any) {
+        if (this.props.match.params.userId !== prevProps.match.params.userID) {
+            this.refreshProfile()
+        }
+
     }
 
     changePostText = (value: string) => {
@@ -56,8 +79,13 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 interface OwnProps extends ClassAttributes<ProfileConnectedComponent> { }
 type PropsFromRedux = ConnectedProps<typeof connector>
-export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux & OwnProps
+export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux & OwnProps & RouteComponentProps<RouteParams>
 
 const connector = connect(mapStateToProps, { getUserProfile, changePostText, addPost, fetching });
 
-export const ProfileContainer = connector(ProfileConnectedComponent)
+type RouteParams = {
+    userId: string
+}
+
+const WithRouterComponent = withRouter(ProfileConnectedComponent)
+export const ProfileContainer = connector(WithRouterComponent)
