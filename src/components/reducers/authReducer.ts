@@ -19,7 +19,7 @@ const initialState: InitialStateType = {
 }
 
 
-export const appReducer = (state = initialState, action: AuthReducerActionType): InitialStateType => {
+export const authReducer = (state = initialState, action: AuthReducerActionType): InitialStateType => {
     switch (action.type) {
         case GET_AUTH_USER_DATA: return {
             ...state, authData: { ...action.data }, isAuth: true

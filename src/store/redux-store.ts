@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { navbarReducer } from "../components/reducers/navbarReducer";
 import { usersReducer } from "../components/reducers/usersReducer";
 import { appReducer } from "../components/reducers/appReducer";
+import { authReducer } from "../components/reducers/authReducer";
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     navbar: navbarReducer,
     usersPage: usersReducer,
     app: appReducer,
+    auth: authReducer,
 })
 
 export const store = createStore(rootReducer)
