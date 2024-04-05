@@ -77,3 +77,14 @@ export type UserProfileType = {
         large: string
     }
 }
+
+export type AuthDataResponseType = {
+    data: {
+        id: number
+        login: string
+        email: string
+    },
+    messages: string[]
+    fieldsErrors: string[]
+    resultCode: number
+} 

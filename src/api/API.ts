@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GetUsersResponseType, ResponseType } from "../types";
+import { AuthDataResponseType, GetUsersResponseType, ResponseType } from "../types";
 
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -24,6 +24,10 @@ export const API = {
     },
     unfollowUser(userId: number) {
         return instance.delete<ResponseType>(`follow/${userId}`)
+            .then(response => response)
+    },
+    authMe() {
+        return instance.get<AuthDataResponseType>(`auth/me`)
             .then(response => response)
     },
 }
