@@ -41,8 +41,8 @@ export const Users = (props: PropsType) => {
                         <div>
                             {
                                 user.followed
-                                    ? <button onClick={() => { props.unfollow(user.id) }}>UNFOLLOW</button>
-                                    : <button onClick={() => { props.follow(user.id) }}>FOLLOW</button>
+                                    ? <button onClick={() => { props.unfollow(user.id) }} disabled={props.isFollow.some(id => id === user.id)}>UNFOLLOW</button>
+                                    : <button onClick={() => { props.follow(user.id) }} disabled={props.isFollow.some(id => id === user.id)}>FOLLOW</button>
                             }
                         </div>
                     </div>

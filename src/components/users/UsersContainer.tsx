@@ -5,7 +5,7 @@ import { API } from "../../api/API"
 import { AppStateType } from "../../store/redux-store"
 import { UserType } from "../../types"
 import { fetching } from "../reducers/appReducer"
-import { followUser, getUsers, selectPage, unfollowUser } from "../reducers/usersReducer"
+import { followUser, following, getUsers, selectPage, unfollowUser } from "../reducers/usersReducer"
 import { Users } from "./Users"
 import { getUserProfile } from "../reducers/profileReducer"
 
@@ -38,19 +38,24 @@ export class UsersConnectedComponent extends React.Component<ConnectedPropsType,
     }
 
     follow = (userId: number) => {
+        this.props.following(userId, true)
         API.followUser(userId)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     this.props.followUser(userId)
                 }
+                this.props.following(userId, false)
+
             })
     }
     unfollow = (userId: number) => {
+        this.props.following(userId, true)
         API.unfollowUser(userId)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     this.props.unfollowUser(userId)
                 }
+                this.props.following(userId, false)
             })
     }
 
@@ -67,6 +72,7 @@ type MapStateToPropsType = {
     currentPage: number
     pageSize: number
     isFetching: boolean
+    isFollow: number[]
 }
 
 // type MapDispatchToPropsType = {
@@ -85,6 +91,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         currentPage: state.usersPage.currentPage,
         pageSize: state.usersPage.pageSize,
         isFetching: state.app.isFetching,
+        isFollow: state.usersPage.isFollow,
     }
 }
 
@@ -105,7 +112,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux & OwnProps
 
 const connector = connect(mapStateToProps, {
-    getUsers, selectPage, followUser, unfollowUser, fetching, getUserProfile,
+    getUsers, selectPage, followUser, unfollowUser, fetching, getUserProfile, following,
 });
 
 

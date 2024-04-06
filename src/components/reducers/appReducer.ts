@@ -22,7 +22,7 @@ export const appReducer = (state = initialState, action: AppReducerActionType): 
 
 export type AppReducerActionType = IsFetchingActionType
 
-type IsFetchingActionType = {
+export type IsFetchingActionType = {
     type: 'IS_FETCHING'
     isFetching: boolean
 }
