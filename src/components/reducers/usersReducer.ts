@@ -1,12 +1,12 @@
 import { Dispatch } from "redux"
 import { API } from "../../api/API"
 import { Nullable, UserType } from "../../types"
-import { IsFetchingActionType, fetching } from "./appReducer"
+import { fetching } from "./appReducer"
 
-const GET_USERS = 'GET_USERS'
-const SELECT_PAGE = 'SELECT_PAGE'
-const FOLLOW_USER = 'FOLLOW_USER'
-const UNFOLLOW_USER = 'UNFOLLOW_USER'
+const SET_USERS = 'GET_USERS'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_SUBSCRIBE = 'SET_SUBSCRIBE'
+const SET_UNSUBSCRIBE = 'SET_UNSUBSCRIBE'
 const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS'
 
 type InitialStateType = {
@@ -30,27 +30,24 @@ const initialState: InitialStateType = {
 }
 
 
-export const usersReducer = (state = initialState, action: UsersReducerActionType | IsFetchingActionType): InitialStateType => {
+export const usersReducer = (state = initialState, action: UsersReducerActionType): InitialStateType => {
     switch (action.type) {
-        case GET_USERS: return {
+        case SET_USERS: return {
             ...state,
             items: [...action.users],
             totalCount: action.totalCount,
             error: action.error,
         }
-        case SELECT_PAGE: return {
+        case SET_CURRENT_PAGE: return {
             ...state, currentPage: action.pageNumber
         }
-        case FOLLOW_USER: return {
+        case SET_SUBSCRIBE: return {
             ...state, items: state.items.map(user =>
                 user.id === action.userId ? { ...user, followed: true } : user)
         }
-        case UNFOLLOW_USER: return {
+        case SET_UNSUBSCRIBE: return {
             ...state, items: state.items.map(user =>
                 user.id === action.userId ? { ...user, followed: false } : user)
-        }
-        case 'IS_FETCHING': return {
-            ...state, isFetching: action.isFetching
         }
         case FOLLOWING_IN_PROGRESS: return {
             ...state,
@@ -64,25 +61,29 @@ export const usersReducer = (state = initialState, action: UsersReducerActionTyp
 
 //types 
 
-export type UsersReducerActionType = GetUsersActionType | SelectPageActionType | FollowUserActionType | UnfollowUserActionType | FollowingProgressActionType
+export type UsersReducerActionType = SetUsersActionType
+    | SetCurrentPageActionType
+    | SubscribeUserActionType
+    | UnsubscribeUserActionType
+    | FollowingProgressActionType
 
-type GetUsersActionType = {
+type SetUsersActionType = {
     type: 'GET_USERS'
     users: UserType[]
     totalCount: number
     error: Nullable<string>
 }
 
-type SelectPageActionType = {
-    type: 'SELECT_PAGE'
+type SetCurrentPageActionType = {
+    type: 'SET_CURRENT_PAGE'
     pageNumber: number
 }
-type FollowUserActionType = {
-    type: 'FOLLOW_USER'
+type SubscribeUserActionType = {
+    type: 'SET_SUBSCRIBE'
     userId: number
 }
-type UnfollowUserActionType = {
-    type: 'UNFOLLOW_USER'
+type UnsubscribeUserActionType = {
+    type: 'SET_UNSUBSCRIBE'
     userId: number
 }
 type FollowingProgressActionType = {
@@ -94,29 +95,29 @@ type FollowingProgressActionType = {
 
 //actions 
 
-export const getUsers = (users: UserType[], totalCount: number, error: Nullable<string>): GetUsersActionType => {
+export const setUsers = (users: UserType[], totalCount: number, error: Nullable<string>): SetUsersActionType => {
     return {
-        type: GET_USERS,
+        type: SET_USERS,
         users,
         totalCount,
         error,
     }
 }
-export const selectPage = (pageNumber: number): SelectPageActionType => {
+export const setCurrentPage = (pageNumber: number): SetCurrentPageActionType => {
     return {
-        type: SELECT_PAGE,
+        type: SET_CURRENT_PAGE,
         pageNumber,
     }
 }
-export const followUser = (userId: number): FollowUserActionType => {
+export const setSubscribeUser = (userId: number): SubscribeUserActionType => {
     return {
-        type: FOLLOW_USER,
+        type: SET_SUBSCRIBE,
         userId,
     }
 }
-export const unfollowUser = (userId: number): UnfollowUserActionType => {
+export const setUnsubscribeUser = (userId: number): UnsubscribeUserActionType => {
     return {
-        type: UNFOLLOW_USER,
+        type: SET_UNSUBSCRIBE,
         userId,
     }
 }
@@ -128,47 +129,45 @@ export const following = (userId: number, isFetching: boolean): FollowingProgres
     }
 }
 
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
-    console.log('getUsersThunkCreator')
+//thunk creators
+
+export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(fetching(true));
     API.getUsers(currentPage, pageSize)
         .then(response => {
             dispatch(fetching(false));
-            dispatch(getUsers(response.data.items, response.data.totalCount, response.data.error));
+            dispatch(setUsers(response.data.items, response.data.totalCount, response.data.error));
         });
 }
 
-export const followUsersThunkCreator = (userId: number) => (dispatch: Dispatch) => {
-    console.log('followUsersThunkCreator')
+export const subscribeUser = (userId: number) => (dispatch: Dispatch) => {
     dispatch(following(userId, true))
     API.followUser(userId)
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(following(userId, false))
-                dispatch(followUser(userId))
+                dispatch(setSubscribeUser(userId))
             }
         });
 }
 
-export const unfollowUsersThunkCreator = (userId: number) => (dispatch: Dispatch) => {
-    console.log('unfollowUsersThunkCreator')
+export const unsubscribeUser = (userId: number) => (dispatch: Dispatch) => {
     dispatch(following(userId, true))
     API.unfollowUser(userId)
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(following(userId, false))
-                dispatch(unfollowUser(userId))
+                dispatch(setUnsubscribeUser(userId))
             }
         });
 }
 
-export const selectPageThunkCreator = (pageNumber: number, pageSize: number) => (dispatch: Dispatch) => {
-    console.log('selectPageThunkCreator')
+export const selectPage = (pageNumber: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(fetching(true))
-    dispatch(selectPage(pageNumber))
+    dispatch(setCurrentPage(pageNumber))
     API.getUsers(pageNumber, pageSize)
         .then(response => {
             dispatch(fetching(false))
-            dispatch(getUsers(response.data.items, response.data.totalCount, response.data.error))
+            dispatch(setUsers(response.data.items, response.data.totalCount, response.data.error))
         })
 }

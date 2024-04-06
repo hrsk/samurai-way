@@ -5,7 +5,7 @@ type PropsType = {
     totalCount: number;
     pageSize: number;
     currentPage: number;
-    setPage: (page: number) => void
+    setCurrentPage: (page: number) => void
 }
 
 export const Pagination = (props: PropsType) => {
@@ -35,15 +35,15 @@ export const Pagination = (props: PropsType) => {
     }
 
     const prevPage = () => {
-        props.setPage(props.currentPage - 1)
+        props.setCurrentPage(props.currentPage - 1)
     }
 
     const nextPage = () => {
-        props.setPage(props.currentPage + 1)
+        props.setCurrentPage(props.currentPage + 1)
     }
 
-    const selectPage = (page: number) => {
-        props.setPage(page);
+    const setCurrentPageHandler = (pageNumber: number) => {
+        props.setCurrentPage(pageNumber);
     }
 
     return (
@@ -53,7 +53,9 @@ export const Pagination = (props: PropsType) => {
             {
                 pages
                     .filter(page => page >= prevCountPageOutput && page <= nextCountPageOutput)
-                    .map((page, index) => <button className={props.currentPage === page ? style.selected : ''} key={index} onClick={() => selectPage(page)}>
+                    .map((page, index) => <button className={props.currentPage === page ? style.selected : ''}
+                        key={index}
+                        onClick={() => setCurrentPageHandler(page)}>
                         {page}
                     </button>
                     )

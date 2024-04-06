@@ -98,7 +98,7 @@ export const getUserProfile = (user: UserProfileType) => {
     }
 }
 
-export const selectUserThunkCreator = (userId: number) => (dispatch: Dispatch) => {
+export const selectUser = (userId: number) => (dispatch: Dispatch) => {
     dispatch(fetching(true))
     API.getUser(userId)
         .then((response) => {

@@ -1,53 +1,31 @@
-import { Pagination } from "../pagination/Pagination"
-import { ConnectedPropsType } from "./UsersContainer"
-import no_avatar from "../../assets/avatar_images/no_avatar.png"
 import { Preloader } from "../../features/Preloader"
-import { NavLink } from "react-router-dom"
+import { Pagination } from "../pagination/Pagination"
+import { User } from "./User"
+import { ConnectedPropsType } from "./UsersContainer"
 
 interface PropsType extends ConnectedPropsType {
-    setPage: (pageNumber: number) => void
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    selectUserProfile: (userId: number) => void
+    setCurrentPage: (pageNumber: number) => void
+    subscribe: (userId: number) => void
+    unsubscribe: (userId: number) => void
 }
 
 export const Users = (props: PropsType) => {
-    return <>
-        <Pagination totalCount={props.totalCount}
-            pageSize={props.pageSize}
-            currentPage={props.currentPage}
-            setPage={props.setPage}
-        />
-        {
-            props.isFetching && <Preloader />
-        }
-        {
-            props.users.map(user => {
-                return (
-                    <div key={user.id}>
-                        <div>
-                            <NavLink to={`profile/${user.id}`}>
-                                <img style={{ width: '64px', height: '64px' }}
-                                    src={user.photos.small ? user.photos.large : no_avatar}
-                                    alt="" />
-                            </NavLink>
-                            {/* <img style={{ width: '64px', height: '64px' }}
-                                src={user.photos.small ? user.photos.large : no_avatar}
-                                alt="" /> */}
-                            <div>{user.id}</div>
-                            <div>{user.name}</div>
-                            <div>{user.status}</div>
-                        </div>
-                        <div>
-                            {
-                                user.followed
-                                    ? <button onClick={() => { props.unfollow(user.id) }} disabled={props.isFollow.some(id => id === user.id)}>UNFOLLOW</button>
-                                    : <button onClick={() => { props.follow(user.id) }} disabled={props.isFollow.some(id => id === user.id)}>FOLLOW</button>
-                            }
-                        </div>
-                    </div>
-                )
-            })
-        }
-    </>
+    return (
+        <div>
+            <Pagination totalCount={props.totalCount}
+                pageSize={props.pageSize}
+                currentPage={props.currentPage}
+                setCurrentPage={props.setCurrentPage}
+            />
+            {
+                props.isFetching
+                    ? <Preloader />
+                    : props.users.map(user => <User user={user}
+                        isFollow={props.isFollow}
+                        subscribe={props.subscribe}
+                        unsubscribe={props.unsubscribe} />
+                    )
+            }
+        </div>
+    )
 }
