@@ -1,4 +1,4 @@
-import { combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
 import { dialogsReducer } from "../components/reducers/dialogsReducer";
 import { profileReducer } from "../components/reducers/profileReducer";
 import { useDispatch } from "react-redux";
@@ -6,6 +6,7 @@ import { navbarReducer } from "../components/reducers/navbarReducer";
 import { usersReducer } from "../components/reducers/usersReducer";
 import { appReducer } from "../components/reducers/appReducer";
 import { authReducer } from "../components/reducers/authReducer";
+import thunk from "redux-thunk";
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -16,7 +17,7 @@ const rootReducer = combineReducers({
     auth: authReducer,
 })
 
-export const store = createStore(rootReducer)
+export const store = createStore(rootReducer, applyMiddleware(thunk))
 
 export type RootStateType = ReturnType<typeof store.getState>
 

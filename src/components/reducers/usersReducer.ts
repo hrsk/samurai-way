@@ -1,5 +1,7 @@
+import { Dispatch } from "redux"
+import { API } from "../../api/API"
 import { Nullable, UserType } from "../../types"
-import { IsFetchingActionType } from "./appReducer"
+import { IsFetchingActionType, fetching } from "./appReducer"
 
 const GET_USERS = 'GET_USERS'
 const SELECT_PAGE = 'SELECT_PAGE'
@@ -126,3 +128,36 @@ export const following = (userId: number, isFetching: boolean): FollowingProgres
     }
 }
 
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+    console.log('getUsersThunkCreator')
+    dispatch(fetching(true));
+    API.getUsers(currentPage, pageSize)
+        .then(response => {
+            dispatch(fetching(false));
+            dispatch(getUsers(response.data.items, response.data.totalCount, response.data.error));
+        });
+}
+
+export const followUsersThunkCreator = (userId: number) => (dispatch: Dispatch) => {
+    console.log('followUsersThunkCreator')
+    dispatch(following(userId, true))
+    API.followUser(userId)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(following(userId, false))
+                dispatch(followUser(userId))
+            }
+        });
+}
+
+export const unfollowUsersThunkCreator = (userId: number) => (dispatch: Dispatch) => {
+    console.log('unfollowUsersThunkCreator')
+    dispatch(following(userId, true))
+    API.unfollowUser(userId)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(following(userId, false))
+                dispatch(unfollowUser(userId))
+            }
+        });
+}

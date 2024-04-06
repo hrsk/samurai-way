@@ -5,19 +5,20 @@ import { API } from "../../api/API"
 import { AppStateType } from "../../store/redux-store"
 import { UserType } from "../../types"
 import { fetching } from "../reducers/appReducer"
-import { followUser, following, getUsers, selectPage, unfollowUser } from "../reducers/usersReducer"
+import { followUser, followUsersThunkCreator, following, getUsers, getUsersThunkCreator, selectPage, unfollowUser, unfollowUsersThunkCreator } from "../reducers/usersReducer"
 import { Users } from "./Users"
 import { getUserProfile } from "../reducers/profileReducer"
 
 export class UsersConnectedComponent extends React.Component<ConnectedPropsType, AppStateType> {
 
     componentDidMount() {
-        this.props.fetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then((response) => {
-                this.props.getUsers(response.data.items, response.data.totalCount, response.data.error)
-                this.props.fetching(false)
-            })
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
+        // this.props.fetching(true)
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        //     .then((response) => {
+        //         this.props.getUsers(response.data.items, response.data.totalCount, response.data.error)
+        //         this.props.fetching(false)
+        //     })
     }
 
     selectUserProfile = (userId: number) => {
@@ -38,25 +39,27 @@ export class UsersConnectedComponent extends React.Component<ConnectedPropsType,
     }
 
     follow = (userId: number) => {
-        this.props.following(userId, true)
-        API.followUser(userId)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    this.props.followUser(userId)
-                }
-                this.props.following(userId, false)
+        this.props.followUsersThunkCreator(userId)
+        // this.props.following(userId, true)
+        // API.followUser(userId)
+        //     .then(response => {
+        //         if (response.data.resultCode === 0) {
+        //             this.props.followUser(userId)
+        //         }
+        //         this.props.following(userId, false)
 
-            })
+        //     })
     }
     unfollow = (userId: number) => {
-        this.props.following(userId, true)
-        API.unfollowUser(userId)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    this.props.unfollowUser(userId)
-                }
-                this.props.following(userId, false)
-            })
+        this.props.unfollowUsersThunkCreator(userId)
+        // this.props.following(userId, true)
+        // API.unfollowUser(userId)
+        //     .then(response => {
+        //         if (response.data.resultCode === 0) {
+        //             this.props.unfollowUser(userId)
+        //         }
+        //         this.props.following(userId, false)
+        //     })
     }
 
     render() {
@@ -112,7 +115,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux & OwnProps
 
 const connector = connect(mapStateToProps, {
-    getUsers, selectPage, followUser, unfollowUser, fetching, getUserProfile, following,
+    getUsers, selectPage, followUser, unfollowUser, fetching, getUserProfile, following, getUsersThunkCreator, followUsersThunkCreator, unfollowUsersThunkCreator,
 });
 
 
