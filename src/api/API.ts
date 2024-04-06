@@ -18,6 +18,10 @@ export const API = {
         return instance.get<GetUsersResponseType>(`users/?page=${pageNumber}&count=${pageSize}`)
             .then(response => response)
     },
+    getUser(userId: number) {
+        return instance.get(`profile/${userId}}`)
+            .then(response => response)
+    },
     followUser(userId: number) {
         return instance.post<ResponseType>(`follow/${userId}`)
             .then(response => response)

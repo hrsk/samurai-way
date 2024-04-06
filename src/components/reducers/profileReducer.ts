@@ -1,4 +1,7 @@
+import { Dispatch } from "redux"
 import { PostType, UserProfileType } from "../../types"
+import { fetching } from "./appReducer"
+import { API } from "../../api/API"
 
 const ADD_POST = 'ADD_POST'
 const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
@@ -93,4 +96,13 @@ export const getUserProfile = (user: UserProfileType) => {
         type: GET_USER_PROFILE,
         user,
     }
-} 
+}
+
+export const selectUserThunkCreator = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(fetching(true))
+    API.getUser(userId)
+        .then((response) => {
+            dispatch(getUserProfile(response.data))
+            dispatch(fetching(false))
+        })
+}

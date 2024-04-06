@@ -161,3 +161,14 @@ export const unfollowUsersThunkCreator = (userId: number) => (dispatch: Dispatch
             }
         });
 }
+
+export const selectPageThunkCreator = (pageNumber: number, pageSize: number) => (dispatch: Dispatch) => {
+    console.log('selectPageThunkCreator')
+    dispatch(fetching(true))
+    dispatch(selectPage(pageNumber))
+    API.getUsers(pageNumber, pageSize)
+        .then(response => {
+            dispatch(fetching(false))
+            dispatch(getUsers(response.data.items, response.data.totalCount, response.data.error))
+        })
+}
