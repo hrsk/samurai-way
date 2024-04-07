@@ -1,16 +1,10 @@
 import { ChangeEvent } from "react";
-import { DialogType, MessageType } from "../../types";
 import style from "./Dialog.module.css";
+import { ConnectedPropsType } from "./DialogContainer";
 import { Dialog } from "./dialog/Dialog";
 import { Message } from "./message/Message";
 
-type PropsType = {
-    dialogs: DialogType[]
-    messages: MessageType[]
-    messageText: string
-    changeMessageText: (value: string) => void
-    sendMessage: () => void
-}
+interface PropsType extends ConnectedPropsType { }
 
 export const Dialogs = (props: PropsType) => {
 
@@ -19,11 +13,10 @@ export const Dialogs = (props: PropsType) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.changeMessageText(e.currentTarget.value)
-        // props.dispatch(changeMessageTextActionCreator(e.currentTarget.value))
     }
     const sendMessageHandler = () => {
         props.sendMessage()
-        // props.dispatch(sendMessageActionCreator())
+        props.changeMessageText('')
     }
 
     return (

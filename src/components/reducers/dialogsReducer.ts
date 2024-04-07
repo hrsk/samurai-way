@@ -34,14 +34,12 @@ export const dialogsReducer = (state = initialState, action: DialogsReducerActio
                 id: Math.random(),
                 message: state.messageText,
             }
-            state.messages.push(newMessage)
-            state.messageText = ''
-            return state
+            return { ...state, messages: [...state.messages, newMessage] }
         }
-        case CHANGE_MESSAGE_TEXT: {
-            state.messageText = action.value
-            return state
+        case CHANGE_MESSAGE_TEXT: return {
+            ...state, messageText: action.value
         }
+
         default: return state
     }
 }
@@ -60,12 +58,12 @@ type ChangeMessageTextActionType = {
 
 //actions
 
-export const sendMessageActionCreator = (): SendMessageActionType => {
+export const sendMessage = (): SendMessageActionType => {
     return {
         type: SEND_MESSAGE
     }
 }
-export const changeMessageTextActionCreator = (value: string): ChangeMessageTextActionType => {
+export const changeMessageText = (value: string): ChangeMessageTextActionType => {
     return {
         type: CHANGE_MESSAGE_TEXT,
         value,

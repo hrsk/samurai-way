@@ -1,28 +1,14 @@
 import { Route } from 'react-router-dom';
-import { DialogsContainerComponent } from '../dialogs/DialogContainerComponent';
-import { Profile } from '../profile/Profile';
-import style from "./Content.module.css";
-import { ConnectedProps } from './ContentContainer';
-import { UsersContainer } from '../users/UsersContainer';
+import { DialogsContainer } from '../dialogs/DialogContainer';
 import { ProfileContainer } from '../profile/ProfileContainer';
+import { UsersContainer } from '../users/UsersContainer';
+import style from "./Content.module.css";
 
-interface PropsType extends ConnectedProps {
-}
-
-export const Content = (props: PropsType) => {
+export const Content = () => {
     return (
         <div className={style.contentWrapper}>
             <Route exact path={'/profile/:userId?'} component={() => <ProfileContainer />} />
-            {/* <Route exact path={'/profile'} component={() => <Profile posts={props.profilePage.posts}
-                changePostText={props.changePostText}
-                addPost={props.addPost}
-                postText={props.profilePage.postText} />}
-            /> */}
-            <Route exact path={'/messages'} component={() => <DialogsContainerComponent dialogs={props.messagesPage.dialogs}
-                messages={props.messagesPage.messages}
-                changeMessageText={props.changeMessageText}
-                sendMessage={props.sendMessage}
-                messageText={props.messagesPage.messageText} />} />
+            <Route exact path={'/messages'} component={() => <DialogsContainer />} />
             <Route exact path={'/users'} component={() => <UsersContainer />} />
         </div>
     );
