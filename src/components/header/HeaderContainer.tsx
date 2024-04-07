@@ -1,20 +1,13 @@
+import React from "react"
 import { ConnectedProps, connect } from "react-redux"
 import { AppStateType } from "../../store/redux-store"
-import { auth } from "../reducers/authReducer"
+import { getAuthUserData } from "../reducers/authReducer"
 import { Header } from "./Header"
-import React from "react"
-import { API } from "../../api/API"
 
 export class HeaderConnectComponent extends React.Component<ConnectedPropsType, AppStateType>  {
 
     componentDidMount() {
-        API.authMe()
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    this.props.auth(response.data.data)
-                }
-            })
-
+        this.props.getAuthUserData()
     }
 
     render() {
@@ -38,7 +31,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const connector = connect(mapStateToProps, { auth });
+const connector = connect(mapStateToProps, { getAuthUserData });
 
 export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux
 
