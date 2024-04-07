@@ -19,7 +19,7 @@ export const API = {
             .then(response => response)
     },
     getUser(userId: number) {
-        return instance.get(`profile/${userId}}`)
+        return instance.get(`profile/${userId}`)
             .then(response => response)
     },
     followUser(userId: number) {

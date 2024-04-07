@@ -1,7 +1,7 @@
 import { Dispatch } from "redux"
+import { API } from "../../api/API"
 import { PostType, UserProfileType } from "../../types"
 import { fetching } from "./appReducer"
-import { API } from "../../api/API"
 
 const ADD_POST = 'ADD_POST'
 const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
@@ -37,21 +37,9 @@ export const profileReducer = (state = initialState, action: ProfileReducerActio
             return {
                 ...state, posts: [newPost, ...state.posts], postText: ''
             }
-            // const newPost: PostType = {
-            //     id: 6,
-            //     text: state.postText,
-            //     likesCount: 0,
-            // }
-
-
-            // state.posts.push(newPost)
-            // state.postText = ''
-            // return state
         }
         case CHANGE_POST_TEXT: {
             return { ...state, postText: action.value }
-            // state.postText = action.value
-            // return state
         }
         case GET_USER_PROFILE: return {
             ...state, user: { ...action.user }
@@ -100,6 +88,15 @@ export const getUserProfile = (user: UserProfileType) => {
 
 export const selectUser = (userId: number) => (dispatch: Dispatch) => {
     dispatch(fetching(true))
+    API.getUser(userId)
+        .then((response) => {
+            dispatch(getUserProfile(response.data))
+            dispatch(fetching(false))
+        })
+}
+
+export const getUserProfileThunkCreator = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(fetching(false))
     API.getUser(userId)
         .then((response) => {
             dispatch(getUserProfile(response.data))

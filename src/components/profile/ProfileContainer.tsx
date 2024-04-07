@@ -1,13 +1,12 @@
 import React, { ClassAttributes } from "react";
-import { AppStateType } from "../../store/redux-store";
 import { ConnectedProps, connect } from "react-redux";
-import { Profile } from "./Profile";
-import { addPost, changePostText, getUserProfile } from "../reducers/profileReducer";
-import { PostType, UserProfileType } from "../../types";
-import axios from "axios";
-import { fetching } from "../reducers/appReducer";
-import { Preloader } from "../../features/Preloader";
 import { RouteComponentProps, withRouter } from "react-router-dom";
+import { Preloader } from "../../features/Preloader";
+import { AppStateType } from "../../store/redux-store";
+import { PostType, UserProfileType } from "../../types";
+import { fetching } from "../reducers/appReducer";
+import { addPost, changePostText, getUserProfile, getUserProfileThunkCreator } from "../reducers/profileReducer";
+import { Profile } from "./Profile";
 
 export class ProfileConnectedComponent extends React.Component<ConnectedPropsType, AppStateType> {
 
@@ -26,11 +25,19 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
     refreshProfile() {
         let userId = this.props.match.params.userId
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${Number(userId)}`)
-            .then((response) => {
-                this.props.getUserProfile(response.data)
-                this.props.fetching(false)
-            })
+        if (!userId) {
+            this.props.getUserProfileThunkCreator(18933)
+        }
+
+        if (userId) {
+            this.props.getUserProfileThunkCreator(Number(userId))
+        }
+
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${Number(userId)}`)
+        //     .then((response) => {
+        //         this.props.getUserProfile(response.data)
+        //         this.props.fetching(false)
+        //     })
     }
 
     componentDidMount() {
@@ -38,7 +45,7 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
     }
 
     componentDidUpdate(prevProps: any) {
-        if (this.props.match.params.userId !== prevProps.match.params.userID) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile()
         }
 
@@ -81,7 +88,7 @@ interface OwnProps extends ClassAttributes<ProfileConnectedComponent> { }
 type PropsFromRedux = ConnectedProps<typeof connector>
 export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux & OwnProps & RouteComponentProps<RouteParams>
 
-const connector = connect(mapStateToProps, { getUserProfile, changePostText, addPost, fetching });
+const connector = connect(mapStateToProps, { getUserProfile, changePostText, addPost, fetching, getUserProfileThunkCreator });
 
 type RouteParams = {
     userId: string
