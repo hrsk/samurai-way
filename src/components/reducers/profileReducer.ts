@@ -5,7 +5,7 @@ import { fetching } from "./appReducer"
 
 const ADD_POST = 'ADD_POST'
 const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
-const GET_USER_PROFILE = 'GET_USER_PROFILE'
+const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
 type InitialStateType = {
     user: UserProfileType
@@ -41,7 +41,7 @@ export const profileReducer = (state = initialState, action: ProfileReducerActio
         case CHANGE_POST_TEXT: {
             return { ...state, postText: action.value }
         }
-        case GET_USER_PROFILE: return {
+        case SET_USER_PROFILE: return {
             ...state, user: { ...action.user }
         }
         default: return state
@@ -61,7 +61,7 @@ type ChangePostTextActionType = {
 }
 
 type GetUserProfileActionType = {
-    type: 'GET_USER_PROFILE'
+    type: 'SET_USER_PROFILE'
     user: UserProfileType
 }
 
@@ -79,27 +79,18 @@ export const changePostText = (value: string): ChangePostTextActionType => {
     }
 }
 
-export const getUserProfile = (user: UserProfileType) => {
+export const setUserProfile = (user: UserProfileType) => {
     return {
-        type: GET_USER_PROFILE,
+        type: SET_USER_PROFILE,
         user,
     }
 }
 
-export const selectUser = (userId: number) => (dispatch: Dispatch) => {
-    dispatch(fetching(true))
-    API.getUser(userId)
-        .then((response) => {
-            dispatch(getUserProfile(response.data))
-            dispatch(fetching(false))
-        })
-}
-
-export const getUserProfileThunkCreator = (userId: number) => (dispatch: Dispatch) => {
+export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
     dispatch(fetching(false))
     API.getUser(userId)
         .then((response) => {
-            dispatch(getUserProfile(response.data))
+            dispatch(setUserProfile(response.data))
             dispatch(fetching(false))
         })
 }

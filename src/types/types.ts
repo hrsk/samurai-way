@@ -59,6 +59,7 @@ export type UserType = {
 
 export type UserProfileType = {
     userId: number
+    aboutMe: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string

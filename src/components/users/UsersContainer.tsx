@@ -4,7 +4,6 @@ import { AppStateType } from "../../store/redux-store"
 import { UserType } from "../../types"
 import { Users } from "./Users"
 import { getUsers, selectPage, subscribeUser, unsubscribeUser } from "../reducers/usersReducer"
-import { selectUser } from "../reducers/profileReducer"
 
 export class UsersConnectedComponent extends React.Component<ConnectedPropsType, AppStateType> {
 
@@ -61,7 +60,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux & OwnProps
 
 const connector = connect(mapStateToProps, {
-    getUsers, selectUser, selectPage,
+    getUsers, selectPage,
     subscribeUser, unsubscribeUser
 })
 

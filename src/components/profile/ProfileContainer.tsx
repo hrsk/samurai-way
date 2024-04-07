@@ -5,39 +5,21 @@ import { Preloader } from "../../features/Preloader";
 import { AppStateType } from "../../store/redux-store";
 import { PostType, UserProfileType } from "../../types";
 import { fetching } from "../reducers/appReducer";
-import { addPost, changePostText, getUserProfile, getUserProfileThunkCreator } from "../reducers/profileReducer";
+import { addPost, changePostText, getUserProfile } from "../reducers/profileReducer";
 import { Profile } from "./Profile";
 
 export class ProfileConnectedComponent extends React.Component<ConnectedPropsType, AppStateType> {
-
-    // componentDidMount(): void {
-    //     debugger
-    //     const userId = this.props.match.params.userId
-
-    //     this.props.fetching(true)
-    //     axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-    //         .then((response) => {
-    //             this.props.getUserProfile(response.data)
-    //             this.props.fetching(false)
-    //         })
-    // }
 
     refreshProfile() {
         let userId = this.props.match.params.userId
 
         if (!userId) {
-            this.props.getUserProfileThunkCreator(18933)
+            this.props.getUserProfile(18933)
         }
 
         if (userId) {
-            this.props.getUserProfileThunkCreator(Number(userId))
+            this.props.getUserProfile(Number(userId))
         }
-
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${Number(userId)}`)
-        //     .then((response) => {
-        //         this.props.getUserProfile(response.data)
-        //         this.props.fetching(false)
-        //     })
     }
 
     componentDidMount() {
@@ -88,7 +70,7 @@ interface OwnProps extends ClassAttributes<ProfileConnectedComponent> { }
 type PropsFromRedux = ConnectedProps<typeof connector>
 export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux & OwnProps & RouteComponentProps<RouteParams>
 
-const connector = connect(mapStateToProps, { getUserProfile, changePostText, addPost, fetching, getUserProfileThunkCreator });
+const connector = connect(mapStateToProps, { changePostText, addPost, fetching, getUserProfile });
 
 type RouteParams = {
     userId: string
