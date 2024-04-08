@@ -4,6 +4,7 @@ import { AppStateType } from "../../store/redux-store";
 import { DialogType, MessageType } from "../../types";
 import { changeMessageText, sendMessage } from "../reducers/dialogsReducer";
 import { Dialogs } from "./Dialogs";
+import { Redirect } from "react-router-dom";
 
 export class DialogsConnectComponent extends React.Component<ConnectedPropsType, AppStateType> {
     componentDidMount(): void {
@@ -19,6 +20,7 @@ export class DialogsConnectComponent extends React.Component<ConnectedPropsType,
     }
 
     render(): React.ReactNode {
+        if (!this.props.isAuth) return <Redirect to={'/login'} />
         return <Dialogs {...this.props} />
     }
 }
@@ -26,6 +28,7 @@ type MapStateToPropsType = {
     dialogs: DialogType[]
     messages: MessageType[]
     messageText: string
+    isAuth: boolean
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
@@ -33,6 +36,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         dialogs: state.messagesPage.dialogs,
         messages: state.messagesPage.messages,
         messageText: state.messagesPage.messageText,
+        isAuth: state.auth.isAuth
     }
 }
 

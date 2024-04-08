@@ -1,6 +1,6 @@
 import React, { ClassAttributes } from "react";
 import { ConnectedProps, connect } from "react-redux";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import { Preloader } from "../../features/Preloader";
 import { AppStateType } from "../../store/redux-store";
 import { PostType, UserProfileType } from "../../types";
@@ -42,6 +42,7 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
     }
 
     render() {
+        if (!this.props.isAuth) return <Redirect to={'/login'} />
         return (
             this.props.isFetching
                 ? <Preloader />
@@ -55,6 +56,7 @@ type MapStateToPropsType = {
     postText: string
     userProfile: UserProfileType
     isFetching: boolean
+    isAuth: boolean
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
@@ -63,6 +65,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         postText: state.profilePage.postText,
         userProfile: state.profilePage.user,
         isFetching: state.app.isFetching,
+        isAuth: state.auth.isAuth,
     }
 }
 
