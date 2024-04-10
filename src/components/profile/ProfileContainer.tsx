@@ -7,6 +7,7 @@ import { PostType, UserProfileType } from "../../types";
 import { fetching } from "../reducers/appReducer";
 import { addPost, changePostText, getUserProfile } from "../reducers/profileReducer";
 import { Profile } from "./Profile";
+import { withAuthRedirect } from "../../features/hoc/RedirectComponent";
 
 export class ProfileConnectedComponent extends React.Component<ConnectedPropsType, AppStateType> {
 
@@ -80,4 +81,4 @@ type RouteParams = {
 }
 
 const WithRouterComponent = withRouter(ProfileConnectedComponent)
-export const ProfileContainer = connector(WithRouterComponent)
+export const ProfileContainer = withAuthRedirect(connector(WithRouterComponent))
