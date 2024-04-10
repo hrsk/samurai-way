@@ -1,4 +1,4 @@
-import React, { ClassAttributes } from "react";
+import React, { ClassAttributes, ComponentType } from "react";
 import { ConnectedProps, connect } from "react-redux";
 import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import { Preloader } from "../../features/Preloader";
@@ -8,6 +8,7 @@ import { fetching } from "../reducers/appReducer";
 import { addPost, changePostText, getUserProfile } from "../reducers/profileReducer";
 import { Profile } from "./Profile";
 import { withAuthRedirect } from "../../features/hoc/RedirectComponent";
+import { compose } from "redux";
 
 export class ProfileConnectedComponent extends React.Component<ConnectedPropsType, AppStateType> {
 
@@ -80,5 +81,11 @@ type RouteParams = {
     userId: string
 }
 
-const WithRouterComponent = withRouter(ProfileConnectedComponent)
-export const ProfileContainer = withAuthRedirect(connector(WithRouterComponent))
+// const WithRouterComponent = withRouter(ProfileConnectedComponent)
+// export const ProfileContainer = withAuthRedirect(connector(WithRouterComponent))
+
+export const ProfileContainer = compose<ComponentType>(
+    withAuthRedirect,
+    withRouter,
+    connector,
+)(ProfileConnectedComponent)
