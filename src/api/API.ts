@@ -34,5 +34,8 @@ export const API = {
         return instance.get<AuthDataResponseType>(`auth/me`)
             .then(response => response)
     },
+    getUserStatus(userId: number) {
+        return instance.get(`profile/status/${userId}`)
+    },
 }
 

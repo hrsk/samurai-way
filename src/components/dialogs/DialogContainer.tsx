@@ -49,6 +49,6 @@ const connector = connect(mapStateToProps, { changeMessageText, sendMessage })
 
 // export const DialogsContainer = withAuthRedirect(connector(DialogsConnectComponent))
 export const DialogsContainer = compose<ComponentType>(
-    withAuthRedirect,
+    // withAuthRedirect,
     connector,
 )(DialogsConnectComponent)

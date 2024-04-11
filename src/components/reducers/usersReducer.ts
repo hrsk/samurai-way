@@ -8,6 +8,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_SUBSCRIBE = 'SET_SUBSCRIBE'
 const SET_UNSUBSCRIBE = 'SET_UNSUBSCRIBE'
 const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS'
+const SET_USER_STATUS = 'SET_USER_STATUS'
 
 type InitialStateType = {
     items: UserType[]
@@ -17,6 +18,7 @@ type InitialStateType = {
     pageSize: number
     isFetching: boolean
     isFollow: number[]
+    status: string
 }
 
 const initialState: InitialStateType = {
@@ -27,6 +29,7 @@ const initialState: InitialStateType = {
     pageSize: 10,
     isFetching: false,
     isFollow: [],
+    status: ''
 }
 
 
@@ -55,6 +58,9 @@ export const usersReducer = (state = initialState, action: UsersReducerActionTyp
                 ? [...state.isFollow, action.userId]
                 : [...state.isFollow.filter(id => id !== action.userId)]
         }
+        case SET_USER_STATUS: return {
+            ...state, status: action.status
+        }
         default: return state
     }
 }
@@ -66,6 +72,7 @@ export type UsersReducerActionType = SetUsersActionType
     | SubscribeUserActionType
     | UnsubscribeUserActionType
     | FollowingProgressActionType
+    | SetUserStatusActionType
 
 type SetUsersActionType = {
     type: 'GET_USERS'
@@ -90,6 +97,10 @@ type FollowingProgressActionType = {
     type: 'FOLLOWING_IN_PROGRESS'
     userId: number
     isFetching: boolean
+}
+type SetUserStatusActionType = {
+    type: 'SET_USER_STATUS'
+    status: string
 }
 
 
@@ -126,6 +137,12 @@ export const following = (userId: number, isFetching: boolean): FollowingProgres
         type: FOLLOWING_IN_PROGRESS,
         userId,
         isFetching,
+    }
+}
+export const setUserStatus = (status: string): SetUserStatusActionType => {
+    return {
+        type: SET_USER_STATUS,
+        status,
     }
 }
 
@@ -170,4 +187,12 @@ export const selectPage = (pageNumber: number, pageSize: number) => (dispatch: D
             dispatch(fetching(false))
             dispatch(setUsers(response.data.items, response.data.totalCount, response.data.error))
         })
+}
+export const getUserStatus = (userId: number) => (dispatch: Dispatch) => {
+    // dispatch(fetching(true))
+    API.getUserStatus(userId).then(response => {
+        // dispatch(fetching(false))
+        dispatch(setUserStatus(response.data))
+    }
+    )
 }

@@ -9,6 +9,7 @@ import { addPost, changePostText, getUserProfile } from "../reducers/profileRedu
 import { Profile } from "./Profile";
 import { withAuthRedirect } from "../../features/hoc/RedirectComponent";
 import { compose } from "redux";
+import { getUserStatus } from "../reducers/usersReducer";
 
 export class ProfileConnectedComponent extends React.Component<ConnectedPropsType, AppStateType> {
 
@@ -21,6 +22,7 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
 
         if (userId) {
             this.props.getUserProfile(Number(userId))
+            this.props.getUserStatus(Number(userId))
         }
     }
 
@@ -44,7 +46,7 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
     }
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={'/login'} />
+        // if (!this.props.isAuth) return <Redirect to={'/login'} />
         return (
             this.props.isFetching
                 ? <Preloader />
@@ -59,6 +61,7 @@ type MapStateToPropsType = {
     userProfile: UserProfileType
     isFetching: boolean
     isAuth: boolean
+    status: string
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
@@ -68,6 +71,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         userProfile: state.profilePage.user,
         isFetching: state.app.isFetching,
         isAuth: state.auth.isAuth,
+        status: state.usersPage.status
     }
 }
 
@@ -75,7 +79,7 @@ interface OwnProps extends ClassAttributes<ProfileConnectedComponent> { }
 type PropsFromRedux = ConnectedProps<typeof connector>
 export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux & OwnProps & RouteComponentProps<RouteParams>
 
-const connector = connect(mapStateToProps, { changePostText, addPost, fetching, getUserProfile });
+const connector = connect(mapStateToProps, { changePostText, addPost, fetching, getUserProfile, getUserStatus });
 
 type RouteParams = {
     userId: string
@@ -85,7 +89,7 @@ type RouteParams = {
 // export const ProfileContainer = withAuthRedirect(connector(WithRouterComponent))
 
 export const ProfileContainer = compose<ComponentType>(
-    withAuthRedirect,
+    // withAuthRedirect,
     withRouter,
     connector,
 )(ProfileConnectedComponent)

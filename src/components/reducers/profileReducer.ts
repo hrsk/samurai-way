@@ -2,6 +2,7 @@ import { Dispatch } from "redux"
 import { API } from "../../api/API"
 import { PostType, UserProfileType } from "../../types"
 import { fetching } from "./appReducer"
+import { setUserStatus } from "./usersReducer"
 
 const ADD_POST = 'ADD_POST'
 const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
