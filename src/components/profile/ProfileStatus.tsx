@@ -1,9 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { ConnectedPropsType } from "./ProfileContainer";
 
-interface PropsType extends ConnectedPropsType {
-    changeStatus: (value: string) => void
-}
+interface PropsType extends ConnectedPropsType { }
 
 export const ProfileStatus = (props: PropsType) => {
 
@@ -16,7 +14,7 @@ export const ProfileStatus = (props: PropsType) => {
 
     const changeStatusHandler = () => {
         setEditMode(false)
-        props.changeStatus(value)
+        props.changeUserStatus(value)
     }
 
     return (
@@ -28,7 +26,11 @@ export const ProfileStatus = (props: PropsType) => {
                         onBlur={changeStatusHandler}
                         autoFocus />
                     : <span onDoubleClick={() => setEditMode(true)}>
-                        {value}
+                        {
+                            props.status
+                                ? props.status
+                                : 'empty status'
+                        }
                     </span>
             }
         </>

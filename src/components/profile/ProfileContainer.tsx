@@ -46,16 +46,12 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
         this.props.addPost()
     }
 
-    changeStatus = (value: string) => {
-        this.props.changeUserStatus(value)
-    }
-
     render() {
         // if (!this.props.isAuth) return <Redirect to={'/login'} />
         return (
             this.props.isFetching
                 ? <Preloader />
-                : <Profile {...this.props} changeStatus={this.changeStatus} />
+                : <Profile {...this.props} />
         )
     }
 }
