@@ -9,7 +9,7 @@ import { addPost, changePostText, getUserProfile } from "../reducers/profileRedu
 import { Profile } from "./Profile";
 import { withAuthRedirect } from "../../features/hoc/RedirectComponent";
 import { compose } from "redux";
-import { getUserStatus } from "../reducers/usersReducer";
+import { changeUserStatus, getUserStatus } from "../reducers/usersReducer";
 
 export class ProfileConnectedComponent extends React.Component<ConnectedPropsType, AppStateType> {
 
@@ -18,6 +18,7 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
 
         if (!userId) {
             this.props.getUserProfile(18933)
+            this.props.getUserStatus(18933)
         }
 
         if (userId) {
@@ -45,12 +46,16 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
         this.props.addPost()
     }
 
+    changeStatus = (value: string) => {
+        this.props.changeUserStatus(value)
+    }
+
     render() {
         // if (!this.props.isAuth) return <Redirect to={'/login'} />
         return (
             this.props.isFetching
                 ? <Preloader />
-                : <Profile {...this.props} />
+                : <Profile {...this.props} changeStatus={this.changeStatus} />
         )
     }
 }
@@ -79,7 +84,7 @@ interface OwnProps extends ClassAttributes<ProfileConnectedComponent> { }
 type PropsFromRedux = ConnectedProps<typeof connector>
 export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux & OwnProps & RouteComponentProps<RouteParams>
 
-const connector = connect(mapStateToProps, { changePostText, addPost, fetching, getUserProfile, getUserStatus });
+const connector = connect(mapStateToProps, { changePostText, addPost, fetching, getUserProfile, getUserStatus, changeUserStatus });
 
 type RouteParams = {
     userId: string

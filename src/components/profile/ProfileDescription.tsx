@@ -2,7 +2,9 @@ import { ConnectedPropsType } from "./ProfileContainer"
 import no_avatar from '../../assets/avatar_images/no_avatar.png'
 import { ProfileStatus } from "./ProfileStatus"
 
-interface PropsType extends ConnectedPropsType { }
+interface PropsType extends ConnectedPropsType {
+    changeStatus: (value: string) => void
+}
 
 export const ProfileDescription = (props: PropsType) => {
     return (

@@ -2,7 +2,9 @@ import { ConnectedPropsType } from "./ProfileContainer";
 import { ProfileDescription } from "./ProfileDescription";
 import { PostsContainerComponent } from "./posts/PostsContainerComponent";
 
-interface PropsType extends ConnectedPropsType { }
+interface PropsType extends ConnectedPropsType {
+    changeStatus: (value: string) => void
+}
 
 export const Profile = (props: PropsType) => {
     return (

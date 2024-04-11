@@ -196,3 +196,13 @@ export const getUserStatus = (userId: number) => (dispatch: Dispatch) => {
     }
     )
 }
+export const changeUserStatus = (status: string) => (dispatch: Dispatch) => {
+    dispatch(fetching(false))
+    API.changeUserStatus(status)
+        .then((response) => {
+            if (response.data.resultCode === 0) {
+                dispatch(setUserStatus(response.data))
+                dispatch(fetching(false))
+            }
+        })
+}
