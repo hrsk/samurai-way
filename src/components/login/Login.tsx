@@ -1,11 +1,6 @@
-import { ConnectedPropsType } from "./LoginContainer"
+import { LoginReduxForm } from "./LoginReduxForm"
 
-interface PropsType extends ConnectedPropsType { }
+export const Login = () => {
 
-export const Login = (props: PropsType) => {
-    return (
-        <div>
-            LOGIN
-        </div>
-    )
+    return <LoginReduxForm />
 }
