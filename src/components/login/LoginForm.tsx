@@ -1,5 +1,5 @@
 import { Field, InjectedFormProps } from "redux-form";
-import { required } from "../../utils/validators";
+import { passwordLengthValidator, required } from "../../utils/validators";
 import { LoginInput } from "./LoginInput";
 
 export type FormDataType = {
@@ -10,6 +10,8 @@ export type FormDataType = {
 
 export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
 
+    const passwordLength = passwordLengthValidator(8, 16)
+
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -18,7 +20,7 @@ export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
             </div>
             <div>
                 <label htmlFor="Password">Password</label>
-                <Field name="password" validate={[required]} component={LoginInput} type="text" placeholder="Password" />
+                <Field name="password" validate={[required, passwordLength]} component={LoginInput} type="text" placeholder="Password" />
             </div>
             <div>
                 <label htmlFor="rememberMe">RememberMe</label>
