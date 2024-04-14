@@ -1,8 +1,9 @@
 import { Dispatch } from "redux"
 import { API } from "../../api/API"
+import { ThunkDispatch } from "redux-thunk"
+import { AppStateType } from "../../store/redux-store"
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
-const SET_LOGIN_DATA = 'SET_LOGIN_DATA'
 const SET_ERROR = 'SET_ERROR'
 
 type InitialStateType = {
@@ -11,9 +12,6 @@ type InitialStateType = {
         id: number | null
         email: string | null
         login: string | null
-    }
-    loginData: {
-        userId: null | number
     }
     error: string | null
 }
@@ -25,9 +23,6 @@ const initialState: InitialStateType = {
         email: null,
         login: null,
     },
-    loginData: {
-        userId: null
-    },
     error: null
 }
 
@@ -36,9 +31,6 @@ export const authReducer = (state = initialState, action: AuthReducerActionType)
     switch (action.type) {
         case SET_AUTH_USER_DATA: return {
             ...state, authData: { ...action.data }, isAuth: true
-        }
-        case SET_LOGIN_DATA: return {
-            ...state, loginData: { ...action.data }
         }
         case SET_ERROR: return {
             ...state, error: action.error
@@ -49,7 +41,7 @@ export const authReducer = (state = initialState, action: AuthReducerActionType)
 
 //types 
 
-export type AuthReducerActionType = SetAuthUserDataActionType | SetLoginUserDataActionType | SetErrorActionType
+export type AuthReducerActionType = SetAuthUserDataActionType | SetErrorActionType
 
 type SetAuthUserDataActionType = {
     type: 'SET_AUTH_USER_DATA'
@@ -59,12 +51,7 @@ type SetAuthUserDataActionType = {
         login: string
     }
 }
-type SetLoginUserDataActionType = {
-    type: 'SET_LOGIN_DATA'
-    data: {
-        userId: number
-    }
-}
+
 type SetErrorActionType = {
     type: 'SET_ERROR'
     error: string
@@ -78,12 +65,7 @@ export const setAuthUserData = (data: { id: number, email: string, login: string
         data,
     }
 }
-export const setLoginUserData = (data: { userId: number }): SetLoginUserDataActionType => {
-    return {
-        type: SET_LOGIN_DATA,
-        data,
-    }
-}
+
 export const setError = (error: string): SetErrorActionType => {
     return {
         type: SET_ERROR,
@@ -91,7 +73,7 @@ export const setError = (error: string): SetErrorActionType => {
     }
 }
 
-
+//thunk
 export const getAuthUserData = () => (dispatch: Dispatch) => {
     API.authMe()
         .then(response => {
@@ -101,11 +83,22 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
         })
 }
 
-export const loginUser = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+export const loginUser = (email: string, password: string, rememberMe: boolean) => (dispatch: ThunkDispatch<AppStateType, any, AuthReducerActionType>) => {
     API.login(email, password, rememberMe)
         .then(response => {
             if (response.data.resultCode === 0) {
-                dispatch(setLoginUserData(response.data.data))
+                dispatch(getAuthUserData())
+            } else {
+                dispatch(setError(response.data.messages[0]))
+            }
+        })
+}
+
+export const logoutUser = () => (dispatch: ThunkDispatch<AppStateType, any, AuthReducerActionType>) => {
+    API.logout()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(getAuthUserData())
             } else {
                 dispatch(setError(response.data.messages[0]))
             }

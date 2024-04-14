@@ -13,7 +13,7 @@ export const Header = (props: PropsType) => {
                 props.isAuth
                     ? <div>
                         <span style={{ display: 'block' }}>{props.email}</span>
-                        <button>Logout</button>
+                        <button onClick={props.logoutUser}>Logout</button>
                     </div>
 
                     : <button>
