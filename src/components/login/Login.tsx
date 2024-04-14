@@ -1,6 +1,12 @@
+import { FormDataType } from "./LoginForm"
 import { LoginReduxForm } from "./LoginReduxForm"
 
-export const Login = () => {
+type PropsType = {
+    onSubmit: (values: FormDataType) => void
+}
 
-    return <LoginReduxForm />
+export const Login = (props: PropsType) => {
+
+    return <LoginReduxForm {...props} onSubmit={props.onSubmit} />
+
 }

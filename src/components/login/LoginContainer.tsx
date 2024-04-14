@@ -1,19 +1,17 @@
 import React from "react";
 import { ConnectedProps, connect } from "react-redux";
 import { AppStateType } from "../../store/redux-store";
-import { LoginForm } from "./LoginForm";
+import { Login } from "./Login";
+import { FormDataType } from "./LoginForm";
 
 export class LoginConnectedComponent extends React.Component<ConnectedPropsType, AppStateType> {
-    // componentDidMount(): void {
 
-    // }
-
-    showResultValues = (values: any) => {
+    handleSubmit = (values: FormDataType) => {
         console.log(JSON.stringify(values, null, 2))
     }
 
     render(): React.ReactNode {
-        return <LoginForm {...this.props} onSubmit={(values) => this.showResultValues(values)} />
+        return <Login {...this.props} onSubmit={this.handleSubmit} />
     }
 }
 

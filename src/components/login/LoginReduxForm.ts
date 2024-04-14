@@ -1,6 +1,6 @@
 import { reduxForm } from "redux-form";
-import { LoginForm } from "./LoginForm";
+import { FormDataType, LoginForm } from "./LoginForm";
 
-export const LoginReduxForm = reduxForm<any, any, any>({
+export const LoginReduxForm = reduxForm<FormDataType>({
     form: 'loginForm',
 })(LoginForm)
