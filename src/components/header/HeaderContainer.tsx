@@ -11,11 +11,11 @@ export class HeaderConnectComponent extends React.Component<ConnectedPropsType, 
     }
 
     logoutUserHandler = () => {
-        this.props.logoutUser()
+        this.props.logoutUser(false)
     }
 
     render() {
-        return <Header {...this.props} />
+        return <Header {...this.props} logout={this.logoutUserHandler} />
     }
 }
 

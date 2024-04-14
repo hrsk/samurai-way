@@ -90,7 +90,7 @@ type RouteParams = {
 // export const ProfileContainer = withAuthRedirect(connector(WithRouterComponent))
 
 export const ProfileContainer = compose<ComponentType>(
-    // withAuthRedirect,
+    withAuthRedirect,
     withRouter,
     connector,
 )(ProfileConnectedComponent)

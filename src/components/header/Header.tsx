@@ -3,7 +3,7 @@ import style from "./Header.module.css"
 import { ConnectedPropsType } from "./HeaderContainer";
 
 interface PropsType extends ConnectedPropsType {
-
+    logout: () => void
 }
 
 export const Header = (props: PropsType) => {
@@ -13,7 +13,7 @@ export const Header = (props: PropsType) => {
                 props.isAuth
                     ? <div>
                         <span style={{ display: 'block' }}>{props.email}</span>
-                        <button onClick={props.logoutUser}>Logout</button>
+                        <button onClick={props.logout}>Logout</button>
                     </div>
 
                     : <button>
