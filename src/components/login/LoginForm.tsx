@@ -1,6 +1,7 @@
 import { Field, InjectedFormProps } from "redux-form";
-import { passwordLengthValidator, required } from "../../utils/validators";
+import { required } from "../../utils/validators";
 import { LoginInput } from "./LoginInput";
+import { ConnectedPropsType } from "./LoginContainer";
 
 export type FormDataType = {
     email: string
@@ -8,25 +9,29 @@ export type FormDataType = {
     rememberMe: boolean
 }
 
-export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
+export const LoginForm = (props: InjectedFormProps<FormDataType> & ConnectedPropsType) => {
 
-    const passwordLength = passwordLengthValidator(8, 16)
+    // const passwordLength = passwordLengthValidator(8, 16)
 
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <label htmlFor="Email">Email</label>
-                <Field name="email" validate={[required]} component={LoginInput} type="text" placeholder="Email" />
-            </div>
-            <div>
-                <label htmlFor="Password">Password</label>
-                <Field name="password" validate={[required, passwordLength]} component={LoginInput} type="text" placeholder="Password" />
-            </div>
-            <div>
-                <label htmlFor="rememberMe">RememberMe</label>
-                <Field name="rememberMe" component={LoginInput} type="checkbox" />
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+        <>
+            {props.error ? <span>{props.error}</span> : ''}
+            <form onSubmit={props.handleSubmit}>
+
+                <div>
+                    <label htmlFor="Email">Email</label>
+                    <Field name="email" validate={[required]} component={LoginInput} type="text" placeholder="Email" />
+                </div>
+                <div>
+                    <label htmlFor="Password">Password</label>
+                    <Field name="password" validate={[required]} component={LoginInput} type="text" placeholder="Password" />
+                </div>
+                <div>
+                    <label htmlFor="rememberMe">RememberMe</label>
+                    <Field name="rememberMe" component={LoginInput} type="checkbox" />
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </>
     );
 };

@@ -40,5 +40,8 @@ export const API = {
     changeUserStatus(value: string) {
         return instance.put(`profile/status`, { status: value })
     },
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post(`auth/login`, { email, password, rememberMe })
+    }
 }
 
