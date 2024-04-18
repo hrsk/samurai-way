@@ -22,7 +22,7 @@ export class DialogsConnectComponent extends React.Component<ConnectedPropsType,
     }
 
     render(): React.ReactNode {
-        if (!this.props.isAuth) return <Redirect to={'/login'} />
+        // if (!this.props.isAuth) return <Redirect to={'/login'} />
         return <Dialogs {...this.props} />
     }
 }

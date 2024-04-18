@@ -149,10 +149,10 @@ export const setUserStatus = (status: string): SetUserStatusActionType => {
 //thunk creators
 
 export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
-    dispatch(fetching(true));
+    // dispatch(fetching(true));
     API.getUsers(currentPage, pageSize)
         .then(response => {
-            dispatch(fetching(false));
+            // dispatch(fetching(false));
             dispatch(setUsers(response.data.items, response.data.totalCount, response.data.error));
         });
 }

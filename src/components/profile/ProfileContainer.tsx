@@ -1,15 +1,15 @@
 import React, { ClassAttributes, ComponentType } from "react";
 import { ConnectedProps, connect } from "react-redux";
-import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import { compose } from "redux";
 import { Preloader } from "../../features/Preloader";
+import { withAuthRedirect } from "../../features/hoc/RedirectComponent";
 import { AppStateType } from "../../store/redux-store";
 import { PostType, UserProfileType } from "../../types";
 import { fetching } from "../reducers/appReducer";
 import { addPost, changePostText, getUserProfile } from "../reducers/profileReducer";
-import { Profile } from "./Profile";
-import { withAuthRedirect } from "../../features/hoc/RedirectComponent";
-import { compose } from "redux";
 import { changeUserStatus, getUserStatus } from "../reducers/usersReducer";
+import { Profile } from "./Profile";
 
 export class ProfileConnectedComponent extends React.Component<ConnectedPropsType, AppStateType> {
 
@@ -18,6 +18,7 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
 
         if (!userId) {
             this.props.getUserProfile(Number(this.props.userId))
+            this.props.getUserStatus(Number(this.props.userId))
             // this.props.getUserProfile(18933)
             // this.props.getUserStatus(18933)
         }
@@ -29,6 +30,7 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
     }
 
     componentDidMount() {
+
         this.refreshProfile()
     }
 
