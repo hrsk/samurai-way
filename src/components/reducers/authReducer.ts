@@ -19,7 +19,7 @@ type InitialStateType = {
         password: string | null
         rememberMe: boolean | null
     }
-    error: string | null
+    errorMessages: string[]
 }
 
 const initialState: InitialStateType = {
@@ -34,7 +34,7 @@ const initialState: InitialStateType = {
         password: null,
         rememberMe: null
     },
-    error: null
+    errorMessages: []
 }
 
 
@@ -44,7 +44,7 @@ export const authReducer = (state = initialState, action: AuthReducerActionType)
             ...state, authData: { ...action.data }, isAuth: true
         }
         case SET_ERROR: return {
-            ...state, error: action.error
+            ...state, errorMessages: [action.error]
         }
         case SET_LOGIN_DATA: return {
             ...state, loginData: { email: null, password: null, rememberMe: null }
@@ -119,7 +119,8 @@ export const loginUser = (email: string, password: string, rememberMe: boolean, 
             if (response.data.resultCode === 0) {
                 dispatch(getAuthUserData())
             } else {
-                dispatch(setError(response.data.messages[0]))
+                const errorMessage = response.data.messages[0]
+                dispatch(setError(errorMessage))
             }
         })
 }

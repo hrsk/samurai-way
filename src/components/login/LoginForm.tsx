@@ -18,6 +18,11 @@ export const LoginForm = (props: InjectedFormProps<FormDataType> & PropsType) =>
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
+                {
+                    props.errorMessages && <span style={props.errorMessages && { color: 'crimson' }}>{props.errorMessages[0]}</span>
+                }
+            </div>
+            <div>
                 <label htmlFor="Email">Email</label>
                 <Field name="email" validate={[required]} component={LoginInput} type="text" placeholder="Email" />
             </div>

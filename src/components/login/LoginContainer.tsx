@@ -11,7 +11,6 @@ export class LoginConnectedComponent extends React.Component<ConnectedPropsType,
     handleSubmit = (values: FormDataType) => {
         this.props.loginUser(values.email, values.password, values.rememberMe, true)
         console.log(JSON.stringify(values, null, 2))
-        console.log(this.props.error)
     }
 
     render(): React.ReactNode {
@@ -23,14 +22,14 @@ export class LoginConnectedComponent extends React.Component<ConnectedPropsType,
 }
 
 type MapStateToPropsType = {
-    error: string | null
     isAuth: boolean
+    errorMessages: string[]
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        error: state.auth.error,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        errorMessages: state.auth.errorMessages
     }
 }
 
