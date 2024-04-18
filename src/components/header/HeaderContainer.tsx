@@ -1,13 +1,13 @@
 import React from "react"
 import { ConnectedProps, connect } from "react-redux"
 import { AppStateType } from "../../store/redux-store"
-import { getAuthUserData, logoutUser } from "../reducers/authReducer"
+import { logoutUser } from "../reducers/authReducer"
 import { Header } from "./Header"
 
 export class HeaderConnectComponent extends React.Component<ConnectedPropsType, AppStateType> {
 
     componentDidMount() {
-        this.props.getAuthUserData()
+        // this.props.getAuthUserData()
     }
 
     logoutUserHandler = () => {
@@ -35,7 +35,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const connector = connect(mapStateToProps, { getAuthUserData, logoutUser });
+const connector = connect(mapStateToProps, { logoutUser });
 
 export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux
 

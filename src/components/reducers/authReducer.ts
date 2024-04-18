@@ -1,6 +1,6 @@
 import { Dispatch } from "redux"
 import { API } from "../../api/API"
-import { ThunkDispatch } from "redux-thunk"
+import { ThunkAction, ThunkDispatch } from "redux-thunk"
 import { AppStateType } from "../../store/redux-store"
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
@@ -104,8 +104,16 @@ export const setLoginData = (loginData: { email: string | null, password: string
 }
 
 //thunk
+// export const getAuthUserData = () => (dispatch: Dispatch) => {
+//     API.authMe()
+//         .then(response => {
+//             if (response.data.resultCode === 0) {
+//                 dispatch(setAuthUserData(response.data.data))
+//             }
+//         })
+// }
 export const getAuthUserData = () => (dispatch: Dispatch) => {
-    API.authMe()
+    return API.authMe()
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(setAuthUserData(response.data.data))

@@ -17,8 +17,9 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
         let userId = this.props.match.params.userId
 
         if (!userId) {
-            this.props.getUserProfile(18933)
-            this.props.getUserStatus(18933)
+            this.props.getUserProfile(Number(this.props.userId))
+            // this.props.getUserProfile(18933)
+            // this.props.getUserStatus(18933)
         }
 
         if (userId) {
@@ -63,6 +64,7 @@ type MapStateToPropsType = {
     isFetching: boolean
     isAuth: boolean
     status: string
+    userId: number | null
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
@@ -72,7 +74,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         userProfile: state.profilePage.user,
         isFetching: state.app.isFetching,
         isAuth: state.auth.isAuth,
-        status: state.usersPage.status
+        status: state.usersPage.status,
+        userId: state.auth.authData.id
     }
 }
 
