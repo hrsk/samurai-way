@@ -8,7 +8,7 @@ import { AppStateType } from "../../store/redux-store";
 import { PostType, UserProfileType } from "../../types";
 import { fetching } from "../reducers/appReducer";
 import { addPost, changePostText, getUserProfile } from "../reducers/profileReducer";
-import { changeUserStatus, getUserStatus } from "../reducers/usersReducer";
+import { changeUserStatus, getUserStatus, setUserStatus } from "../reducers/usersReducer";
 import { Profile } from "./Profile";
 
 export class ProfileConnectedComponent extends React.Component<ConnectedPropsType, AppStateType> {
@@ -38,7 +38,6 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
         if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile()
         }
-
     }
 
     changePostText = (value: string) => {
@@ -49,12 +48,19 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
         this.props.addPost()
     }
 
+    changeUserStatusHandler = (value: string) => {
+        this.props.changeUserStatus(value)
+    }
+    setUserStatusHandler = (value: string) => {
+        this.props.setUserStatus(value)
+    }
+
     render() {
         // if (!this.props.isAuth) return <Redirect to={'/login'} />
         return (
             this.props.isFetching
                 ? <Preloader />
-                : <Profile {...this.props} />
+                : <Profile {...this.props} changeUserStatusHandler={this.changeUserStatusHandler} setUserStatusHandler={this.setUserStatusHandler} />
         )
     }
 }
@@ -85,7 +91,7 @@ interface OwnProps extends ClassAttributes<ProfileConnectedComponent> { }
 type PropsFromRedux = ConnectedProps<typeof connector>
 export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux & OwnProps & RouteComponentProps<RouteParams>
 
-const connector = connect(mapStateToProps, { changePostText, addPost, fetching, getUserProfile, getUserStatus, changeUserStatus });
+const connector = connect(mapStateToProps, { changePostText, addPost, fetching, getUserProfile, getUserStatus, changeUserStatus, setUserStatus });
 
 type RouteParams = {
     userId: string

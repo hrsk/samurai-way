@@ -188,21 +188,36 @@ export const selectPage = (pageNumber: number, pageSize: number) => (dispatch: D
             dispatch(setUsers(response.data.items, response.data.totalCount, response.data.error))
         })
 }
-export const getUserStatus = (userId: number) => (dispatch: Dispatch) => {
-    // dispatch(fetching(true))
-    API.getUserStatus(userId).then(response => {
-        // dispatch(fetching(false))
-        dispatch(setUserStatus(response.data))
-    }
-    )
+// export const getUserStatus = (userId: number) => (dispatch: ThunkDispatch<AppStateType, any, any>) => {
+//     // dispatch(fetching(true))
+//     API.getUserStatus(userId).then((response) => {
+//         if (response.data.resultCode === 0) {
+//             // dispatch(fetching(false))
+//             dispatch(setUserStatus(response.data))
+//         }
+//     }
+//     )
+// }
+
+export const getUserStatus = (userId: number) => async (dispatch: Dispatch) => {
+    const response = await API.getUserStatus(userId);
+    dispatch(setUserStatus(response.data))
 }
-export const changeUserStatus = (status: string) => (dispatch: Dispatch) => {
-    dispatch(fetching(false))
-    API.changeUserStatus(status)
-        .then((response) => {
-            if (response.data.resultCode === 0) {
-                dispatch(setUserStatus(response.data))
-                dispatch(fetching(false))
-            }
-        })
+
+// export const changeUserStatus = (status: string) => (dispatch: ThunkDispatch<AppStateType, any, any>) => {
+//     // dispatch(fetching(false))
+//     API.changeUserStatus(status)
+//         .then((response) => {
+//             if (response.data.resultCode === 0) {
+//                 dispatch(setUserStatus(response.data))
+//                 // dispatch(fetching(false))
+//             }
+//         })
+// }
+
+export const changeUserStatus = (status: string) => async (dispatch: Dispatch) => {
+    const response = await API.changeUserStatus(status);
+    if (response.data.resultCode === 0) {
+        dispatch(setUserStatus(status))
+    }
 }
