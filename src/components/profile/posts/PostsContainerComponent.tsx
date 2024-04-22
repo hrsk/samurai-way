@@ -1,3 +1,4 @@
+import React from "react";
 import { PostType } from "../../../types";
 import { Posts } from "./Posts";
 
@@ -8,7 +9,8 @@ type PropsType = {
     addPost: () => void
 }
 
-export const PostsContainerComponent = (props: PropsType) => {
+export const PostsContainerComponent = React.memo((props: PropsType) => {
+    console.log('POSTS CONTAINER RENDERED')
 
     const changePostText = (value: string) => {
         props.changePostText(value)
@@ -22,4 +24,4 @@ export const PostsContainerComponent = (props: PropsType) => {
         postText={props.postText}
         addPost={addPost}
         changePostText={changePostText} />
-}
+})

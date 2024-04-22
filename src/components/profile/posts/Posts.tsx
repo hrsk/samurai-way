@@ -11,6 +11,7 @@ type PropsType = {
 
 export const Posts = (props: PropsType) => {
 
+    console.log('POSTS RENDERED')
     const posts = props.posts.map(post => <Post key={post.id} post={post} />)
 
     const changePostTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
