@@ -4,6 +4,7 @@ import { PostType, UserProfileType } from "../../types"
 import { fetching } from "./appReducer"
 
 const ADD_POST = 'ADD_POST'
+const REMOVE_POST = 'REMOVE_POST'
 // const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
@@ -39,6 +40,9 @@ export const profileReducer = (state = initialState, action: ProfileReducerActio
                 ...state, posts: [...state.posts, newPost]
             }
         }
+        case REMOVE_POST: return {
+            ...state, posts: state.posts.filter(post => post.id !== action.id)
+        }
         // case CHANGE_POST_TEXT: {
         //     return { ...state, postText: action.value }
         // }
@@ -51,11 +55,15 @@ export const profileReducer = (state = initialState, action: ProfileReducerActio
 
 //types 
 
-export type ProfileReducerActionsType = AddPostActionType | GetUserProfileActionType
+export type ProfileReducerActionsType = AddPostActionType | GetUserProfileActionType | RemovePostActionType
 
 type AddPostActionType = {
     type: 'ADD_POST'
     value: string
+}
+type RemovePostActionType = {
+    type: 'REMOVE_POST'
+    id: number
 }
 // type ChangePostTextActionType = {
 //     type: 'CHANGE_POST_TEXT'
@@ -73,6 +81,13 @@ export const addPost = (value: string): AddPostActionType => {
     return {
         type: ADD_POST,
         value
+    }
+}
+
+export const removePost = (id: number): RemovePostActionType => {
+    return {
+        type: REMOVE_POST,
+        id
     }
 }
 // export const changePostText = (value: string): ChangePostTextActionType => {
