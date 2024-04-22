@@ -7,7 +7,7 @@ import { withAuthRedirect } from "../../features/hoc/RedirectComponent";
 import { AppStateType } from "../../store/redux-store";
 import { PostType, UserProfileType } from "../../types";
 import { fetching } from "../reducers/appReducer";
-import { addPost, changePostText, getUserProfile } from "../reducers/profileReducer";
+import { addPost, getUserProfile } from "../reducers/profileReducer";
 import { changeUserStatus, getUserStatus, setUserStatus } from "../reducers/usersReducer";
 import { Profile } from "./Profile";
 
@@ -40,12 +40,12 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
         }
     }
 
-    changePostText = (value: string) => {
-        this.props.changePostText(value)
-    }
+    // changePostText = (value: string) => {
+    //     this.props.changePostText(value)
+    // }
 
-    addPost = () => {
-        this.props.addPost()
+    addPost = (value: string) => {
+        this.props.addPost(value)
     }
 
     changeUserStatusHandler = (value: string) => {
@@ -67,7 +67,7 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
 
 type MapStateToPropsType = {
     posts: PostType[]
-    postText: string
+    // postText: string
     userProfile: UserProfileType
     isFetching: boolean
     isAuth: boolean
@@ -78,7 +78,7 @@ type MapStateToPropsType = {
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
-        postText: state.profilePage.postText,
+        // postText: state.profilePage.postText,
         userProfile: state.profilePage.user,
         isFetching: state.app.isFetching,
         isAuth: state.auth.isAuth,
@@ -91,7 +91,7 @@ interface OwnProps extends ClassAttributes<ProfileConnectedComponent> { }
 type PropsFromRedux = ConnectedProps<typeof connector>
 export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux & OwnProps & RouteComponentProps<RouteParams>
 
-const connector = connect(mapStateToProps, { changePostText, addPost, fetching, getUserProfile, getUserStatus, changeUserStatus, setUserStatus });
+const connector = connect(mapStateToProps, { addPost, fetching, getUserProfile, getUserStatus, changeUserStatus, setUserStatus });
 
 type RouteParams = {
     userId: string

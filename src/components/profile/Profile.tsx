@@ -16,9 +16,10 @@ export const Profile = (props: PropsType) => {
             {/* <ProfileStatus {...props} /> */}
             <ProfileDescription {...props} />
             <PostsContainerComponent posts={props.posts}
-                changePostText={props.changePostText}
+                // changePostText={props.changePostText}
                 addPost={props.addPost}
-                postText={props.postText} />
+            // postText={props.postText} 
+            />
         </div>
     );
 };

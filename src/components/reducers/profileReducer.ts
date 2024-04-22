@@ -4,18 +4,18 @@ import { PostType, UserProfileType } from "../../types"
 import { fetching } from "./appReducer"
 
 const ADD_POST = 'ADD_POST'
-const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
+// const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
 type InitialStateType = {
     user: UserProfileType
-    postText: string
+    // postText: string
     posts: PostType[]
 }
 
 const initialState: InitialStateType = {
     user: {} as UserProfileType,
-    postText: '',
+    // postText: '',
     posts: [
         { id: 1, text: 'asdasdasd', likesCount: 99 },
         { id: 2, text: 'asdasdzxc', likesCount: 11 },
@@ -27,20 +27,21 @@ const initialState: InitialStateType = {
 
 
 export const profileReducer = (state = initialState, action: ProfileReducerActionsType): InitialStateType => {
+    debugger
     switch (action.type) {
         case ADD_POST: {
             const newPost: PostType = {
                 id: 6,
-                text: state.postText,
+                text: action.value,
                 likesCount: 0,
             }
             return {
-                ...state, posts: [newPost, ...state.posts], postText: ''
+                ...state, posts: [...state.posts, newPost]
             }
         }
-        case CHANGE_POST_TEXT: {
-            return { ...state, postText: action.value }
-        }
+        // case CHANGE_POST_TEXT: {
+        //     return { ...state, postText: action.value }
+        // }
         case SET_USER_PROFILE: return {
             ...state, user: { ...action.user }
         }
@@ -50,15 +51,16 @@ export const profileReducer = (state = initialState, action: ProfileReducerActio
 
 //types 
 
-export type ProfileReducerActionsType = AddPostActionType | ChangePostTextActionType | GetUserProfileActionType
+export type ProfileReducerActionsType = AddPostActionType | GetUserProfileActionType
 
 type AddPostActionType = {
     type: 'ADD_POST'
-}
-type ChangePostTextActionType = {
-    type: 'CHANGE_POST_TEXT'
     value: string
 }
+// type ChangePostTextActionType = {
+//     type: 'CHANGE_POST_TEXT'
+//     value: string
+// }
 
 type GetUserProfileActionType = {
     type: 'SET_USER_PROFILE'
@@ -67,17 +69,18 @@ type GetUserProfileActionType = {
 
 //actions 
 
-export const addPost = (): AddPostActionType => {
+export const addPost = (value: string): AddPostActionType => {
     return {
         type: ADD_POST,
+        value
     }
 }
-export const changePostText = (value: string): ChangePostTextActionType => {
-    return {
-        type: CHANGE_POST_TEXT,
-        value,
-    }
-}
+// export const changePostText = (value: string): ChangePostTextActionType => {
+//     return {
+//         type: CHANGE_POST_TEXT,
+//         value,
+//     }
+// }
 
 export const setUserProfile = (user: UserProfileType) => {
     return {

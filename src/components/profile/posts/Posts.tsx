@@ -1,31 +1,34 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { PostType } from "../../../types";
 import { Post } from "./post/Post";
 
 type PropsType = {
     posts: PostType[]
-    postText: string
-    addPost: () => void
-    changePostText: (value: string) => void
+    // postText: string
+    addPost: (value: string) => void
+    // changePostText: (value: string) => void
 }
 
 export const Posts = (props: PropsType) => {
+
+    const [value, setValue] = useState<string>('')
 
     console.log('POSTS RENDERED')
     const posts = props.posts.map(post => <Post key={post.id} post={post} />)
 
     const changePostTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.changePostText(e.currentTarget.value)
+        setValue(e.currentTarget.value)
     }
 
     const addPostHandler = () => {
-        props.addPost()
+        props.addPost(value)
+        setValue('')
     }
 
     return (
         <div>
             {posts}
-            <textarea value={props.postText}
+            <textarea value={value}
                 onChange={changePostTextHandler} />
             <button onClick={addPostHandler}>add post</button>
         </div>
