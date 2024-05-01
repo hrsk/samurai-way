@@ -1,10 +1,12 @@
 .nav {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    /* display: grid; */
     border: rosybrown solid 2px;
-    grid-area: nav;
+    /* grid-area: nav; */
     padding: 20px;
-    grid-template-rows: 1fr;
-    grid-template-columns: 8fr;
+    /* grid-template-rows: 1fr; */
+    /* grid-template-columns: 8fr;s */
 }
 .link {
     text-decoration: none; 

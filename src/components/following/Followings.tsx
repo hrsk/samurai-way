@@ -2,6 +2,7 @@ import { Preloader } from "../../features/Preloader"
 import { Pagination } from "../pagination/Pagination"
 import { User } from "../users/User"
 import { ConnectedPropsType } from "./FollowingContainer"
+import styles from './Followings.module.css'
 
 interface PropsType extends ConnectedPropsType {
     setCurrentPage: (pageNumber: number) => void
@@ -20,11 +21,13 @@ export const Followings = (props: PropsType) => {
             {
                 props.isFetching
                     ? <Preloader />
-                    : props.followings.map(user => <User user={user}
-                        isFollow={props.isFollow}
-                        subscribe={props.subscribe}
-                        unsubscribe={props.unsubscribe} />
-                    )
+                    : <div className={styles.grid}>
+                        {props.followings.map(user => <User user={user}
+                            isFollow={props.isFollow}
+                            subscribe={props.subscribe}
+                            unsubscribe={props.unsubscribe} />
+                        )}
+                    </div>
             }
         </div>
     )

@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom"
 import no_avatar from "../../assets/avatar_images/no_avatar.png"
 import { UserType } from "../../types"
+import style from './User.module.css'
 
 type PropsType = {
     user: UserType,
@@ -23,24 +24,18 @@ export const User = (props: PropsType) => {
 
     return (
         <div key={props.user.id}>
-            <div>
-                <span style={{ display: 'block' }}>
-                    Nickname: <p style={{ display: 'inline-block', fontStyle: 'italic' }}>{props.user.name}</p>
-                </span>
-                <span style={{ display: 'block' }}>
-                    Status: <p style={{ display: 'inline-block', fontStyle: 'italic' }}>{props.user.status}</p>
-                </span>
+            <div className={style.userWrapper}>
                 <NavLink to={`profile/${props.user.id}`}>
-                    <img style={{ width: '64px', height: '64px' }}
+                    <img className={style.avatar}
                         src={props.user.photos.small ? props.user.photos.large : no_avatar}
                         alt="" />
                 </NavLink>
-            </div>
-            <div>
+                <span>{props.user.name}</span>
+                <span className={style.status}>{props.user.status}</span>
                 {
                     props.user.followed
-                        ? <button onClick={unsubscribeHandler} disabled={disabledHandler}>UNFOLLOW</button>
-                        : <button onClick={subscribeHandler} disabled={disabledHandler}>FOLLOW</button>
+                        ? <button className={style.button} onClick={unsubscribeHandler} disabled={disabledHandler}>UNFOLLOW</button>
+                        : <button className={style.button} onClick={subscribeHandler} disabled={disabledHandler}>FOLLOW</button>
                 }
             </div>
         </div>

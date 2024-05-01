@@ -1,4 +1,5 @@
 .header {
-    grid-area: header;
+    /* grid-area: header; */
     border: pink solid 2px;
+    position: sticky;
 }
