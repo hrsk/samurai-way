@@ -1,0 +1,45 @@
+.descriptionWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 48px;
+}
+
+.profileInformation {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.jobsDescription {
+display: flex;
+flex-direction: column;
+gap: 5px;
+font-size: 16px;
+font-weight: 600;
+}
+
+.contactsInformation {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.socialLink {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.text {
+    display: inline-block;
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 400;
+}

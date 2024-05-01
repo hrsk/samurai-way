@@ -1,70 +1,40 @@
 import { ConnectedPropsType } from "./ProfileContainer"
 import no_avatar from '../../assets/avatar_images/no_avatar.png'
+import style from './ProfileDescription.module.css'
 
 interface PropsType extends ConnectedPropsType {
 }
 
 export const ProfileDescription = (props: PropsType) => {
     return (
-        <div>
-            <div>
-                <p>{props.userProfile.userId}</p>
-                <span style={{ display: 'block' }}>{props.userProfile.aboutMe}</span>
-                <span style={{ display: 'block', fontWeight: 600 }}>{props.userProfile.fullName}</span>
+        <div className={style.descriptionWrapper}>
+            <div className={style.profileInformation}>
                 {props.userProfile.photos ?
-                    <img style={{ width: '64px', height: '64px' }}
+                    <img className={style.avatar}
                         src={props.userProfile.photos.small && props.userProfile.photos.large}
                         alt="" />
-                    : <img style={{ width: '64px', height: '64px' }} src={no_avatar} alt="" />
+                    : <img className={style.avatar} src={no_avatar} alt="" />
                 }
+                <span>{props.userProfile.userId}</span>
+                <span>{props.userProfile.aboutMe}</span>
+                <span>{props.userProfile.fullName}</span>
             </div>
-            <div>
-                <span style={{ display: 'block' }}>
-                    lookingForAJob:
-                    <p style={{ display: 'inline-block' }}>{props.userProfile.lookingForAJob}</p>
-                </span>
-                <span style={{ display: 'block' }}>
-                    lookingForAJobDescription:
-                    <p style={{ display: 'inline-block' }}>{props.userProfile.lookingForAJobDescription}</p>
-                </span>
+            <div className={style.jobsDescription}>
+                <span>lookingForAJob:{props.userProfile.lookingForAJob}</span>
+                <span>lookingForAJobDescription:{props.userProfile.lookingForAJobDescription}</span>
             </div>
             {
                 props.userProfile.contacts ?
-                    <div>
-                        <span style={{ display: 'block', fontSize: 24, fontWeight: 600 }}>Contacts:</span>
-                        <span style={{ display: 'block' }}>
-                            facebook:
-                            <p style={{ display: 'inline-block' }}>{props.userProfile.contacts.facebook}</p>
-                        </span>
-                        <span style={{ display: 'block' }}>
-                            website:
-                            <p style={{ display: 'inline-block' }}>{props.userProfile.contacts.website}</p>
-                        </span>
-                        <span style={{ display: 'block' }}>
-                            vk:
-                            <p style={{ display: 'inline-block' }}>{props.userProfile.contacts.vk}</p>
-                        </span>
-                        <span style={{ display: 'block' }}>
-                            twitter:
-                            <p style={{ display: 'inline-block' }}>{props.userProfile.contacts.twitter}</p>
-                        </span>
-
-                        <span style={{ display: 'block' }}>
-                            instagram:
-                            <p style={{ display: 'inline-block' }}>{props.userProfile.contacts.instagram}</p>
-                        </span>
-                        <span style={{ display: 'block' }}>
-                            youtube:
-                            <p style={{ display: 'inline-block' }}>{props.userProfile.contacts.youtube}</p>
-                        </span>
-                        <span style={{ display: 'block' }}>
-                            github:
-                            <p style={{ display: 'inline-block' }}>{props.userProfile.contacts.github}</p>
-                        </span>
-                        <span style={{ display: 'block' }}>
-                            mainLink:
-                            <p style={{ display: 'inline-block' }}>{props.userProfile.contacts.mainLink}</p>
-                        </span>
+                    <div className={style.contactsInformation}>
+                        <h3>Contacts:</h3>
+                        <span className={style.socialLink}>facebook: <p className={style.text}>{props.userProfile.contacts.facebook}</p></span>
+                        <span className={style.socialLink}>website: <p className={style.text}>{props.userProfile.contacts.website}</p></span>
+                        <span className={style.socialLink}>vk: <p className={style.text}>{props.userProfile.contacts.vk}</p></span>
+                        <span className={style.socialLink}>twitter: <p className={style.text}>{props.userProfile.contacts.twitter}</p></span>
+                        <span className={style.socialLink}>instagram: <p className={style.text}>{props.userProfile.contacts.instagram}</p></span>
+                        <span className={style.socialLink}>youtube: <p className={style.text}>{props.userProfile.contacts.youtube}</p></span>
+                        <span className={style.socialLink}>github: <p className={style.text}>{props.userProfile.contacts.github}</p></span>
+                        <span className={style.socialLink}>mainLink: <p className={style.text}>{props.userProfile.contacts.mainLink}</p></span>
                     </div>
                     : <div>is empty</div>
             }
