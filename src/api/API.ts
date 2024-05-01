@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AuthDataResponseType, GetUsersResponseType, ResponseType } from "../types";
+import { AuthDataResponseType, GetUsersResponseType, ResponseType, UserProfileType } from "../types";
 
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -42,6 +42,9 @@ export const API = {
     },
     getFollowings(pageNumber: number, pageSize: number) {
         return instance.get<GetUsersResponseType>(`users?page=${pageNumber}&count=${pageSize}&friend=true`)
+    },
+    getProfilePhotos(userId: number) {
+        return instance.get<UserProfileType>(`profile/${userId}`)
     },
 }
 

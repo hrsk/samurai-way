@@ -41,7 +41,11 @@ export const store: AppStoreType = {
                 { id: 3, text: 'zxccv', likesCount: 22 },
                 { id: 4, text: 'cvbcvbcvb', likesCount: 3 },
                 { id: 5, text: 'hgjfhjfgh', likesCount: 5 },
-            ]
+            ],
+            photos: {
+                small: undefined,
+                large: undefined
+            }
         },
     },
     _renderThree() {
@@ -95,6 +99,10 @@ export type ProfilePageType = {
     user: UserProfileType
     postText: string
     posts: PostType[]
+    photos: {
+        small: string | undefined
+        large: string | undefined
+    }
 }
 
 export type DialogType = {

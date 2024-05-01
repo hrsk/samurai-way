@@ -51,8 +51,8 @@ export type UserType = {
     name: string
     status: string
     photos: {
-        small: string
-        large: string
+        small: string | undefined
+        large: string | undefined
     }
     followed: boolean
 }
@@ -74,8 +74,8 @@ export type UserProfileType = {
         mainLink: string
     }
     photos: {
-        small: string
-        large: string
+        small: string | undefined
+        large: string | undefined
     }
 }
 

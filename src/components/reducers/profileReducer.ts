@@ -1,17 +1,24 @@
 import { Dispatch } from "redux"
 import { API } from "../../api/API"
-import { PostType, UserProfileType } from "../../types"
+import { Nullable, PostType, UserProfileType } from "../../types"
 import { fetching } from "./appReducer"
+import { ThunkDispatch } from "redux-thunk"
+import { AppStateType } from "../../store/redux-store"
 
 const ADD_POST = 'ADD_POST'
 const REMOVE_POST = 'REMOVE_POST'
 // const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_PROFILE_PHOTOS = 'SET_PROFILE_PHOTOS'
 
 type InitialStateType = {
     user: UserProfileType
     // postText: string
     posts: PostType[]
+    photos: {
+        small: string | undefined
+        large: string | undefined
+    }
 }
 
 const initialState: InitialStateType = {
@@ -24,6 +31,10 @@ const initialState: InitialStateType = {
         { id: 4, text: 'cvbcvbcvb', likesCount: 3 },
         { id: 5, text: 'hgjfhjfgh', likesCount: 5 },
     ],
+    photos: {
+        small: undefined,
+        large: undefined
+    }
 }
 
 
@@ -48,13 +59,17 @@ export const profileReducer = (state = initialState, action: ProfileReducerActio
         case SET_USER_PROFILE: return {
             ...state, user: { ...action.user }
         }
+        case SET_PROFILE_PHOTOS: return {
+            ...state, photos: { ...action.photos },
+        };
+
         default: return state
     }
 }
 
 //types 
 
-export type ProfileReducerActionsType = AddPostActionType | GetUserProfileActionType | RemovePostActionType
+export type ProfileReducerActionsType = AddPostActionType | GetUserProfileActionType | RemovePostActionType | SetProfilePhotosActionType
 
 type AddPostActionType = {
     type: 'ADD_POST'
@@ -72,6 +87,13 @@ type RemovePostActionType = {
 type GetUserProfileActionType = {
     type: 'SET_USER_PROFILE'
     user: UserProfileType
+}
+type SetProfilePhotosActionType = {
+    type: 'SET_PROFILE_PHOTOS'
+    photos: {
+        small: string | undefined
+        large: string | undefined
+    }
 }
 
 //actions 
@@ -111,3 +133,26 @@ export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
             dispatch(fetching(false))
         })
 }
+
+export const setProfilePhotos = (photos: { small: string | undefined, large: string | undefined }) =>
+({
+    type: SET_PROFILE_PHOTOS,
+    photos,
+} as const);
+
+
+export const getProfilePhotos = (userId: Nullable<number>) => {
+    return async (
+        dispatch: ThunkDispatch<AppStateType, unknown, ProfileReducerActionsType>,
+    ) => {
+        try {
+            if (userId) {
+                const response = await API.getProfilePhotos(userId);
+
+                dispatch(setProfilePhotos(response.data.photos));
+            }
+        } catch (error) {
+            console.log(`Error setting profile small photo. ${error}`);
+        }
+    };
+};
