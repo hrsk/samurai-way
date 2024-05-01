@@ -40,5 +40,8 @@ export const API = {
     logout() {
         return instance.delete<ResponseType>(`auth/login`)
     },
+    getFollowings(pageNumber: number, pageSize: number) {
+        return instance.get<GetUsersResponseType>(`users?page=${pageNumber}&count=${pageSize}&friend=true`)
+    },
 }
 
