@@ -1,0 +1,40 @@
+.writePostWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.textarea {
+    min-width: 30%;
+    max-width: 40%;
+    min-height: 70px;
+    background-color: #fff;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid transparent;
+    border-color: black;
+    border-radius: 5px;
+    word-break: break-word;
+    resize: vertical;
+    &:focus {
+        box-shadow: #a57cff 0 0 10px 1px;
+    }
+}
+
+.button {
+    color: #fff;
+    font-size: 14px;
+    width: max-content;
+    background-color: #6e94ff;
+    padding: 8px;
+    margin-top: 4px;
+    border-radius: 8px;
+    border: none;
+}
+
+.button:hover {
+    background-color: #a57cff;
+    color: #fff;
+    text-shadow: #fff 0 0 2px;
+    box-shadow: #f280f1 0 0 8px;
+}

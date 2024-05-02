@@ -1,45 +1,80 @@
-.descriptionWrapper {
+.profileWrapper {
     display: flex;
     flex-direction: column;
-    gap: 15px;
     font-size: 24px;
     font-weight: 600;
 }
-
-.avatar {
-    border-radius: 50%;
-    object-fit: cover;
-    width: 48px;
-}
-
-.profileInformation {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.jobsDescription {
-display: flex;
-flex-direction: column;
-gap: 5px;
-font-size: 16px;
-font-weight: 600;
-}
-
-.contactsInformation {
+.statusBlock {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.socialLink {
-    font-size: 16px;
+.avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 128px;
+}
+
+.profileInformation {
+    display: flex;
+    justify-content:space-evenly;
+    /* gap: 5px; */
+}
+
+.aboutMe {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.aboutMe span {
+    font-size: 14px;
     font-weight: 600;
+}
+
+
+.contactsInformation {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+}
+.contactsInformation h3 {
+    margin  : 0;
+}
+.contactsInformation span {
+    font-size: 14px;
+    font-weight: 600;
+}
+.contactsInformation .span p  {
+    display: inline-block;
+    font-style: italic;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .text {
     display: inline-block;
     font-style: italic;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
+}
+
+.button {
+    color: #fff;
+    font-size: 14px;
+    width: max-content;
+    background-color: #6e94ff;
+    padding: 8px;
+    margin-top: 4px;
+    border-radius: 8px;
+    border: none;
+}
+
+.button:hover {
+    background-color: #a57cff;
+    color: #fff;
+    text-shadow: #fff 0 0 2px;
+    box-shadow: #f280f1 0 0 8px;
 }

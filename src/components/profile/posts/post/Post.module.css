@@ -21,3 +21,28 @@
     display: flex;
     align-items: center;
 }
+
+.avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 64px;
+}
+
+.button {
+    margin-left: 5px;
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    font-size: 14px;
+    background-color: #6e94ff;
+    border-radius: 50%;
+    border: none;
+}
+
+.button:hover {
+    background-color: #a57cff;
+    color: #fff;
+    text-shadow: #fff 0 0 2px;
+    box-shadow: #f280f1 0 0 8px;
+}

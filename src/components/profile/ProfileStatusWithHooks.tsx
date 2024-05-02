@@ -43,7 +43,7 @@ export const ProfileStatusWithHooks = (props: PropsType) => {
                 onBlur={changeStatusHandler}
                 autoFocus
                 onKeyDown={onKeyPressHandler} />
-            : <span onDoubleClick={editModeHandler}>
+            : <span style={{ fontWeight: 600 }} onDoubleClick={editModeHandler}>
                 {
                     props.status
                         ? props.status
