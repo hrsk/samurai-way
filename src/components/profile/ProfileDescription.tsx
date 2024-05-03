@@ -2,6 +2,7 @@ import { ConnectedPropsType } from "./ProfileContainer"
 import no_avatar from '../../assets/avatar_images/no_avatar.png'
 import style from './ProfileDescription.module.css'
 import { ProfileStatusWithHooks } from "./ProfileStatusWithHooks"
+import { Button } from "../common/button/Button"
 
 interface PropsType extends ConnectedPropsType {
     changeUserStatusHandler: (value: string) => void
@@ -22,7 +23,8 @@ export const ProfileDescription = (props: PropsType) => {
                     <ProfileStatusWithHooks status={props.status}
                         changeUserStatusHandler={props.changeUserStatusHandler}
                         setUserStatusHandler={props.setUserStatusHandler} />
-                    <button className={style.button} onClick={() => { }}>Change avatar</button>
+                    <Button onClick={() => { }}>Edit</Button>
+                    {/* <button className={style.button} onClick={() => { }}>Change avatar</button> */}
                 </div>
                 <div className={style.aboutMe}>
                     {/* <span>{props.userProfile.userId}</span> */}
@@ -42,7 +44,8 @@ export const ProfileDescription = (props: PropsType) => {
                             <span>youtube: <p className={style.text}>{props.userProfile.contacts.youtube}</p></span>
                             <span>github: <p className={style.text}>{props.userProfile.contacts.github}</p></span>
                             <span>mainLink: <p className={style.text}>{props.userProfile.contacts.mainLink}</p></span>
-                            <button className={style.button} onClick={() => { }}>Edit</button>
+                            <Button onClick={() => { }}>Edit</Button>
+                            {/* <button className={style.button} onClick={() => { }}>Edit</button> */}
                         </div>
                     }
                 </div>

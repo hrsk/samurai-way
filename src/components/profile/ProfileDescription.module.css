@@ -61,11 +61,11 @@
     font-weight: 400;
 }
 
-.button {
+.buttonD {
     color: #fff;
     font-size: 14px;
     width: max-content;
-    background-color: #6e94ff;
+    background-color: green;
     padding: 8px;
     margin-top: 4px;
     border-radius: 8px;

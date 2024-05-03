@@ -5,6 +5,7 @@ import { ConnectedPropsType } from "./HeaderContainer";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getProfilePhotos } from "../reducers/profileReducer";
+import { Button } from "../common/button/Button";
 
 interface PropsType extends ConnectedPropsType {
     logout: () => void
@@ -30,13 +31,17 @@ export const Header = (props: PropsType) => {
                             : <img className={style.avatar} style={{ width: '64px', height: '64px' }} src={no_avatar} alt="" />
                         }
                         <span style={{ display: 'block' }}>{props.login}</span>
-                        <button className={style.button} onClick={props.logout}>Logout</button>
+                        <Button onClick={props.logout}>Logout</Button>
+                        {/* <button className={style.button} onClick={props.logout}>Logout</button> */}
                     </div>
-                    : <button className={style.button}>
-                        <NavLink to={'/login'} className={style.navLink}>
-                            SingIn
-                        </NavLink>
-                    </button>
+                    : <Button onClick={() => { }}>
+                        <NavLink to={'/login'} className={style.navLink}>SignIn</NavLink>
+                    </Button>
+                // : <button className={style.button}>
+                //     <NavLink to={'/login'} className={style.navLink}>
+                //         SingIn
+                //     </NavLink>
+                // </button>
             }
 
         </div>

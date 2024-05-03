@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { PostType } from "../../../types";
 import { Post } from "./post/Post";
 import style from './Posts.module.css';
+import { Button } from "../../common/button/Button";
 
 type PropsType = {
     posts: PostType[]
@@ -38,7 +39,8 @@ export const Posts = (props: PropsType) => {
                     value={value}
                     placeholder="Enter post text"
                     onChange={changePostTextHandler} />
-                <button className={style.button} onClick={addPostHandler}>Add Post</button>
+                <Button type="button" onClick={addPostHandler}>Add Post</Button>
+                {/* <button className={style.button} onClick={addPostHandler}>Add Post</button> */}
             </div>
             <div>{posts}</div>
         </div>
