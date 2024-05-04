@@ -1,5 +1,5 @@
 import { Preloader } from "../../features/Preloader"
-import { Pagination } from "../pagination/Pagination"
+import { Pagination } from "../common/pagination/Pagination"
 import { User } from "../users/User"
 import { ConnectedPropsType } from "./FollowingContainer"
 import styles from './Followings.module.css'

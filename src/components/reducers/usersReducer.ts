@@ -21,7 +21,7 @@ type InitialStateType = {
     status: string
 }
 
-const initialState: InitialStateType = {
+export const InitialState: InitialStateType = {
     items: [],
     totalCount: 0,
     error: null,
@@ -33,7 +33,7 @@ const initialState: InitialStateType = {
 }
 
 
-export const usersReducer = (state = initialState, action: UsersReducerActionType): InitialStateType => {
+export const usersReducer = (state = InitialState, action: UsersReducerActionType): InitialStateType => {
     switch (action.type) {
         case SET_USERS: return {
             ...state,
@@ -180,11 +180,11 @@ export const unsubscribeUser = (userId: number) => (dispatch: Dispatch) => {
 }
 
 export const selectPage = (pageNumber: number, pageSize: number) => (dispatch: Dispatch) => {
-    dispatch(fetching(true))
+    // dispatch(fetching(true))
     dispatch(setCurrentPage(pageNumber))
     API.getUsers(pageNumber, pageSize)
         .then(response => {
-            dispatch(fetching(false))
+            // dispatch(fetching(false))
             dispatch(setUsers(response.data.items, response.data.totalCount, response.data.error))
         })
 }
