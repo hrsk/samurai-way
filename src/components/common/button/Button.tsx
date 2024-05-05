@@ -1,4 +1,4 @@
-import { ReactChild, ReactNode } from 'react'
+import { ReactChild } from 'react'
 import classes from './Button.module.css'
 
 type defaultProps = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
@@ -6,7 +6,8 @@ type defaultProps = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButto
 interface ButtonProps extends defaultProps {
     className?: string
     children: ReactChild
-    onClick: () => void
+    onClick?: () => void
+    type?: 'submit' | 'reset' | 'button' | undefined
 }
 
-export const Button = ({ children, className, onClick }: ButtonProps) => <button className={className || classes.button} onClick={onClick} type="button">{children}</button>
+export const Button = ({ children, className, onClick, type }: ButtonProps) => <button className={className || classes.button} onClick={onClick} type={type || "button"}>{children}</button>
