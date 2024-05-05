@@ -3,14 +3,15 @@
     margin-bottom: 25px;
 }
 .label input {
+    min-width: 250px;
     width: 100%;
     border: 0;
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid #fff;
     background: transparent;
     margin-bottom: 25px;
     padding: 8px 0 5px 0;
     font-size: 16px;
-    color: black;
+    color: #fff;
     border-radius: 3px;
 }
 
@@ -21,7 +22,7 @@
 }
 
 ::placeholder {
-    color: black;
+    color: #fff;
     font-size: 16px;
     text-align: start;
 }
