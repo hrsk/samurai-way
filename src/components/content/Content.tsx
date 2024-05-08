@@ -12,13 +12,13 @@ import { PATH } from '../../enum/paths';
 export const Content = () => {
     return (
         <div className={style.contentWrapper}>
-            <Route exact path={`/${PATH.PROFILE}/:${PATH.USER_ID}?`} component={() => <ProfileContainer />} />
+            <Route exact path={`${PATH.PROFILE}/:${PATH.USER_ID}?`} component={() => <ProfileContainer />} />
             <Route exact path={PATH.MESSAGES} component={() => <DialogsContainer />} />
             <Route exact path={PATH.USERS} component={() => <UsersContainer />} />
             <Route exact path={PATH.LOGIN} component={() => <LoginContainer />} />
             <Route exact path={PATH.FOLLOWINGS} component={() => <FollowingsContainer />} />
             <Route exact path={'/sign_in'} component={() => <SignIn />} />
-            {/* <Route exact path={PATH.PAGE_NOT_FOUND} component={() => <PageNotFound />} /> */}
+            <Route exact path={PATH.PAGE_NOT_FOUND} component={() => <PageNotFound />} />
         </div>
     );
 }

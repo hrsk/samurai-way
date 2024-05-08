@@ -1,6 +1,6 @@
 export enum PATH {
     PAGE_NOT_FOUND = '/*',
-    USER_ID = '/userId',
+    USER_ID = 'userId',
     MESSAGES = '/messages',
     LOGIN = '/login',
     PROFILE = '/profile',
