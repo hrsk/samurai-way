@@ -2,7 +2,9 @@
 .formControlError textarea {
     border: 1px solid red;
 }
-
+.label {
+    color: #fff
+}
 .formControlError span {
     color: red;
     display: inline-block;

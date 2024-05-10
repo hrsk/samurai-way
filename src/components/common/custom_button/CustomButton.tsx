@@ -6,8 +6,9 @@ type defaultProps = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButto
 interface ButtonProps extends defaultProps {
     className?: string
     children: ReactChild
-    onClick: () => void
+    onClick?: () => void
     disabled?: boolean
+    type?: 'submit' | 'reset' | 'button' | undefined
 }
 
-export const CustomButton = ({ children, className, onClick }: ButtonProps) => <button className={className || classes.button} onClick={onClick} type="button">{children}</button>
+export const CustomButton = ({ children, className, onClick, type }: ButtonProps) => <button className={className || classes.button} onClick={onClick} type={type || "button"}>{children}</button>

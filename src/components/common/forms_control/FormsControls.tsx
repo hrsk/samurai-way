@@ -53,7 +53,7 @@ export const createField = (
     fieldClass?: any,
 ) => (
     <div className={wrapperClass}>
-        <label htmlFor={text}>{text}</label>
+        <label htmlFor={text} className={classes.label}>{text}</label>
         <Field
             component={component}
             name={name}

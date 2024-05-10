@@ -15,7 +15,6 @@ const initialState: InitialStateType = {
         { id: 7, title: 'Settings' },
         { id: 8, title: 'Users' },
         { id: 9, title: 'Login' },
-        { id: 10, title: 'Sign_In' },
     ],
 }
 export const navbarReducer = (state = initialState, action: any): InitialStateType => {
