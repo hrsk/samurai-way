@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 import classes from './FormsControls.module.css';
 import { Field } from 'redux-form';
 
@@ -14,10 +14,11 @@ export const FormControl = (props: PropsType) => {
     const hasError = meta.error && meta.touched;
 
     return (
-        <div className={hasError && classes.formControlError}>
-            <div>{children}</div>
-            <div>{hasError && <span>{meta.error}</span>}</div>
-        </div>
+        <div className={classes.children}>{children}</div>
+        // <div className={hasError && classes.formControlError}>
+        //     <div className={classes.children}>{children}</div>
+        //     <div>{hasError && <span>{meta.error}</span>}</div>
+        // </div>
     );
 };
 
@@ -41,6 +42,22 @@ export const Input = (props: PropsType) => {
     );
 };
 
+interface CustomInputPropsType extends PropsType {
+    labelText?: string
+};
+
+export const CustomInput = (props: CustomInputPropsType) => {
+
+    const { input, labelText, ...restProps } = props;
+
+    return (
+        <FormControl {...props}>
+            <label htmlFor={labelText} className={classes.label}>
+                <input {...input} {...restProps} />
+            </label>
+        </FormControl>
+    )
+}
 
 export const createField = (
     placeholder = '',

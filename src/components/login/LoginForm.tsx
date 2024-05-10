@@ -4,7 +4,7 @@ import { Button } from "../common/button/Button";
 import { Input, createField } from "../common/forms_control/FormsControls";
 import { ConnectedPropsType } from "./LoginContainer";
 import classes from './LoginForm.module.css';
-import { CustomInput } from "../common/custom_input/CustomInput";
+import { CustomInput } from "../common/forms_control/FormsControls";
 import { CustomButton } from "../common/custom_button/CustomButton";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
@@ -48,28 +48,28 @@ export const LoginForm = (props: InjectedFormProps<FormDataType> & PropsType) =>
                 </div>
                 <div className={classes.fieldsWrapper}>
                     {createField(
-                        'email',
+                        '',
                         'email',
                         [required],
-                        Input,
+                        CustomInput,
                         {},
                         'Email:',
                         classes.wrapperStyle
                     )}
                     {createField(
-                        'password',
+                        '',
                         'password',
                         [required],
-                        Input,
+                        CustomInput,
                         { type: 'password' },
                         'Password:',
                         classes.wrapperStyle
                     )}
                     {createField(
-                        'Password',
+                        '',
                         'rememberMe',
                         [],
-                        Input,
+                        CustomInput,
                         { type: 'checkbox' },
                         'Remember me:',
                         classes.wrapperStyle,
@@ -91,7 +91,6 @@ export const LoginForm = (props: InjectedFormProps<FormDataType> & PropsType) =>
                     </NavLink>
                 </div>
             </div>
-
         </form>
         // <form onSubmit={props.handleSubmit}>
         //     <div>
