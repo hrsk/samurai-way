@@ -1,16 +1,21 @@
 .nav {
     display: flex;
     flex-direction: column;
-    /* display: grid; */
-    border: rosybrown solid 2px;
-    /* grid-area: nav; */
-    padding: 20px;
-    /* grid-template-rows: 1fr; */
-    /* grid-template-columns: 8fr;s */
+    background-image: linear-gradient(to left, #09203f 0%, #537895 100%);
+    border-radius: 8px;
+    min-width: 240px;
+    width: max-content;
+    padding: 8px;
+    align-items: center;
+    gap: 4px;
 }
 .link {
     text-decoration: none; 
-    color: gold;
+    color: #fff;
+}
+.link:hover {
+    font-weight: 600;
+    color: #7785ff;
 }
 .linkItemText {
     text-transform: uppercase;
