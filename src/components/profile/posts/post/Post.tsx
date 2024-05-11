@@ -8,9 +8,10 @@ type PropsType = {
         small: string | undefined
         large: string | undefined
     }
+    removePost: (postId: number) => void
 }
 
-export const Post = ({ post, photos }: PropsType) => {
+export const Post = ({ post, photos, removePost }: PropsType) => {
     return (
         <ul className={classes.ul}>
             <li className={classes.li}>
@@ -21,7 +22,7 @@ export const Post = ({ post, photos }: PropsType) => {
                 }
                 <span className={classes.postText}>{post.text}</span>
                 <span className={classes.likesCount}>{post.likesCount}</span>
-                <Button className={classes.button} onClick={() => { }}>x</Button>
+                <Button className={classes.button} onClick={() => removePost(post.id)}>x</Button>
             </li>
         </ul>
     );

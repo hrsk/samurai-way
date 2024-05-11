@@ -1,7 +1,7 @@
 import classes from './Profile.module.css';
 import { ConnectedPropsType } from "./ProfileContainer";
 import { ProfileDescription } from "./ProfileDescription";
-import { PostsContainerComponent } from "./posts/PostsContainerComponent";
+import { PostsContainer } from "./posts/PostsContainer";
 
 interface PropsType extends ConnectedPropsType {
     changeUserStatusHandler: (value: string) => void
@@ -12,10 +12,7 @@ export const Profile = (props: PropsType) => {
     return (
         <div className={classes.profileWrapper}>
             <ProfileDescription {...props} />
-            <PostsContainerComponent posts={props.posts}
-                photos={props.userProfile.photos}
-                addPost={props.addPost}
-            />
+            <PostsContainer />
         </div>
     );
 };

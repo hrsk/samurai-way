@@ -42,7 +42,7 @@ export const profileReducer = (state = initialState, action: ProfileReducerActio
     switch (action.type) {
         case ADD_POST: {
             const newPost: PostType = {
-                id: 6,
+                id: Math.random(),
                 text: action.value,
                 likesCount: 0,
             }

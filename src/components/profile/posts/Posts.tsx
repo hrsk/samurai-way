@@ -1,24 +1,14 @@
 import { ChangeEvent, useState } from "react";
-import { PostType } from "../../../types";
-import { Post } from "./post/Post";
-import classes from './Posts.module.css';
 import { Button } from "../../common/button/Button";
+import classes from './Posts.module.css';
+import { ConnectedPropsType } from "./PostsContainer";
+import { Post } from "./post/Post";
 
-type PropsType = {
-    posts: PostType[]
-    addPost: (value: string) => void
-    photos: {
-        small: string | undefined
-        large: string | undefined
-    }
-}
+interface PropsType extends ConnectedPropsType { }
 
 export const Posts = (props: PropsType) => {
 
     const [value, setValue] = useState<string>('')
-
-    console.log('POSTS RENDERED')
-    const posts = props.posts.map(post => <Post key={post.id} post={post} photos={props.photos} />)
 
     const changePostTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setValue(e.currentTarget.value)
@@ -32,7 +22,12 @@ export const Posts = (props: PropsType) => {
     return (
         <div className={classes.postsWrapper}>
             <h3>My posts</h3>
-            {posts}
+            {
+                props.posts.map(post => <Post key={post.id}
+                    post={post}
+                    photos={props.photos}
+                    removePost={props.removePost} />)
+            }
             <div className={classes.textareaContainer}>
                 <textarea className={classes.textarea}
                     value={value}
