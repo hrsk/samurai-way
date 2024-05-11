@@ -1,4 +1,17 @@
 .profileWrapper {
+    background-image: url(../../assets/background/background_image.jpg);
+    background-position: center;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+    color: #fff;
+    /* background-image: url(../../assets/background/background_image.jpg);
+    width: max-content;
+    height: max-content;
     display: flex;
-    flex-flow: column;
+    flex-direction: column;
+    margin: 8px; */
 }

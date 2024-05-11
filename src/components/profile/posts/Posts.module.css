@@ -1,24 +1,37 @@
-.writePostWrapper {
+.postsWrapper {
+    margin: 8px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 30px;
+}
+
+.postsWrapper h3 {
+    margin: 0;
+    margin-bottom: 8px;
+    text-align: center;
+}
+.textareaContainer {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    margin: 8px;
 }
 
 .textarea {
-    min-width: 30%;
-    max-width: 40%;
-    min-height: 70px;
-    background-color: #fff;
-    padding: 10px;
-    font-size: 18px;
-    border: 1px solid transparent;
-    border-color: black;
-    border-radius: 5px;
-    word-break: break-word;
+    width: 375px;
+    height: 75px;
+    padding: 4px 8px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
     resize: vertical;
     &:focus {
-        box-shadow: #a57cff 0 0 10px 1px;
+        box-shadow: #ccc 0 0 10px 4px;
     }
+}
+::placeholder {
+    color: #000;
 }
 
 .button {

@@ -1,5 +1,6 @@
 import { PostType } from "../../../../types";
-import style from "./Post.module.css"
+import { Button } from "../../../common/button/Button";
+import classes from "./Post.module.css"
 
 type PropsType = {
     post: PostType
@@ -11,16 +12,16 @@ type PropsType = {
 
 export const Post = ({ post, photos }: PropsType) => {
     return (
-        <ul className={style.ul}>
-            <li className={style.li}>
+        <ul className={classes.ul}>
+            <li className={classes.li}>
                 {photos &&
-                    <img className={style.avatar}
+                    <img className={classes.avatar}
                         src={photos.small && photos.large}
                         alt="" />
                 }
-                <span className={style.postText}>{post.text}</span>
-                <span className={style.likesCount}>{post.likesCount}</span>
-                <button className={style.button} onClick={() => { }}>x</button>
+                <span className={classes.postText}>{post.text}</span>
+                <span className={classes.likesCount}>{post.likesCount}</span>
+                <Button className={classes.button} onClick={() => { }}>x</Button>
             </li>
         </ul>
     );

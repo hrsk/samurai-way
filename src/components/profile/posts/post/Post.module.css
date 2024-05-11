@@ -15,6 +15,9 @@
 .ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+    width: max-content;
+    margin: 8px;
 }
 
 .li {
@@ -29,20 +32,34 @@
 }
 
 .button {
-    margin-left: 5px;
-    color: #fff;
-    width: 28px;
-    height: 28px;
-    text-align: center;
-    font-size: 14px;
-    background-color: #6e94ff;
+    width: 32px;
+    height: 32px;
+    background: 
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(60deg, #ff81ed 0%, #b279ff 52.6%, #7785ff 73.96%, #51b9ff 100%) border-box;
+    border: 2px solid transparent;
     border-radius: 50%;
-    border: none;
+    text-transform: capitalize;
+    margin: 8px;
+    color: #b279ff;
+    font: Inter;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 14px;
 }
-
 .button:hover {
-    background-color: #a57cff;
-    color: #fff;
-    text-shadow: #fff 0 0 2px;
-    box-shadow: #f280f1 0 0 8px;
+    cursor: pointer;
+        color: #fff;
+        background: 
+        linear-gradient(60deg, #51b9ff 0%, #7785ff 52.6%, #b279ff 73.96%, #ff81ed 100%) padding-box;
+    border: none;
+    border-radius: 50%;
+}
+.button:disabled {    
+    color: #cccaca;
+    border: 2px solid #cccaca;
+    border-radius: 34px;
+}
+.button:disabled:hover {
+        color: #cccaca
 }

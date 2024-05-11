@@ -1,12 +1,12 @@
-.profileWrapper {
+.descriptionWrapper {
     display: flex;
     flex-direction: column;
-    font-size: 24px;
-    font-weight: 600;
+    padding: 8px;
 }
 .statusBlock {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
 }
 
@@ -16,18 +16,18 @@
     width: 128px;
 }
 
-.profileInformation {
+.profileInformationContainer {
     display: flex;
-    justify-content:space-evenly;
-    /* gap: 5px; */
+    justify-content: center;
+    gap: 40px;
 }
-
 .aboutMe {
     display: flex;
     flex-direction: column;
     font-size: 14px;
     font-weight: 400;
 }
+
 
 .aboutMe span {
     font-size: 14px;
