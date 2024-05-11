@@ -1,8 +1,9 @@
 import { ChangeEvent } from "react";
-import style from "./Dialog.module.css";
+import classes from "./Dialog.module.css";
 import { ConnectedPropsType } from "./DialogContainer";
 import { Dialog } from "./dialog/Dialog";
 import { Message } from "./message/Message";
+import { Button } from "../common/button/Button";
 
 interface PropsType extends ConnectedPropsType { }
 
@@ -20,19 +21,20 @@ export const Dialogs = (props: PropsType) => {
     }
 
     return (
-        <>
-            <div className={style.wrapper}>
-                <ul className={style.ul}>
-                    {gialogs}
-                </ul>
-                <ul className={style.ul}>
-                    {messages}
-                </ul>
+        <div className={classes.dialogsWrapper}>
+            <ul className={classes.ul}>
+                {gialogs}
+            </ul>
+            <ul className={classes.ul}>
+                {messages}
+            </ul>
+            <div className={classes.textareaContainer}>
+                <textarea className={classes.textarea}
+                    placeholder="Enter your message"
+                    value={props.messageText}
+                    onChange={onChangeHandler} />
+                <Button onClick={sendMessageHandler}>send message</Button>
             </div>
-            <div className={style.textarea}>
-                <textarea placeholder="Enter your message" value={props.messageText} onChange={onChangeHandler} />
-                <button onClick={sendMessageHandler}>send message</button>
-            </div>
-        </>
+        </div>
     );
 };

@@ -75,7 +75,7 @@ export const LoginForm = (props: InjectedFormProps<FormDataType> & PropsType) =>
                         classes.wrapperStyle,
                     )}
                 </div>
-                <CustomButton type='submit'>Sign In</CustomButton>
+                <Button type='submit'>sign in</Button>
                 <div className={classes.link}>
                     <p>
                         {' '}

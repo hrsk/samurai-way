@@ -1,3 +1,4 @@
+
 import { NavLink } from "react-router-dom";
 import no_avatar from './../../assets/avatar_images/no_avatar.png';
 import style from "./Header.module.css";
@@ -25,25 +26,18 @@ export const Header = (props: PropsType) => {
                 props.isAuth
                     ? <div className={style.loginContainer}>
                         {props.profilePhotos ?
-                            <img className={style.avatar} style={{ width: '64px', height: '64px' }}
+                            <img className={style.avatar} style={{ width: '48px', height: '48px' }}
                                 src={props.profilePhotos.small && props.profilePhotos.large}
                                 alt="" />
                             : <img className={style.avatar} style={{ width: '64px', height: '64px' }} src={no_avatar} alt="" />
                         }
                         <span style={{ display: 'block' }}>{props.login}</span>
                         <Button onClick={props.logout}>Logout</Button>
-                        {/* <button className={style.button} onClick={props.logout}>Logout</button> */}
                     </div>
                     : <Button onClick={() => { }}>
                         <NavLink to={'/login'} className={style.navLink}>SignIn</NavLink>
                     </Button>
-                // : <button className={style.button}>
-                //     <NavLink to={'/login'} className={style.navLink}>
-                //         SingIn
-                //     </NavLink>
-                // </button>
             }
-
         </div>
     );
 };

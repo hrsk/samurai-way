@@ -20,13 +20,14 @@
 .button {
     width: max-content;
     height: 32px;
-
     background: 
         linear-gradient(#fff, #fff) padding-box,
         linear-gradient(60deg, #51b9ff 0%, #7785ff 52.6%, #b279ff 73.96%, #ff81ed 100%) border-box;
     border: 2px solid transparent;
     border-radius: 34px;
 
+    text-transform: capitalize;
+    margin: 8px;
     color: #7785ff;
     font: Inter;
     font-size: 14px;
