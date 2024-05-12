@@ -19,5 +19,7 @@
 
 .content-wrapper {
   display: flex;
+  height: 100%;
+  min-height: 100vh;
   gap: 10px;
 }

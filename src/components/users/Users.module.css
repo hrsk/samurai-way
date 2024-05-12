@@ -1,7 +1,9 @@
-.grid {
+.wrapper {
+    padding: 8px;
+}
 
+.grid {
     display: grid;
     grid-template: auto /repeat(5, 1fr) ;
-    margin-top: 15px;
     gap: 10px;
 } 
