@@ -5,6 +5,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 100vh;
+    border-radius: 8px;
 }
 
 .textCenter {
@@ -19,7 +20,7 @@
 
 .box {
     position: absolute;
-    left: 55%;
+    left: 58%;
     top: 65%;
     height: 500px;
     width: 450px;

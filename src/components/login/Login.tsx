@@ -1,4 +1,4 @@
-import { FormDataType } from "./LoginForm"
+import { FormDataType } from "./LoginReduxForm"
 import { LoginReduxForm } from "./LoginReduxForm"
 
 type PropsType = {

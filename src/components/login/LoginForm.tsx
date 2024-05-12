@@ -1,145 +1,104 @@
-import { InjectedFormProps } from "redux-form";
-import { required } from "../../utils/validators";
-import { Button } from "../common/button/Button";
-import { Input, createField } from "../common/forms_control/FormsControls";
-import { ConnectedPropsType } from "./LoginContainer";
 import classes from './LoginForm.module.css';
-import { CustomInput } from "../common/forms_control/FormsControls";
-import { CustomButton } from "../common/custom_button/CustomButton";
+import { ChangeEvent, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { validateEmail } from "../../helpers/authorization/emailValidator";
+import { validatePassword } from "../../helpers/authorization/passwordValidator";
+import { useInput } from "../../hooks/useInput";
+import { useAppDispatch } from "../../store/redux-store";
+import { CustomButton } from "../common/custom_button/CustomButton";
+import { CustomInput } from "../common/custom_input/CustomInput";
+import { loginUser, setError } from "../reducers/authReducer";
 
-export type FormDataType = {
-    email: string
-    password: string
-    rememberMe: boolean
-}
-
-interface PropsType extends ConnectedPropsType { }
-
-export const LoginForm = (props: InjectedFormProps<FormDataType> & PropsType) => {
-
-    // const passwordLength = passwordLengthValidator(8, 16)
+export const LoginForm = () => {
 
     const [rememberMe, setRememberMe] = useState<boolean>(false);
 
+    const { value: email, onChange: handleEmail, clearValue: clearEmail } = useInput('');
+
+    const {
+        value: password,
+        onChange: handlePassword,
+        clearValue: clearPassword,
+    } = useInput('');
+
+    const dispatch = useAppDispatch();
 
     const onClickCancel = () => {
+        clearEmail();
+        clearPassword();
     };
 
-    const onChangeCheckbox = () => {
+    const onChangeCheckbox = (e: ChangeEvent<HTMLInputElement>) =>
+        setRememberMe(e.currentTarget.checked);
 
-    }
+    const delay = 3000;
 
-    const onChangeHandler = () => {
+    const onSubmit = () => {
 
-    }
+        if (validateEmail(email) && validatePassword(password)) {
+            dispatch(loginUser(email, password, rememberMe, true));
+            clearEmail();
+            clearPassword();
+        }
+
+        if (!validateEmail(email) || !validatePassword(password)) {
+            dispatch(setError('Invalid data'));
+            setTimeout(() => {
+                dispatch(setError(''));
+            }, delay);
+        }
+    };
 
     return (
-        <form className={classes.contentWrapper} onSubmit={props.handleSubmit}>
+        <div className={classes.contentWrapper}>
             <div className={classes.box}>
-                <h3 className={classes.textCenter}>login</h3>
-                {/* {serverError && <span style={{ color: 'red' }}>{serverError}</span>} */}
-                {/* {networkError && <span style={{ color: 'red' }}>{networkError}</span>} */}
-                <div>
-                    {
-                        props.errorMessages && <span style={props.errorMessages && { color: 'crimson' }}>{props.errorMessages[0]}</span>
-                    }
+                <span className={classes.textCenter}>login</span>
+                <CustomInput
+                    placeholder="Email"
+                    onChange={handleEmail}
+                    value={email}
+                    type="email"
+                    name="email"
+                />
+                <CustomInput
+                    placeholder="Password"
+                    onChange={handlePassword}
+                    value={password}
+                    type="password"
+                    name="password"
+                />
+                <div className={classes.inputContainer}>
+                    <label className={classes.container} htmlFor="inputCheckbox">
+                        Remember Me
+                        <input
+                            id="inputCheckbox"
+                            type="checkbox"
+                            required={false}
+                            name="checkbox"
+                            checked={rememberMe}
+                            onChange={onChangeCheckbox}
+                        />
+                        <span className={classes.checkmark} />
+                    </label>
                 </div>
-                <div className={classes.fieldsWrapper}>
-                    {createField(
-                        '',
-                        'email',
-                        [required],
-                        CustomInput,
-                        {},
-                        'Email:',
-                        classes.wrapperStyle
-                    )}
-                    {createField(
-                        '',
-                        'password',
-                        [required],
-                        CustomInput,
-                        { type: 'password' },
-                        'Password:',
-                        classes.wrapperStyle
-                    )}
-                    {createField(
-                        '',
-                        'rememberMe',
-                        [],
-                        CustomInput,
-                        { type: 'checkbox' },
-                        'Remember me:',
-                        classes.wrapperStyle,
-                    )}
+                <div className={classes.button}>
+                    <CustomButton onClick={onSubmit}>sign in</CustomButton>
                 </div>
-                <Button type='submit'>sign in</Button>
                 <div className={classes.link}>
                     <p>
                         {' '}
                         Do not have an account?{' '}
-                        <NavLink to={'/'} onClick={onClickCancel}>
+                        <NavLink to={'/sign_up'} onClick={onClickCancel}>
                             Sign Up
                         </NavLink>{' '}
                     </p>
                 </div>
                 <div className={classes.link}>
-                    <NavLink to={'/'} onClick={onClickCancel}>
+                    <NavLink to={'/forgot_password'} onClick={onClickCancel}>
                         Forgot Password
                     </NavLink>
                 </div>
             </div>
-        </form>
-        // <form onSubmit={props.handleSubmit}>
-        //     <div>
-        //         {
-        //             props.errorMessages && <span style={props.errorMessages && { color: 'crimson' }}>{props.errorMessages[0]}</span>
-        //         }
-        //     </div>
-        //     {createField(
-        //         'Email',
-        //         'email',
-        //         [required],
-        //         Input,
-        //         {},
-        //         'Email:',
-        //         classes.wrapperStyle
-        //     )}
-
-        //     {createField(
-        //         'Password',
-        //         'password',
-        //         [required],
-        //         Input,
-        //         {},
-        //         'Password:',
-        //         classes.wrapperStyle
-        //     )}
-
-        //     {createField(
-        //         'Password',
-        //         'rememberMe',
-        //         [],
-        //         Input,
-        //         { type: 'checkbox' },
-        //         'Remember me:',
-        //         classes.wrapperStyle,
-        //     )}
-        //     {/* <div>
-        //         <label htmlFor="Email">Email</label>
-        //         <Field name="email" validate={[required]} component={LoginInput} type="text" placeholder="Email" />
-        //     </div>
-        //     <div>
-        //         <label htmlFor="Password">Password</label>
-        //         <Field name="password" validate={[required]} component={LoginInput} type="text" placeholder="Password" />
-        //     </div>
-        //     <div>
-        //         <label htmlFor="rememberMe">RememberMe</label>
-        //         <Field name="rememberMe" component={LoginInput} type="checkbox" />
-        //     </div> */}
-        //     <Button type="submit">Submit</Button>
-        // </form>
+        </div>
     );
 };
