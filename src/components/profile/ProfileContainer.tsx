@@ -7,7 +7,7 @@ import { withAuthRedirect } from "../../features/hoc/RedirectComponent";
 import { AppStateType } from "../../store/redux-store";
 import { PostType, UserProfileType } from "../../types";
 import { fetching } from "../reducers/appReducer";
-import { addPost, getUserProfile } from "../reducers/profileReducer";
+import { addPost, getUserProfile, uploadUserPhotoThunk } from "../reducers/profileReducer";
 import { changeUserStatus, getUserStatus, setUserStatus } from "../reducers/usersReducer";
 import { Profile } from "./Profile";
 
@@ -51,16 +51,28 @@ export class ProfileConnectedComponent extends React.Component<ConnectedPropsTyp
     changeUserStatusHandler = (value: string) => {
         this.props.changeUserStatus(value)
     }
+
     setUserStatusHandler = (value: string) => {
         this.props.setUserStatus(value)
     }
 
+    setUserPhotoHandler = (image: File) => {
+        this.props.uploadUserPhotoThunk(image)
+    }
+
     render() {
+
+        let isOwner: boolean = !this.props.match.params.userId
+
         // if (!this.props.isAuth) return <Redirect to={'/login'} />
         return (
             this.props.isFetching
                 ? <Preloader />
-                : <Profile {...this.props} changeUserStatusHandler={this.changeUserStatusHandler} setUserStatusHandler={this.setUserStatusHandler} />
+                : <Profile {...this.props}
+                    isOwner={isOwner}
+                    uploadUserPhoto={this.setUserPhotoHandler}
+                    changeUserStatusHandler={this.changeUserStatusHandler}
+                    setUserStatusHandler={this.setUserStatusHandler} />
         )
     }
 }
@@ -91,7 +103,11 @@ interface OwnProps extends ClassAttributes<ProfileConnectedComponent> { }
 type PropsFromRedux = ConnectedProps<typeof connector>
 export type ConnectedPropsType = MapStateToPropsType & PropsFromRedux & OwnProps & RouteComponentProps<RouteParams>
 
-const connector = connect(mapStateToProps, { addPost, fetching, getUserProfile, getUserStatus, changeUserStatus, setUserStatus });
+const connector = connect(mapStateToProps, {
+    addPost, fetching, getUserProfile,
+    getUserStatus, changeUserStatus,
+    setUserStatus, uploadUserPhotoThunk,
+});
 
 type RouteParams = {
     userId: string

@@ -1,6 +1,6 @@
 import { Dispatch } from "redux"
 import { API } from "../../api/API"
-import { Nullable, PostType, UserProfileType } from "../../types"
+import { Nullable, PhotosType, PostType, UserProfileType } from "../../types"
 import { fetching } from "./appReducer"
 import { ThunkDispatch } from "redux-thunk"
 import { AppStateType } from "../../store/redux-store"
@@ -10,6 +10,7 @@ const REMOVE_POST = 'REMOVE_POST'
 // const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_PROFILE_PHOTOS = 'SET_PROFILE_PHOTOS'
+const UPLOAD_USER_PHOTO = 'UPLOAD_USER_PHOTO'
 
 type InitialStateType = {
     user: UserProfileType
@@ -62,6 +63,10 @@ export const profileReducer = (state = initialState, action: ProfileReducerActio
         case SET_PROFILE_PHOTOS: return {
             ...state, photos: { ...action.photos },
         };
+        case UPLOAD_USER_PHOTO:
+            return {
+                ...state, user: { ...state.user, photos: action.photos }
+            }
 
         default: return state
     }
@@ -69,7 +74,7 @@ export const profileReducer = (state = initialState, action: ProfileReducerActio
 
 //types 
 
-export type ProfileReducerActionsType = AddPostActionType | GetUserProfileActionType | RemovePostActionType | SetProfilePhotosActionType
+export type ProfileReducerActionsType = AddPostActionType | GetUserProfileActionType | RemovePostActionType | SetProfilePhotosActionType | UploadUserPhotoType
 
 type AddPostActionType = {
     type: 'ADD_POST'
@@ -90,10 +95,12 @@ type GetUserProfileActionType = {
 }
 type SetProfilePhotosActionType = {
     type: 'SET_PROFILE_PHOTOS'
-    photos: {
-        small: string | undefined
-        large: string | undefined
-    }
+    photos: PhotosType
+}
+
+type UploadUserPhotoType = {
+    type: 'UPLOAD_USER_PHOTO'
+    photos: PhotosType
 }
 
 //actions 
@@ -140,6 +147,12 @@ export const setProfilePhotos = (photos: { small: string | undefined, large: str
     photos,
 } as const);
 
+export const uploadUserPhoto = (photos: PhotosType): UploadUserPhotoType => {
+    return {
+        type: UPLOAD_USER_PHOTO,
+        photos,
+    }
+}
 
 export const getProfilePhotos = (userId: Nullable<number>) => {
     return async (
@@ -156,3 +169,10 @@ export const getProfilePhotos = (userId: Nullable<number>) => {
         }
     };
 };
+
+export const uploadUserPhotoThunk = (image: File) => async (dispatch: Dispatch) => {
+    const response = await API.uploadUserPhoto(image)
+    if (response.data.resultCode === 0) {
+        dispatch(uploadUserPhoto(response.data.data.photos))
+    }
+}

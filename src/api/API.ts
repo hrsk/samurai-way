@@ -46,5 +46,16 @@ export const API = {
     getProfilePhotos(userId: number) {
         return instance.get<UserProfileType>(`profile/${userId}`)
     },
+    uploadUserPhoto(image: File) {
+        const formData = new FormData();
+        formData.append("image", image);
+        return (
+            instance.put(`profile/photo`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+            })
+        )
+    },
 }
 

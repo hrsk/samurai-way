@@ -88,4 +88,9 @@ export type AuthDataResponseType = {
     messages: string[]
     fieldsErrors: string[]
     resultCode: number
-} 
+}
+
+export type PhotosType = {
+    small: string | undefined
+    large: string | undefined
+}

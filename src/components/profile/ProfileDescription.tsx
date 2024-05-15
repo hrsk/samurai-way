@@ -3,13 +3,23 @@ import no_avatar from '../../assets/avatar_images/no_avatar.png'
 import classes from './ProfileDescription.module.css'
 import { ProfileStatusWithHooks } from "./ProfileStatusWithHooks"
 import { Button } from "../common/button/Button"
+import { ChangeEvent } from "react"
 
 interface PropsType extends ConnectedPropsType {
     changeUserStatusHandler: (value: string) => void
     setUserStatusHandler: (value: string) => void
+    uploadUserPhoto: (image: File) => void
+    isOwner: boolean
 }
 
 export const ProfileDescription = (props: PropsType) => {
+
+    const onPhotoSelected = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files) {
+            props.uploadUserPhoto(event.target.files[0])
+        }
+    }
+
     return (
         <div className={classes.descriptionWrapper}>
             <div className={classes.statusBlock} >
@@ -22,7 +32,8 @@ export const ProfileDescription = (props: PropsType) => {
                 <ProfileStatusWithHooks status={props.status}
                     changeUserStatusHandler={props.changeUserStatusHandler}
                     setUserStatusHandler={props.setUserStatusHandler} />
-                <Button onClick={() => { }}>Edit</Button>
+                {/* <Button onClick={() => { }}>Edit</Button> */}
+                {props.isOwner && <input type="file" onChange={onPhotoSelected} />}
                 {/* <button className={style.button} onClick={() => { }}>Change avatar</button> */}
             </div>
             <div className={classes.profileInformationContainer}>
