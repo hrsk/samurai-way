@@ -4,6 +4,7 @@ import classes from './ProfileDescription.module.css'
 import { ProfileStatusWithHooks } from "./ProfileStatusWithHooks"
 import { Button } from "../common/button/Button"
 import { ChangeEvent } from "react"
+import { ProfileContactsData } from "./ContactsDataForm"
 
 interface PropsType extends ConnectedPropsType {
     changeUserStatusHandler: (value: string) => void
@@ -43,7 +44,8 @@ export const ProfileDescription = (props: PropsType) => {
                     <p>lookingForAJob:{props.userProfile.lookingForAJob}</p>
                     <p>lookingForAJobDescription: {props.userProfile.lookingForAJobDescription}</p>
                 </div>
-                {
+                <ProfileContactsData userProfile={props.userProfile} />
+                {/* {
                     props.userProfile.contacts &&
                     <div className={classes.contactsInformation}>
                         <span>Contacts:</span>
@@ -56,9 +58,8 @@ export const ProfileDescription = (props: PropsType) => {
                         <span>github: <p className={classes.text}>{props.userProfile.contacts.github}</p></span>
                         <span>mainLink: <p className={classes.text}>{props.userProfile.contacts.mainLink}</p></span>
                         <Button onClick={() => { }}>Edit</Button>
-                        {/* <button className={style.button} onClick={() => { }}>Edit</button> */}
                     </div>
-                }
+                } */}
             </div>
         </div>
     )
