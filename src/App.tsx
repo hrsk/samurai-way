@@ -1,7 +1,16 @@
 import './App.css'
+import { Content } from './content/Content'
+import { Footer } from './footer/Footer'
+import { Header } from './header/Header'
+import { Navbar } from './navbar/Navbar'
 
-function App() {
-	return <div className='App'>SAMURAI_WAY</div>
+export const App = () => {
+	return (
+		<div className={'app-wrapper'}>
+			<Header />
+			<Navbar />
+			<Content />
+			<Footer />
+		</div>
+	)
 }
-
-export default App
