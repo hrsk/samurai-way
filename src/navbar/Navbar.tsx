@@ -1,24 +1,26 @@
+import { NavLink } from 'react-router-dom'
+
 export const Navbar = () => {
 	return (
 		<div className={'nav'}>
 			<ul>
 				<li>
-					<a href=''>Profile</a>
+					<NavLink to='/profile'>Profile</NavLink>
 				</li>
 				<li>
-					<a href=''>Messages</a>
+					<NavLink to='/messages'>Messages</NavLink>
 				</li>
 				<li>
-					<a href=''>News</a>
+					<NavLink to='/news'>News</NavLink>
 				</li>
 				<li>
-					<a href=''>Music</a>
+					<NavLink to='/music'>Music</NavLink>
 				</li>
 				<li>
-					<a href=''>Video</a>
+					<NavLink to='/video'>Video</NavLink>
 				</li>
 				<li>
-					<a href=''>Settings</a>
+					<NavLink to='/settings'>Settings</NavLink>
 				</li>
 			</ul>
 		</div>
