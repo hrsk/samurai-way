@@ -1,4 +1,4 @@
-import { PostType } from '../..'
+import { PostType } from '../../state/state'
 import { Post } from './post/Post'
 
 type PropsType = {

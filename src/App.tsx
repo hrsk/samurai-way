@@ -1,13 +1,14 @@
-import { DialogType, PostType } from '.'
 import './App.css'
 import { Content } from './content/Content'
 import { Footer } from './footer/Footer'
 import { Header } from './header/Header'
 import { Navbar } from './navbar/Navbar'
+import { CustomStateType } from './state/state'
 
 type PropsType = {
-	dialogs: DialogType[]
-	posts: PostType[]
+	state: CustomStateType
+	// dialogs: DialogType[]
+	// posts: PostType[]
 }
 
 export const App = (props: PropsType) => {
@@ -15,7 +16,10 @@ export const App = (props: PropsType) => {
 		<div className={'app-wrapper'}>
 			<Header />
 			<Navbar />
-			<Content dialogs={props.dialogs} posts={props.posts} />
+			<Content
+				messagesPageData={props.state.messagesPage}
+				profilePageData={props.state.profilePage}
+			/>
 			<Footer />
 		</div>
 	)

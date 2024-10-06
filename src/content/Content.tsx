@@ -1,11 +1,13 @@
 import { Route } from 'react-router-dom'
-import { DialogType, PostType } from '..'
 import { Messages } from '../messages/Messages'
 import { Profile } from '../profile/Profile'
+import { MessagesPageType, ProfilePageType } from '../state/state'
 
 type PropsType = {
-	dialogs: DialogType[]
-	posts: PostType[]
+	messagesPageData: MessagesPageType
+	profilePageData: ProfilePageType
+	// dialogs: DialogType[]
+	// posts: PostType[]
 }
 
 export const Content = (props: PropsType) => {
@@ -14,13 +16,13 @@ export const Content = (props: PropsType) => {
 			<Route
 				exact
 				path={'/profile'}
-				render={() => <Profile posts={props.posts} />}
+				render={() => <Profile posts={props.profilePageData.posts} />}
 				// component={Profile}
 			/>
 			<Route
 				exact
 				path={'/messages'}
-				render={() => <Messages dialogs={props.dialogs} />}
+				render={() => <Messages dialogs={props.messagesPageData.dialogs} />}
 				// component={Messages}
 			/>
 			{/* <Profile /> */}
