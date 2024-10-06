@@ -1,6 +1,11 @@
+import { PostType } from '..'
 import { Posts } from './posts/Posts'
 
-export const Profile = () => {
+type PropsType = {
+	posts: PostType[]
+}
+
+export const Profile = (props: PropsType) => {
 	return (
 		<div>
 			<div>
@@ -13,7 +18,7 @@ export const Profile = () => {
 				<div>education</div>
 				<div>website</div>
 			</div>
-			<Posts />
+			<Posts posts={props.posts} />
 		</div>
 	)
 }
