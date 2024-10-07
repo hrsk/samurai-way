@@ -1,3 +1,4 @@
+import React from 'react'
 import { PostType } from '../../state/state'
 import { Post } from './post/Post'
 
@@ -6,6 +7,13 @@ type PropsType = {
 }
 
 export const Posts = (props: PropsType) => {
+	const refElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
+
+	const addPost = () => {
+		const postText = refElement.current?.value
+		alert(postText)
+	}
+
 	return (
 		<div>
 			<ul>
@@ -22,8 +30,8 @@ export const Posts = (props: PropsType) => {
 				<Post /> */}
 			</ul>
 			<div>
-				<textarea />
-				<button>add post</button>
+				<textarea ref={refElement} />
+				<button onClick={addPost}>add post</button>
 			</div>
 		</div>
 	)

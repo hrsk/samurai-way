@@ -1,3 +1,4 @@
+import React from 'react'
 import { DialogType } from '../state/state'
 import { DialogueWithUser } from './dialogs/DialogueWithUser'
 import { Message } from './dialogs/message/Message'
@@ -8,6 +9,13 @@ type PropsType = {
 }
 
 export const Messages = (props: PropsType) => {
+	const refElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
+
+	const sendMessage = () => {
+		const messageText = refElement.current?.value
+
+		alert(messageText)
+	}
 	return (
 		<div className={styles.messagesWrapper}>
 			<ul>
@@ -32,8 +40,8 @@ export const Messages = (props: PropsType) => {
 					<Message /> */}
 				</ul>
 				<div>
-					<textarea />
-					<button>send</button>
+					<textarea ref={refElement} />
+					<button onClick={sendMessage}>send</button>
 				</div>
 			</div>
 		</div>
