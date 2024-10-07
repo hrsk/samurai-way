@@ -4,6 +4,7 @@ import { Post } from './post/Post'
 
 type PropsType = {
 	posts: PostType[]
+	addPost: (value: string) => void
 }
 
 export const Posts = (props: PropsType) => {
@@ -11,7 +12,10 @@ export const Posts = (props: PropsType) => {
 
 	const addPost = () => {
 		const postText = refElement.current?.value
-		alert(postText)
+		if (postText) {
+			props.addPost(postText)
+		}
+		// alert(postText)
 	}
 
 	return (

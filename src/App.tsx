@@ -7,6 +7,7 @@ import { CustomStateType } from './state/state'
 
 type PropsType = {
 	state: CustomStateType
+	addPost: (value: string) => void
 	// dialogs: DialogType[]
 	// posts: PostType[]
 }
@@ -19,6 +20,7 @@ export const App = (props: PropsType) => {
 			<Content
 				messagesPageData={props.state.messagesPage}
 				profilePageData={props.state.profilePage}
+				addPost={props.addPost}
 			/>
 			<Footer />
 		</div>

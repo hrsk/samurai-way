@@ -81,3 +81,12 @@ export const customState: CustomStateType = {
 		],
 	},
 }
+
+export const addPost = (value: string) => {
+	const newPost = {
+		id: 4,
+		userName: 'Dassler',
+		postText: value,
+	}
+	customState.profilePage.posts.push(newPost)
+}

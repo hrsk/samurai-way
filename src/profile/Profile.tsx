@@ -3,6 +3,7 @@ import { Posts } from './posts/Posts'
 
 type PropsType = {
 	posts: PostType[]
+	addPost: (value: string) => void
 }
 
 export const Profile = (props: PropsType) => {
@@ -18,7 +19,7 @@ export const Profile = (props: PropsType) => {
 				<div>education</div>
 				<div>website</div>
 			</div>
-			<Posts posts={props.posts} />
+			<Posts posts={props.posts} addPost={props.addPost} />
 		</div>
 	)
 }
