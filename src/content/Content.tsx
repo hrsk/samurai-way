@@ -6,7 +6,8 @@ import { MessagesPageType, ProfilePageType } from '../state/state'
 type PropsType = {
 	messagesPageData: MessagesPageType
 	profilePageData: ProfilePageType
-	addPost: (value: string) => void
+	addPost: () => void
+	onChangeTextPost: (value: string) => void
 	// dialogs: DialogType[]
 	// posts: PostType[]
 }
@@ -21,6 +22,8 @@ export const Content = (props: PropsType) => {
 					<Profile
 						posts={props.profilePageData.posts}
 						addPost={props.addPost}
+						onChangeTextPost={props.onChangeTextPost}
+						newPostText={props.profilePageData.newPostText}
 					/>
 				)}
 				// component={Profile}

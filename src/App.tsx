@@ -7,7 +7,8 @@ import { CustomStateType } from './state/state'
 
 type PropsType = {
 	state: CustomStateType
-	addPost: (value: string) => void
+	addPost: () => void
+	onChangeTextPost: (value: string) => void
 	// dialogs: DialogType[]
 	// posts: PostType[]
 }
@@ -21,6 +22,7 @@ export const App = (props: PropsType) => {
 				messagesPageData={props.state.messagesPage}
 				profilePageData={props.state.profilePage}
 				addPost={props.addPost}
+				onChangeTextPost={props.onChangeTextPost}
 			/>
 			<Footer />
 		</div>

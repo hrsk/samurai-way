@@ -1,3 +1,5 @@
+// import { rerenderEntireThree } from '..'
+
 export type DialogType = {
 	id: number
 	userName: string
@@ -16,6 +18,7 @@ export type MessagesPageType = {
 
 export type ProfilePageType = {
 	posts: PostType[]
+	newPostText: string
 }
 
 export type CustomStateType = {
@@ -59,6 +62,7 @@ export const customState: CustomStateType = {
 		],
 	},
 	profilePage: {
+		newPostText: 'new post text',
 		posts: [
 			{
 				id: 1,
@@ -81,12 +85,21 @@ export const customState: CustomStateType = {
 		],
 	},
 }
-
-export const addPost = (value: string) => {
+let rerenderEntireThree = () => {}
+export const subscribe = (observer: () => void) => {
+	rerenderEntireThree = observer
+}
+export const addPost = () => {
 	const newPost = {
 		id: 4,
 		userName: 'Dassler',
-		postText: value,
+		postText: customState.profilePage.newPostText,
 	}
 	customState.profilePage.posts.push(newPost)
+	onChangeTextPost('')
+	rerenderEntireThree()
+}
+export const onChangeTextPost = (value: string) => {
+	customState.profilePage.newPostText = value
+	rerenderEntireThree()
 }

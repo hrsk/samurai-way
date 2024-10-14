@@ -3,7 +3,9 @@ import { Posts } from './posts/Posts'
 
 type PropsType = {
 	posts: PostType[]
-	addPost: (value: string) => void
+	addPost: () => void
+	onChangeTextPost: (value: string) => void
+	newPostText: string
 }
 
 export const Profile = (props: PropsType) => {
@@ -19,7 +21,12 @@ export const Profile = (props: PropsType) => {
 				<div>education</div>
 				<div>website</div>
 			</div>
-			<Posts posts={props.posts} addPost={props.addPost} />
+			<Posts
+				posts={props.posts}
+				addPost={props.addPost}
+				newPostText={props.newPostText}
+				onChangeTextPost={props.onChangeTextPost}
+			/>
 		</div>
 	)
 }
