@@ -3,13 +3,13 @@ import { Content } from './content/Content'
 import { Footer } from './footer/Footer'
 import { Header } from './header/Header'
 import { Navbar } from './navbar/Navbar'
-import { StateType } from './store/store'
+import { ActionsType, StateType } from './store/store'
 
 type PropsType = {
 	state: StateType
 	// addPost: () => void
 	// onChangeTextPost: (value: string) => void
-	dispatch: (action: any) => void
+	dispatch: (action: ActionsType) => void
 	// dialogs: DialogType[]
 	// posts: PostType[]
 }

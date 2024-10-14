@@ -1,12 +1,13 @@
 import React from 'react'
 import { PostType } from '../../state/state'
+import { ActionsType, addPostAC, changePostTextAC } from '../../store/store'
 import { Post } from './post/Post'
 
 type PropsType = {
 	posts: PostType[]
 	// addPost: () => void
 	newPostText: string
-	dispatch: (action: any) => void
+	dispatch: (action: ActionsType) => void
 	// onChangeTextPost: (value: string) => void
 }
 
@@ -19,17 +20,19 @@ export const Posts = (props: PropsType) => {
 		// 	props.addPost(postText)
 		// }
 		// alert(postText)
-		props.dispatch({ type: 'ADD_POST' })
+		// props.dispatch({ type: 'ADD_POST' })
+		props.dispatch(addPostAC())
 		// props.addPost()
 	}
 
 	const onChangeHandler = () => {
 		const postText = refElement.current?.value
-		const action = { type: 'CHANGE_POST_TEXT', value: postText }
-		props.dispatch(action)
-		// if (postText) {
-		// 	props.onChangeTextPost(postText)
-		// }
+		if (postText) {
+			// 	props.onChangeTextPost(postText)
+			// const action = { type: 'CHANGE_POST_TEXT', value: postText } as const
+			// props.dispatch(action)
+			props.dispatch(changePostTextAC(postText))
+		}
 		console.log(postText)
 	}
 

@@ -80,12 +80,12 @@ export const store: AppStoreType = {
 		this._state.profilePage.newPostText = value
 		this._rerenderEntireThree()
 	},
-	dispatch(action: any) {
+	dispatch(action: ActionsType) {
 		switch (action.type) {
-			case 'ADD_POST': {
+			case ADD_POST: {
 				return this._addPost()
 			}
-			case 'CHANGE_POST_TEXT': {
+			case CHANGE_POST_TEXT: {
 				return this._onChangeTextPost(action.value)
 			}
 		}
@@ -123,5 +123,30 @@ export type AppStoreType = {
 	_subscribe: (observer: () => void) => void
 	_addPost: () => void
 	_onChangeTextPost: (value: string) => void
-	dispatch: (action: any) => void
+	dispatch: (action: ActionsType) => void
+}
+
+const ADD_POST = 'ADD_POST'
+const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
+
+export type ActionsType = AddPostType | ChangePostTextType
+
+type AddPostType = {
+	type: 'ADD_POST'
+}
+type ChangePostTextType = {
+	type: 'CHANGE_POST_TEXT'
+	value: string
+}
+
+export const addPostAC = (): AddPostType => {
+	return {
+		type: ADD_POST,
+	}
+}
+export const changePostTextAC = (value: string): ChangePostTextType => {
+	return {
+		type: CHANGE_POST_TEXT,
+		value,
+	}
 }
