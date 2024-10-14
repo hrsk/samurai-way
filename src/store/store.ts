@@ -65,19 +65,30 @@ export const store: AppStoreType = {
 	_getState() {
 		return this._state
 	},
-	addPost() {
+	_addPost() {
 		const newPost = {
 			id: 4,
 			userName: 'Dassler',
 			postText: this._state.profilePage.newPostText,
 		}
 		this._state.profilePage.posts.push(newPost)
-		this.onChangeTextPost('')
+		this._onChangeTextPost('')
 		this._rerenderEntireThree()
 	},
-	onChangeTextPost(value: string) {
+	_onChangeTextPost(value: string) {
+		console.log(value)
 		this._state.profilePage.newPostText = value
 		this._rerenderEntireThree()
+	},
+	dispatch(action: any) {
+		switch (action.type) {
+			case 'ADD_POST': {
+				return this._addPost()
+			}
+			case 'CHANGE_POST_TEXT': {
+				return this._onChangeTextPost(action.value)
+			}
+		}
 	},
 }
 
@@ -110,6 +121,7 @@ export type AppStoreType = {
 	_getState: () => StateType
 	_rerenderEntireThree: () => void
 	_subscribe: (observer: () => void) => void
-	addPost: () => void
-	onChangeTextPost: (value: string) => void
+	_addPost: () => void
+	_onChangeTextPost: (value: string) => void
+	dispatch: (action: any) => void
 }

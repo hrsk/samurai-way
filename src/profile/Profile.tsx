@@ -3,9 +3,10 @@ import { Posts } from './posts/Posts'
 
 type PropsType = {
 	posts: PostType[]
-	addPost: () => void
-	onChangeTextPost: (value: string) => void
+	// addPost: () => void
+	// onChangeTextPost: (value: string) => void
 	newPostText: string
+	dispatch: (action: any) => void
 }
 
 export const Profile = (props: PropsType) => {
@@ -23,9 +24,10 @@ export const Profile = (props: PropsType) => {
 			</div>
 			<Posts
 				posts={props.posts}
-				addPost={props.addPost}
+				// addPost={props.addPost}
+				dispatch={props.dispatch}
 				newPostText={props.newPostText}
-				onChangeTextPost={props.onChangeTextPost}
+				// onChangeTextPost={props.onChangeTextPost}
 			/>
 		</div>
 	)

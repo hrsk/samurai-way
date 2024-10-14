@@ -4,9 +4,10 @@ import { Post } from './post/Post'
 
 type PropsType = {
 	posts: PostType[]
-	addPost: () => void
+	// addPost: () => void
 	newPostText: string
-	onChangeTextPost: (value: string) => void
+	dispatch: (action: any) => void
+	// onChangeTextPost: (value: string) => void
 }
 
 export const Posts = (props: PropsType) => {
@@ -18,14 +19,17 @@ export const Posts = (props: PropsType) => {
 		// 	props.addPost(postText)
 		// }
 		// alert(postText)
-		props.addPost()
+		props.dispatch({ type: 'ADD_POST' })
+		// props.addPost()
 	}
 
 	const onChangeHandler = () => {
 		const postText = refElement.current?.value
-		if (postText) {
-			props.onChangeTextPost(postText)
-		}
+		const action = { type: 'CHANGE_POST_TEXT', value: postText }
+		props.dispatch(action)
+		// if (postText) {
+		// 	props.onChangeTextPost(postText)
+		// }
 		console.log(postText)
 	}
 
