@@ -3,10 +3,10 @@ import { Content } from './content/Content'
 import { Footer } from './footer/Footer'
 import { Header } from './header/Header'
 import { Navbar } from './navbar/Navbar'
-import { CustomStateType } from './state/state'
+import { StateType } from './store/store'
 
 type PropsType = {
-	state: CustomStateType
+	state: StateType
 	addPost: () => void
 	onChangeTextPost: (value: string) => void
 	// dialogs: DialogType[]
