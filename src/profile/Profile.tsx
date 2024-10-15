@@ -1,5 +1,5 @@
 import { PostType } from '../state/state'
-import { Posts } from './posts/Posts'
+import { PostsContainer } from './posts/PostsContainer'
 
 type PropsType = {
 	posts: PostType[]
@@ -22,7 +22,7 @@ export const Profile = (props: PropsType) => {
 				<div>education</div>
 				<div>website</div>
 			</div>
-			<Posts
+			<PostsContainer
 				posts={props.posts}
 				// addPost={props.addPost}
 				dispatch={props.dispatch}

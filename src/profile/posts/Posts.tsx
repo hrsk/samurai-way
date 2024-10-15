@@ -1,18 +1,15 @@
 import React from 'react'
 import { PostType } from '../../state/state'
 // import { ActionsType, addPostAC, changePostTextAC } from '../../store/store'
-import {
-	ActionsType,
-	addPostAC,
-	changePostTextAC,
-} from '../../redux/profile-reducer'
 import { Post } from './post/Post'
 
 type PropsType = {
 	posts: PostType[]
 	// addPost: () => void
 	newPostText: string
-	dispatch: (action: ActionsType) => void
+	addPost: () => void
+	changePostText: (value: string) => void
+	// dispatch: (action: ActionsType) => void
 	// onChangeTextPost: (value: string) => void
 }
 
@@ -26,7 +23,8 @@ export const Posts = (props: PropsType) => {
 		// }
 		// alert(postText)
 		// props.dispatch({ type: 'ADD_POST' })
-		props.dispatch(addPostAC())
+		// props.dispatch(addPostAC())
+		props.addPost()
 		// props.addPost()
 	}
 
@@ -36,9 +34,10 @@ export const Posts = (props: PropsType) => {
 			// 	props.onChangeTextPost(postText)
 			// const action = { type: 'CHANGE_POST_TEXT', value: postText } as const
 			// props.dispatch(action)
-			props.dispatch(changePostTextAC(postText))
+			props.changePostText(postText)
+			// props.dispatch(changePostTextAC(postText))
 		}
-		console.log(postText)
+		// console.log(postText)
 	}
 
 	return (
