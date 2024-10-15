@@ -1,16 +1,11 @@
 import { Route } from 'react-router-dom'
 import { Profile } from '../profile/Profile'
+import { ActionsType } from '../redux/profile-reducer'
 import { ProfilePageType } from '../state/state'
 
 type PropsType = {
-	// messagesPageData: MessagesPageType
-	profilePageData: ProfilePageType
-	// addPost: () => void
-	// onChangeTextPost: (value: string) => void
-	dispatch: (action: any) => void
-
-	// dialogs: DialogType[]
-	// posts: PostType[]
+	// profilePageData: ProfilePageType
+	// dispatch: (action: ActionsType) => void
 }
 
 export const Content = (props: PropsType) => {
@@ -21,14 +16,11 @@ export const Content = (props: PropsType) => {
 				path={'/profile'}
 				render={() => (
 					<Profile
-						posts={props.profilePageData.posts}
-						// addPost={props.addPost}
-						// onChangeTextPost={props.onChangeTextPost}
-						dispatch={props.dispatch}
-						newPostText={props.profilePageData.newPostText}
+					// posts={props.profilePageData.posts}
+					// dispatch={props.dispatch}
+					// newPostText={props.profilePageData.newPostText}
 					/>
 				)}
-				// component={Profile}
 			/>
 			{/* <Route
 				exact
@@ -36,8 +28,6 @@ export const Content = (props: PropsType) => {
 				render={() => <Messages dialogs={props.messagesPageData.dialogs} />}
 				// component={Messages}
 			/> */}
-			{/* <Profile /> */}
-			{/* <Messages /> */}
 		</div>
 	)
 }

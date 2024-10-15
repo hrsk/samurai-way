@@ -3,16 +3,12 @@ import { Content } from './content/Content'
 import { Footer } from './footer/Footer'
 import { Header } from './header/Header'
 import { Navbar } from './navbar/Navbar'
+import { ActionsType } from './redux/profile-reducer'
 import { RootStateType } from './store/redux-store'
 
 type PropsType = {
-	// state: StateType
-	state: RootStateType
-	// addPost: () => void
-	// onChangeTextPost: (value: string) => void
-	dispatch: (action: any) => void
-	// dialogs: DialogType[]
-	// posts: PostType[]
+	// state: RootStateType
+	// dispatch: (action: ActionsType) => void
 }
 
 export const App = (props: PropsType) => {
@@ -21,11 +17,8 @@ export const App = (props: PropsType) => {
 			<Header />
 			<Navbar />
 			<Content
-				// messagesPageData={props.state.messagesPage}
-				profilePageData={props.state.profilePage}
-				dispatch={props.dispatch}
-				// addPost={props.addPost}
-				// onChangeTextPost={props.onChangeTextPost}
+			// profilePageData={props.profilePage}
+			// dispatch={props.dispatch}
 			/>
 			<Footer />
 		</div>

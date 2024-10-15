@@ -1,5 +1,3 @@
-// import { rerenderEntireThree } from '..'
-
 export type DialogType = {
 	id: number
 	userName: string

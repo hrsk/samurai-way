@@ -1,12 +1,10 @@
-import { PostType } from '../state/state'
+import { MyContext } from '..'
 import { PostsContainer } from './posts/PostsContainer'
 
 type PropsType = {
-	posts: PostType[]
-	// addPost: () => void
-	// onChangeTextPost: (value: string) => void
-	newPostText: string
-	dispatch: (action: any) => void
+	// posts: PostType[]
+	// newPostText: string
+	// dispatch: (action: any) => void
 }
 
 export const Profile = (props: PropsType) => {
@@ -22,13 +20,15 @@ export const Profile = (props: PropsType) => {
 				<div>education</div>
 				<div>website</div>
 			</div>
-			<PostsContainer
-				posts={props.posts}
-				// addPost={props.addPost}
-				dispatch={props.dispatch}
-				newPostText={props.newPostText}
-				// onChangeTextPost={props.onChangeTextPost}
-			/>
+			<MyContext.Consumer>
+				{value => (
+					<PostsContainer
+						posts={value.getState().profilePage.posts}
+						dispatch={value.dispatch}
+						newPostText={value.getState().profilePage.newPostText}
+					/>
+				)}
+			</MyContext.Consumer>
 		</div>
 	)
 }
