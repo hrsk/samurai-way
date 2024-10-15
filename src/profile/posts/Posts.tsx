@@ -1,6 +1,11 @@
 import React from 'react'
 import { PostType } from '../../state/state'
-import { ActionsType, addPostAC, changePostTextAC } from '../../store/store'
+// import { ActionsType, addPostAC, changePostTextAC } from '../../store/store'
+import {
+	ActionsType,
+	addPostAC,
+	changePostTextAC,
+} from '../../redux/profile-reducer'
 import { Post } from './post/Post'
 
 type PropsType = {

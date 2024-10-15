@@ -1,3 +1,5 @@
+import { profileReducer } from '../redux/profile-reducer'
+
 export const store: AppStoreType = {
 	_state: {
 		profilePage: {
@@ -81,14 +83,18 @@ export const store: AppStoreType = {
 		this._rerenderEntireThree()
 	},
 	dispatch(action: ActionsType) {
-		switch (action.type) {
-			case ADD_POST: {
-				return this._addPost()
-			}
-			case CHANGE_POST_TEXT: {
-				return this._onChangeTextPost(action.value)
-			}
-		}
+		this._state.profilePage = profileReducer(this._state.profilePage, action)
+
+		this._rerenderEntireThree()
+
+		// switch (action.type) {
+		// 	case ADD_POST: {
+		// 		return this._addPost()
+		// 	}
+		// 	case CHANGE_POST_TEXT: {
+		// 		return this._onChangeTextPost(action.value)
+		// 	}
+		// }
 	},
 }
 
@@ -116,8 +122,9 @@ export type StateType = {
 	messagesPage: MessagesPageType
 	profilePage: ProfilePageType
 }
+
 export type AppStoreType = {
-	_state: StateType
+	_state: any
 	_getState: () => StateType
 	_rerenderEntireThree: () => void
 	_subscribe: (observer: () => void) => void
