@@ -1,10 +1,9 @@
 import { Route } from 'react-router-dom'
-import { Messages } from '../messages/Messages'
 import { Profile } from '../profile/Profile'
-import { MessagesPageType, ProfilePageType } from '../state/state'
+import { ProfilePageType } from '../state/state'
 
 type PropsType = {
-	messagesPageData: MessagesPageType
+	// messagesPageData: MessagesPageType
 	profilePageData: ProfilePageType
 	// addPost: () => void
 	// onChangeTextPost: (value: string) => void
@@ -31,12 +30,12 @@ export const Content = (props: PropsType) => {
 				)}
 				// component={Profile}
 			/>
-			<Route
+			{/* <Route
 				exact
 				path={'/messages'}
 				render={() => <Messages dialogs={props.messagesPageData.dialogs} />}
 				// component={Messages}
-			/>
+			/> */}
 			{/* <Profile /> */}
 			{/* <Messages /> */}
 		</div>

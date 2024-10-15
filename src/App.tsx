@@ -3,13 +3,14 @@ import { Content } from './content/Content'
 import { Footer } from './footer/Footer'
 import { Header } from './header/Header'
 import { Navbar } from './navbar/Navbar'
-import { ActionsType, StateType } from './store/store'
+import { RootStateType } from './store/redux-store'
 
 type PropsType = {
-	state: StateType
+	// state: StateType
+	state: RootStateType
 	// addPost: () => void
 	// onChangeTextPost: (value: string) => void
-	dispatch: (action: ActionsType) => void
+	dispatch: (action: any) => void
 	// dialogs: DialogType[]
 	// posts: PostType[]
 }
@@ -20,7 +21,7 @@ export const App = (props: PropsType) => {
 			<Header />
 			<Navbar />
 			<Content
-				messagesPageData={props.state.messagesPage}
+				// messagesPageData={props.state.messagesPage}
 				profilePageData={props.state.profilePage}
 				dispatch={props.dispatch}
 				// addPost={props.addPost}
