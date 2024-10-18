@@ -1,5 +1,7 @@
-import { MyContext } from '..'
-import { PostsContainer } from './posts/PostsContainer'
+// import { MyContext } from '..'
+// import { PostsContainer } from './posts/PostsContainer'
+
+import { PostsContainer } from './posts/PostsContainerComponent'
 
 type PropsType = {
 	// posts: PostType[]
@@ -20,15 +22,16 @@ export const Profile = (props: PropsType) => {
 				<div>education</div>
 				<div>website</div>
 			</div>
-			<MyContext.Consumer>
-				{value => (
-					<PostsContainer
-						posts={value.getState().profilePage.posts}
-						dispatch={value.dispatch}
-						newPostText={value.getState().profilePage.newPostText}
-					/>
-				)}
-			</MyContext.Consumer>
+			{/* <MyContext.Consumer> */}
+			{/* {value => ( */}
+			<PostsContainer />
+			{/* <PostsContainer
+				posts={value.getState().profilePage.posts}
+				dispatch={value.dispatch}
+				newPostText={value.getState().profilePage.newPostText}
+			/> */}
+			{/* )} */}
+			{/* </MyContext.Consumer> */}
 		</div>
 	)
 }

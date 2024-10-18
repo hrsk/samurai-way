@@ -48,14 +48,23 @@ export const profileReducer = (
 				userName: 'Dassler',
 				postText: state.newPostText,
 			}
-			state.posts.push(newPost)
-			state.newPostText = ''
-			return state
+			return {
+				...state,
+				posts: [...state.posts, newPost],
+			}
+			// state.posts.push(newPost)
+			// state.newPostText = ''
+			// return state
 		}
-		case CHANGE_POST_TEXT: {
-			state.newPostText = action.value
-			return state
-		}
+		case CHANGE_POST_TEXT:
+			return {
+				...state,
+				newPostText: action.value,
+			}
+		// {
+		// 	state.newPostText = action.value
+		// 	return state
+		// }
 		default:
 			return state
 	}
