@@ -1,4 +1,4 @@
-import { profileReducer } from '../redux/profile-reducer'
+import { profileReducer } from '../reducers/profile-reducer'
 
 export const store: AppStoreType = {
 	_state: {

@@ -1,7 +1,7 @@
 // import { MyContext } from '..'
 // import { PostsContainer } from './posts/PostsContainer'
 
-import { PostsContainer } from './posts/PostsContainerComponent'
+import { PostsContainer } from './posts/PostsContainer'
 
 type PropsType = {
 	// posts: PostType[]

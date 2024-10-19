@@ -5,8 +5,8 @@ import {
 	DialogType,
 	MessageType,
 	sendMessageAC,
-} from '../redux/dialogs-reducer'
-import { AppStateType } from '../store/redux-store'
+} from '../reducers/dialogs-reducer'
+import { AppStateType } from '../redux/redux-store'
 import { Messages } from './Messages'
 
 type MapStateToPropsType = {

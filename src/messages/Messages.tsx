@@ -4,10 +4,6 @@ import { Message } from './dialogs/message/Message'
 import styles from './Messages.module.css'
 import { MessagesPropsType } from './MessagesContainer'
 
-// type PropsType = {
-// 	dialogs: DialogType[]
-// }
-
 export const Messages = (props: MessagesPropsType) => {
 	const refElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
 
@@ -29,22 +25,12 @@ export const Messages = (props: MessagesPropsType) => {
 				{props.dialogs.map(dialog => (
 					<DialogueWithUser key={dialog.id} userName={dialog.userName} />
 				))}
-				{/* <DialogueWithUser />
-				<DialogueWithUser />
-				<DialogueWithUser />
-				<DialogueWithUser />
-				<DialogueWithUser /> */}
 			</ul>
 			<div>
 				<ul>
 					{props.messages.map(message => (
 						<Message key={message.id} messageText={message.messageText} />
 					))}
-					{/* <Message />
-					<Message />
-					<Message />
-					<Message />
-					<Message /> */}
 				</ul>
 				<div>
 					<textarea

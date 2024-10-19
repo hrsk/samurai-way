@@ -1,13 +1,6 @@
 import React from 'react'
 import { Post } from './post/Post'
-import { PostsPropsType } from './PostsContainerComponent'
-
-// type PropsType = {
-// 	posts: PostType[]
-// 	newPostText: string
-// 	addPost: () => void
-// 	changePostText: (value: string) => void
-// }
+import { PostsPropsType } from './PostsContainer'
 
 export const Posts = (props: PostsPropsType) => {
 	const refElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
