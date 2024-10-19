@@ -1,7 +1,6 @@
 import { Route } from 'react-router-dom'
+import { MessagesContainer } from '../messages/MessagesContainer'
 import { Profile } from '../profile/Profile'
-import { ActionsType } from '../redux/profile-reducer'
-import { ProfilePageType } from '../state/state'
 
 type PropsType = {
 	// profilePageData: ProfilePageType
@@ -22,12 +21,15 @@ export const Content = (props: PropsType) => {
 					/>
 				)}
 			/>
-			{/* <Route
+			<Route
 				exact
 				path={'/messages'}
-				render={() => <Messages dialogs={props.messagesPageData.dialogs} />}
+				render={
+					() => <MessagesContainer />
+					// <Messages dialogs={props.messagesPageData.dialogs} />
+				}
 				// component={Messages}
-			/> */}
+			/>
 		</div>
 	)
 }
