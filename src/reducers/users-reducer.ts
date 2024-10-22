@@ -2,7 +2,7 @@ type InitialStateType = {
 	users: UserType[]
 }
 
-type UserType = {
+export type UserType = {
 	id: number
 	fullName: {
 		firstName: string
@@ -32,7 +32,7 @@ const initialState: InitialStateType = {
 			},
 		},
 		{
-			id: 1,
+			id: 2,
 			fullName: {
 				firstName: 'Dimych',
 				lastName: 'Dimych',
@@ -45,12 +45,12 @@ const initialState: InitialStateType = {
 			},
 		},
 		{
-			id: 1,
+			id: 3,
 			fullName: {
 				firstName: 'Daniel',
 				lastName: 'Daniel',
 			},
-			isFollow: true,
+			isFollow: false,
 			status: 'yo',
 			location: {
 				country: 'Belarus',
@@ -66,9 +66,19 @@ export const usersReducer = (
 ): InitialStateType => {
 	switch (action.type) {
 		case FOLLOW:
-			return state
+			return {
+				...state,
+				users: state.users.map(user =>
+					user.id === action.userId ? { ...user, isFollow: true } : user
+				),
+			}
 		case UNFOLLOW:
-			return state
+			return {
+				...state,
+				users: state.users.map(user =>
+					user.id === action.userId ? { ...user, isFollow: false } : user
+				),
+			}
 		case SHOW_MORE:
 			return state
 		default:
@@ -82,12 +92,12 @@ const SHOW_MORE = 'SHOW_MORE'
 
 type FollowActionType = {
 	type: 'FOLLOW'
-	isFollow: boolean
+	userId: number
 }
 
 type UnfollowActionType = {
 	type: 'UNFOLLOW'
-	isFollow: boolean
+	userId: number
 }
 
 type ShowMoreActionType = {
@@ -97,17 +107,17 @@ type ShowMoreActionType = {
 
 type ActionsType = FollowActionType | UnfollowActionType | ShowMoreActionType
 
-export const follow = (isFollow: boolean): FollowActionType => {
+export const follow = (userId: number): FollowActionType => {
 	return {
 		type: FOLLOW,
-		isFollow,
+		userId,
 	}
 }
 
-export const unfollow = (isFollow: boolean): UnfollowActionType => {
+export const unfollow = (userId: number): UnfollowActionType => {
 	return {
 		type: UNFOLLOW,
-		isFollow,
+		userId,
 	}
 }
 export const showMore = (users: UserType[]): ShowMoreActionType => {
