@@ -1,111 +1,118 @@
-import { UserType } from '../reducers/users-reducer'
+import axios from 'axios'
+import { GetResponseType, ResponseUserType } from '../reducers/users-reducer'
 import { UsersPropsType } from './UsersContainer'
 
 export const Users = (props: UsersPropsType) => {
-	const usersFromServer = [
-		{
-			id: 1,
-			fullName: {
-				firstName: 'Yegor',
-				lastName: 'Gursky',
-			},
-			isFollow: true,
-			status: 'yo',
-			location: {
-				country: 'Belarus',
-				city: 'Svetlogorsk',
-			},
-		},
-		{
-			id: 2,
-			fullName: {
-				firstName: 'Dimych',
-				lastName: 'Dimych',
-			},
-			isFollow: true,
-			status: 'yo',
-			location: {
-				country: 'Belarus',
-				city: 'Svetlogorsk',
-			},
-		},
-		{
-			id: 3,
-			fullName: {
-				firstName: 'Daniel',
-				lastName: 'Daniel',
-			},
-			isFollow: false,
-			status: 'yo',
-			location: {
-				country: 'Belarus',
-				city: 'Svetlogorsk',
-			},
-		},
-		{
-			id: 4,
-			fullName: {
-				firstName: 'Daniel',
-				lastName: 'Daniel',
-			},
-			isFollow: false,
-			status: 'yo',
-			location: {
-				country: 'Belarus',
-				city: 'Svetlogorsk',
-			},
-		},
-		{
-			id: 5,
-			fullName: {
-				firstName: 'Daniel',
-				lastName: 'Daniel',
-			},
-			isFollow: false,
-			status: 'yo',
-			location: {
-				country: 'Belarus',
-				city: 'Svetlogorsk',
-			},
-		},
-		{
-			id: 6,
-			fullName: {
-				firstName: 'Daniel',
-				lastName: 'Daniel',
-			},
-			isFollow: false,
-			status: 'yo',
-			location: {
-				country: 'Belarus',
-				city: 'Svetlogorsk',
-			},
-		},
-	]
+	// const usersFromServer = [
+	// 	{
+	// 		id: 1,
+	// 		fullName: {
+	// 			firstName: 'Yegor',
+	// 			lastName: 'Gursky',
+	// 		},
+	// 		isFollow: true,
+	// 		status: 'yo',
+	// 		location: {
+	// 			country: 'Belarus',
+	// 			city: 'Svetlogorsk',
+	// 		},
+	// 	},
+	// 	{
+	// 		id: 2,
+	// 		fullName: {
+	// 			firstName: 'Dimych',
+	// 			lastName: 'Dimych',
+	// 		},
+	// 		isFollow: true,
+	// 		status: 'yo',
+	// 		location: {
+	// 			country: 'Belarus',
+	// 			city: 'Svetlogorsk',
+	// 		},
+	// 	},
+	// 	{
+	// 		id: 3,
+	// 		fullName: {
+	// 			firstName: 'Daniel',
+	// 			lastName: 'Daniel',
+	// 		},
+	// 		isFollow: false,
+	// 		status: 'yo',
+	// 		location: {
+	// 			country: 'Belarus',
+	// 			city: 'Svetlogorsk',
+	// 		},
+	// 	},
+	// 	{
+	// 		id: 4,
+	// 		fullName: {
+	// 			firstName: 'Daniel',
+	// 			lastName: 'Daniel',
+	// 		},
+	// 		isFollow: false,
+	// 		status: 'yo',
+	// 		location: {
+	// 			country: 'Belarus',
+	// 			city: 'Svetlogorsk',
+	// 		},
+	// 	},
+	// 	{
+	// 		id: 5,
+	// 		fullName: {
+	// 			firstName: 'Daniel',
+	// 			lastName: 'Daniel',
+	// 		},
+	// 		isFollow: false,
+	// 		status: 'yo',
+	// 		location: {
+	// 			country: 'Belarus',
+	// 			city: 'Svetlogorsk',
+	// 		},
+	// 	},
+	// 	{
+	// 		id: 6,
+	// 		fullName: {
+	// 			firstName: 'Daniel',
+	// 			lastName: 'Daniel',
+	// 		},
+	// 		isFollow: false,
+	// 		status: 'yo',
+	// 		location: {
+	// 			country: 'Belarus',
+	// 			city: 'Svetlogorsk',
+	// 		},
+	// 	},
+	// ]
 
 	const setUsers = () => {
-		props.setUsers(usersFromServer.slice(3))
+		axios
+			.get<GetResponseType>(
+				`https://social-network.samuraijs.com/api/1.0/users`
+			)
+			.then(response => {
+				props.setUsers(response.data.items)
+			})
 	}
 	const showMore = () => {
-		props.showMore(usersFromServer)
+		props.showMore(props.users)
 	}
 
 	return (
 		<div>
 			<button onClick={setUsers}>set users</button>
 			<ul>
-				{props.users.map((user: UserType) => (
+				{props.users.map((user: ResponseUserType) => (
 					<li key={user.id}>
 						<div>
-							firstName: <p>{user.fullName.firstName}</p>
-							lastName: <p>{user.fullName.lastName}</p>
+							userName: <p>{user.name}</p>
+							status: <p>{user.status}</p>
 						</div>
-						<div>
+						{/* <div>
 							country: <p>{user.location.country}</p>
 							city: <p>{user.location.city}</p>
-						</div>
+						</div> */}
 						<div>
-							{user.isFollow ? (
+							{user.followed ? (
 								<button
 									onClick={() => {
 										props.unfollow(user.id)

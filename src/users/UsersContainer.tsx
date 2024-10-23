@@ -2,10 +2,10 @@ import { connect, ConnectedProps } from 'react-redux'
 import { Dispatch } from 'redux'
 import {
 	follow,
+	ResponseUserType,
 	setUsers,
 	showMore,
 	unfollow,
-	UserType,
 } from '../reducers/users-reducer'
 import { AppStateType } from '../redux/redux-store'
 import { Users } from './Users'
@@ -23,10 +23,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 		unfollow: (userId: number) => {
 			dispatch(unfollow(userId))
 		},
-		showMore: (users: UserType[]) => {
+		showMore: (users: ResponseUserType[]) => {
 			dispatch(showMore(users))
 		},
-		setUsers: (users: UserType[]) => {
+		setUsers: (users: ResponseUserType[]) => {
 			dispatch(setUsers(users))
 		},
 	}
