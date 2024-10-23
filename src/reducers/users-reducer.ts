@@ -40,7 +40,7 @@ export const usersReducer = (
 				),
 			}
 		case SHOW_MORE:
-			return state
+			return { ...state, users: action.users }
 		case SET_USERS:
 			return { ...state, users: action.users }
 		default:

@@ -42,10 +42,52 @@ export const Users = (props: UsersPropsType) => {
 				city: 'Svetlogorsk',
 			},
 		},
+		{
+			id: 4,
+			fullName: {
+				firstName: 'Daniel',
+				lastName: 'Daniel',
+			},
+			isFollow: false,
+			status: 'yo',
+			location: {
+				country: 'Belarus',
+				city: 'Svetlogorsk',
+			},
+		},
+		{
+			id: 5,
+			fullName: {
+				firstName: 'Daniel',
+				lastName: 'Daniel',
+			},
+			isFollow: false,
+			status: 'yo',
+			location: {
+				country: 'Belarus',
+				city: 'Svetlogorsk',
+			},
+		},
+		{
+			id: 6,
+			fullName: {
+				firstName: 'Daniel',
+				lastName: 'Daniel',
+			},
+			isFollow: false,
+			status: 'yo',
+			location: {
+				country: 'Belarus',
+				city: 'Svetlogorsk',
+			},
+		},
 	]
 
 	const setUsers = () => {
-		props.setUsers(usersFromServer)
+		props.setUsers(usersFromServer.slice(3))
+	}
+	const showMore = () => {
+		props.showMore(usersFromServer)
 	}
 
 	return (
@@ -78,6 +120,7 @@ export const Users = (props: UsersPropsType) => {
 					</li>
 				))}
 			</ul>
+			<button onClick={showMore}>show more</button>
 		</div>
 	)
 }
