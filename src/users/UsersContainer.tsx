@@ -1,6 +1,12 @@
 import { connect, ConnectedProps } from 'react-redux'
 import { Dispatch } from 'redux'
-import { follow, showMore, unfollow, UserType } from '../reducers/users-reducer'
+import {
+	follow,
+	setUsers,
+	showMore,
+	unfollow,
+	UserType,
+} from '../reducers/users-reducer'
 import { AppStateType } from '../redux/redux-store'
 import { Users } from './Users'
 
@@ -19,6 +25,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 		},
 		showMore: (users: UserType[]) => {
 			dispatch(showMore(users))
+		},
+		setUsers: (users: UserType[]) => {
+			dispatch(setUsers(users))
 		},
 	}
 }

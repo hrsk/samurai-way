@@ -17,47 +17,7 @@ export type UserType = {
 }
 
 const initialState: InitialStateType = {
-	users: [
-		{
-			id: 1,
-			fullName: {
-				firstName: 'Yegor',
-				lastName: 'Gursky',
-			},
-			isFollow: true,
-			status: 'yo',
-			location: {
-				country: 'Belarus',
-				city: 'Svetlogorsk',
-			},
-		},
-		{
-			id: 2,
-			fullName: {
-				firstName: 'Dimych',
-				lastName: 'Dimych',
-			},
-			isFollow: true,
-			status: 'yo',
-			location: {
-				country: 'Belarus',
-				city: 'Svetlogorsk',
-			},
-		},
-		{
-			id: 3,
-			fullName: {
-				firstName: 'Daniel',
-				lastName: 'Daniel',
-			},
-			isFollow: false,
-			status: 'yo',
-			location: {
-				country: 'Belarus',
-				city: 'Svetlogorsk',
-			},
-		},
-	],
+	users: [],
 }
 
 export const usersReducer = (
@@ -81,6 +41,8 @@ export const usersReducer = (
 			}
 		case SHOW_MORE:
 			return state
+		case SET_USERS:
+			return { ...state, users: action.users }
 		default:
 			return state
 	}
@@ -89,6 +51,7 @@ export const usersReducer = (
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SHOW_MORE = 'SHOW_MORE'
+const SET_USERS = 'SET_USERS'
 
 type FollowActionType = {
 	type: 'FOLLOW'
@@ -105,7 +68,16 @@ type ShowMoreActionType = {
 	users: UserType[]
 }
 
-type ActionsType = FollowActionType | UnfollowActionType | ShowMoreActionType
+type SetUsersActionType = {
+	type: 'SET_USERS'
+	users: UserType[]
+}
+
+type ActionsType =
+	| FollowActionType
+	| UnfollowActionType
+	| ShowMoreActionType
+	| SetUsersActionType
 
 export const follow = (userId: number): FollowActionType => {
 	return {
@@ -123,6 +95,12 @@ export const unfollow = (userId: number): UnfollowActionType => {
 export const showMore = (users: UserType[]): ShowMoreActionType => {
 	return {
 		type: SHOW_MORE,
+		users,
+	}
+}
+export const setUsers = (users: UserType[]): SetUsersActionType => {
+	return {
+		type: SET_USERS,
 		users,
 	}
 }
