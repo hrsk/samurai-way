@@ -45,14 +45,14 @@ export const usersReducer = (
 			return {
 				...state,
 				users: state.users.map(user =>
-					user.id === action.userId ? { ...user, isFollow: true } : user
+					user.id === action.userId ? { ...user, followed: true } : user
 				),
 			}
 		case UNFOLLOW:
 			return {
 				...state,
 				users: state.users.map(user =>
-					user.id === action.userId ? { ...user, isFollow: false } : user
+					user.id === action.userId ? { ...user, followed: false } : user
 				),
 			}
 		case SHOW_MORE:
