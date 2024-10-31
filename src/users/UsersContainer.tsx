@@ -2,7 +2,7 @@ import {connect, ConnectedProps} from 'react-redux'
 import {Dispatch} from 'redux'
 import {
     follow,
-    ResponseUserType,
+    ResponseUserType, selectPage,
     setUsers,
     showMore,
     unfollow,
@@ -13,6 +13,9 @@ import {UsersClassComponent} from "./UsersClassComponent";
 const mapStateToProps = (state: AppStateType) => {
     return {
         users: state.findUsersPage.users,
+        totalCount: state.findUsersPage.totalCount,
+        error: state.findUsersPage.error,
+        currentPage: state.findUsersPage.currentPage,
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch) => {
@@ -26,8 +29,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         showMore: (users: ResponseUserType[]) => {
             dispatch(showMore(users))
         },
-        setUsers: (users: ResponseUserType[]) => {
-            dispatch(setUsers(users))
+        setUsers: (users: ResponseUserType[], totalCount: number) => {
+            dispatch(setUsers(users, totalCount))
+        },
+        selectPage: (pageNumber: number) => {
+            dispatch(selectPage(pageNumber))
         },
     }
 }

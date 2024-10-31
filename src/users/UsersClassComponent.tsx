@@ -4,6 +4,7 @@ import {GetResponseType, ResponseUserType} from "../reducers/users-reducer";
 import no_avatar from "../assets/images/avatars/no_avatar.png";
 import {UsersPropsType} from "./UsersContainer";
 import {AppStateType} from "../redux/redux-store";
+import {Pagination} from "../pagination/Pagination";
 
 export class UsersClassComponent extends React.PureComponent<UsersPropsType, AppStateType> {
 
@@ -13,7 +14,7 @@ export class UsersClassComponent extends React.PureComponent<UsersPropsType, App
                 `https://social-network.samuraijs.com/api/1.0/users`
             )
             .then(response => {
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(response.data.items, response.data.totalCount)
             })
     }
 
@@ -31,10 +32,16 @@ export class UsersClassComponent extends React.PureComponent<UsersPropsType, App
     showMore = () => {
         this.props.showMore(this.props.users)
     }
+    changePage = (pageNumber: number) => {
+        this.props.selectPage(pageNumber)
+    }
+
 
     render() {
         return (
             <div>
+                <Pagination usersCount={this.props.totalCount} currentPage={this.props.currentPage}
+                            changePage={this.changePage}/>
                 {/*<button onClick={this.setUsers}>set users</button>*/}
                 <ul>
                     {this.props.users.map((user: ResponseUserType) => (
