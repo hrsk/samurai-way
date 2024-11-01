@@ -3,6 +3,7 @@ type InitialStateType = {
     totalCount: number
     error: string | null
     currentPage: number
+    usersPerPage: number
 }
 
 export type GetResponseType = {
@@ -40,6 +41,7 @@ const initialState: InitialStateType = {
     totalCount: 0,
     error: null,
     currentPage: 1,
+    usersPerPage: 10,
 }
 
 export const usersReducer = (

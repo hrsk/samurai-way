@@ -16,6 +16,7 @@ const mapStateToProps = (state: AppStateType) => {
         totalCount: state.findUsersPage.totalCount,
         error: state.findUsersPage.error,
         currentPage: state.findUsersPage.currentPage,
+        usersPerPage: state.findUsersPage.usersPerPage,
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch) => {

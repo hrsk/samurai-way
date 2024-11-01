@@ -34,6 +34,13 @@ export class UsersClassComponent extends React.PureComponent<UsersPropsType, App
     }
     changePage = (pageNumber: number) => {
         this.props.selectPage(pageNumber)
+        axios
+            .get<GetResponseType>(
+                `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.usersPerPage}`
+            )
+            .then(response => {
+                this.props.setUsers(response.data.items, response.data.totalCount)
+            })
     }
 
 
