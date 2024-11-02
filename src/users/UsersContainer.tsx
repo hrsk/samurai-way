@@ -4,7 +4,7 @@ import {
     follow,
     ResponseUserType, selectPage,
     setUsers,
-    showMore,
+    showMore, showPreloader,
     unfollow,
 } from '../reducers/users-reducer'
 import {AppStateType} from '../redux/redux-store'
@@ -17,6 +17,7 @@ const mapStateToProps = (state: AppStateType) => {
         error: state.findUsersPage.error,
         currentPage: state.findUsersPage.currentPage,
         usersPerPage: state.findUsersPage.usersPerPage,
+        isLoading: state.findUsersPage.isLoading,
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch) => {
@@ -35,6 +36,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         },
         selectPage: (pageNumber: number) => {
             dispatch(selectPage(pageNumber))
+        },
+        showPreloader: (preloader: boolean) => {
+            dispatch(showPreloader(preloader))
         },
     }
 }

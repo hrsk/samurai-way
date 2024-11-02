@@ -4,6 +4,7 @@ type InitialStateType = {
     error: string | null
     currentPage: number
     usersPerPage: number
+    isLoading: boolean
 }
 
 export type GetResponseType = {
@@ -42,6 +43,7 @@ const initialState: InitialStateType = {
     error: null,
     currentPage: 1,
     usersPerPage: 10,
+    isLoading: false,
 }
 
 export const usersReducer = (
@@ -64,13 +66,15 @@ export const usersReducer = (
                 ),
             }
         case SHOW_MORE:
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: [...action.users]}
         case SET_USERS:
             return {...state, users: action.users, totalCount: action.totalCount}
         case SELECT_PAGE:
             return {
                 ...state, currentPage: action.pageNumber
             }
+        case SHOW_PRELOADER:
+            return {...state, isLoading: action.preloader}
         default:
             return state
     }
@@ -81,6 +85,7 @@ const UNFOLLOW = 'UNFOLLOW'
 const SHOW_MORE = 'SHOW_MORE'
 const SET_USERS = 'SET_USERS'
 const SELECT_PAGE = 'SELECT_PAGE'
+const SHOW_PRELOADER = 'SHOW_PRELOADER'
 
 type FollowActionType = {
     type: 'FOLLOW'
@@ -106,6 +111,10 @@ type SelectPageActionType = {
     type: 'SELECT_PAGE'
     pageNumber: number
 }
+type ShowPreloaderActionType = {
+    type: 'SHOW_PRELOADER'
+    preloader: boolean
+}
 
 type ActionsType =
     | FollowActionType
@@ -113,6 +122,7 @@ type ActionsType =
     | ShowMoreActionType
     | SetUsersActionType
     | SelectPageActionType
+    | ShowPreloaderActionType
 
 export const follow = (userId: number): FollowActionType => {
     return {
@@ -144,5 +154,11 @@ export const selectPage = (pageNumber: number): SelectPageActionType => {
     return {
         type: SELECT_PAGE,
         pageNumber,
+    }
+}
+export const showPreloader = (preloader: boolean): ShowPreloaderActionType => {
+    return {
+        type: SHOW_PRELOADER,
+        preloader,
     }
 }

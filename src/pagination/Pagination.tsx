@@ -56,8 +56,9 @@ export const Pagination = (props: PropsType) => {
             <button onClick={prevPageHandler}>prevPage</button>
             {
                 pages.filter(page => page >= prevCountPageOutput && page <= nextCountPageOutput)
-                    .map((page: number) => <button style={props.currentPage === page ? {color: 'red'} : {}}
-                                                   onClick={() => selectPage(page)}>{page}</button>)
+                    .map((page: number, index) => <button key={index}
+                                                          style={props.currentPage === page ? {color: 'red'} : {}}
+                                                          onClick={() => selectPage(page)}>{page}</button>)
             }
             <button onClick={nextPageHandler}>nextPage</button>
             <button onClick={nextPortionPages}>{'>>'}</button>
