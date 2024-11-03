@@ -1,6 +1,7 @@
 import React from 'react';
 import {ResponseUserType} from "../reducers/users-reducer";
 import no_avatar from "../assets/images/avatars/no_avatar.png";
+import {NavLink} from "react-router-dom";
 
 type PropsType = {
     users: ResponseUserType[]
@@ -14,6 +15,7 @@ export const Users = (props: PropsType) => {
             {props.users.map((user: ResponseUserType) => (
                 <li key={user.id}>
                     <div>
+                        <NavLink to={`profile/${user.id}`}>
                         <img
                             src={
                                 user.photos.small !== null
@@ -24,6 +26,7 @@ export const Users = (props: PropsType) => {
                             }
                             alt='alt'
                         />
+                        </NavLink>
                         <p>userName: {user.name}</p>
                         <p>status: {user.status}</p>
                     </div>

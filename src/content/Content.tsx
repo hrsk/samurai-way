@@ -7,7 +7,7 @@ import {ProfileContainer} from "../profile/ProfileContainer";
 export const Content = () => {
 	return (
 		<div className={'content-wrapper'}>
-			<Route exact path={'/profile'} render={() => <ProfileContainer />} />
+			<Route exact path={'/profile/:userId?'} render={() => <ProfileContainer />} />
 			<Route exact path={'/messages'} render={() => <MessagesContainer />} />
 			<Route exact path={'/users'} render={() => <UsersContainer />} />
 		</div>
