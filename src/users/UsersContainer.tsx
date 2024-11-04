@@ -20,29 +20,29 @@ const mapStateToProps = (state: AppStateType) => {
         isLoading: state.findUsersPage.isLoading,
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        follow: (userId: number) => {
-            dispatch(follow(userId))
-        },
-        unfollow: (userId: number) => {
-            dispatch(unfollow(userId))
-        },
-        showMore: (users: ResponseUserType[]) => {
-            dispatch(showMore(users))
-        },
-        setUsers: (users: ResponseUserType[], totalCount: number) => {
-            dispatch(setUsers(users, totalCount))
-        },
-        selectPage: (pageNumber: number) => {
-            dispatch(selectPage(pageNumber))
-        },
-        showPreloader: (preloader: boolean) => {
-            dispatch(showPreloader(preloader))
-        },
-    }
-}
+// const mapDispatchToProps = (dispatch: Dispatch) => {
+//     return {
+//         follow: (userId: number) => {
+//             dispatch(follow(userId))
+//         },
+//         unfollow: (userId: number) => {
+//             dispatch(unfollow(userId))
+//         },
+//         showMore: (users: ResponseUserType[]) => {
+//             dispatch(showMore(users))
+//         },
+//         setUsers: (users: ResponseUserType[], totalCount: number) => {
+//             dispatch(setUsers(users, totalCount))
+//         },
+//         selectPage: (pageNumber: number) => {
+//             dispatch(selectPage(pageNumber))
+//         },
+//         showPreloader: (preloader: boolean) => {
+//             dispatch(showPreloader(preloader))
+//         },
+//     }
+// }
 
 export type UsersPropsType = ConnectedProps<typeof connector>
-const connector = connect(mapStateToProps, mapDispatchToProps)
+const connector = connect(mapStateToProps, {follow, unfollow, showMore, setUsers, selectPage, showPreloader})
 export const UsersContainer = connector(UsersClassComponent)
