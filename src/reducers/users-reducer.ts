@@ -1,3 +1,6 @@
+import {API} from "../api/API";
+import {AppDispatch} from "../redux/redux-store";
+
 type InitialStateType = {
     users: ResponseUserType[]
     totalCount: number
@@ -184,4 +187,12 @@ export const showDisabledButton = (userId: number, isDisabled: boolean): Disable
         userId,
         isDisabled,
     }
+}
+
+export const setUsersThunkCreator = (currentPage: number, usersPerPage: number) => (dispatch: AppDispatch) => {
+    dispatch(showPreloader(true))
+    return API.getUsers(currentPage, usersPerPage).then(data => {
+        dispatch(setUsers(data.items, data.totalCount))
+        dispatch(showPreloader(false))
+    })
 }

@@ -8,11 +8,12 @@ import {API} from "../api/API";
 
 export class UsersClassComponent extends React.PureComponent<UsersPropsType, AppStateType> {
     componentDidMount() {
-        this.props.showPreloader(true)
-        API.getUsers(this.props.currentPage, this.props.usersPerPage).then((data) => {
-            this.props.setUsers(data.items, data.totalCount)
-            this.props.showPreloader(false)
-        })
+        this.props.setUsersThunkCreator(this.props.currentPage, this.props.usersPerPage)
+        // this.props.showPreloader(true)
+        // API.getUsers(this.props.currentPage, this.props.usersPerPage).then((data) => {
+        //     this.props.setUsers(data.items, data.totalCount)
+        //     this.props.showPreloader(false)
+        // })
     }
 
     showMore = () => {
