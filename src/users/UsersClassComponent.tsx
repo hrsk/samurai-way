@@ -30,18 +30,22 @@ export class UsersClassComponent extends React.PureComponent<UsersPropsType, App
     }
 
     follow = (userId: number) => {
+        this.props.showDisabledButton(userId, true)
         API.follow(userId).then((response) => {
             if (response.data.resultCode === 0) {
                 this.props.follow(userId)
             }
+            this.props.showDisabledButton(userId, false)
         })
     }
 
     unfollow = (userId: number) => {
+        this.props.showDisabledButton(userId, true)
         API.unfollow(userId).then((response) => {
             if (response.data.resultCode === 0) {
                 this.props.unfollow(userId)
             }
+            this.props.showDisabledButton(userId, false)
         })
     }
 
@@ -55,7 +59,8 @@ export class UsersClassComponent extends React.PureComponent<UsersPropsType, App
                     this.props.isLoading ?
                         <Preloader/>
                         :
-                        <Users users={this.props.users} follow={this.follow} unfollow={this.unfollow}/>
+                        <Users users={this.props.users} follow={this.follow} unfollow={this.unfollow}
+                               isDisabled={this.props.isDisabled}/>
                 }
             </div>
         )

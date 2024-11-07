@@ -5,6 +5,7 @@ type InitialStateType = {
     currentPage: number
     usersPerPage: number
     isLoading: boolean
+    isDisabled: number[]
 }
 
 export type GetResponseType = {
@@ -44,6 +45,7 @@ const initialState: InitialStateType = {
     currentPage: 1,
     usersPerPage: 10,
     isLoading: false,
+    isDisabled: []
 }
 
 export const usersReducer = (
@@ -75,6 +77,13 @@ export const usersReducer = (
             }
         case SHOW_PRELOADER:
             return {...state, isLoading: action.preloader}
+        case DISABLE_BUTTON:
+            return {
+                ...state,
+                isDisabled: action.isDisabled
+                    ? [...state.isDisabled, action.userId]
+                    : state.isDisabled.filter(id => id !== action.userId)
+            }
         default:
             return state
     }
@@ -86,6 +95,7 @@ const SHOW_MORE = 'SHOW_MORE'
 const SET_USERS = 'SET_USERS'
 const SELECT_PAGE = 'SELECT_PAGE'
 const SHOW_PRELOADER = 'SHOW_PRELOADER'
+const DISABLE_BUTTON = 'DISABLE_BUTTON'
 
 type FollowActionType = {
     type: 'FOLLOW'
@@ -115,6 +125,11 @@ type ShowPreloaderActionType = {
     type: 'SHOW_PRELOADER'
     preloader: boolean
 }
+type DisableButtonActionType = {
+    type: 'DISABLE_BUTTON'
+    userId: number
+    isDisabled: boolean
+}
 
 type ActionsType =
     | FollowActionType
@@ -123,6 +138,7 @@ type ActionsType =
     | SetUsersActionType
     | SelectPageActionType
     | ShowPreloaderActionType
+    | DisableButtonActionType
 
 export const follow = (userId: number): FollowActionType => {
     return {
@@ -160,5 +176,12 @@ export const showPreloader = (preloader: boolean): ShowPreloaderActionType => {
     return {
         type: SHOW_PRELOADER,
         preloader,
+    }
+}
+export const showDisabledButton = (userId: number, isDisabled: boolean): DisableButtonActionType => {
+    return {
+        type: DISABLE_BUTTON,
+        userId,
+        isDisabled,
     }
 }

@@ -3,7 +3,7 @@ import {Dispatch} from 'redux'
 import {
     follow,
     ResponseUserType, selectPage,
-    setUsers,
+    setUsers, showDisabledButton,
     showMore, showPreloader,
     unfollow,
 } from '../reducers/users-reducer'
@@ -18,6 +18,7 @@ const mapStateToProps = (state: AppStateType) => {
         currentPage: state.findUsersPage.currentPage,
         usersPerPage: state.findUsersPage.usersPerPage,
         isLoading: state.findUsersPage.isLoading,
+        isDisabled: state.findUsersPage.isDisabled,
     }
 }
 // const mapDispatchToProps = (dispatch: Dispatch) => {
@@ -44,5 +45,5 @@ const mapStateToProps = (state: AppStateType) => {
 // }
 
 export type UsersPropsType = ConnectedProps<typeof connector>
-const connector = connect(mapStateToProps, {follow, unfollow, showMore, setUsers, selectPage, showPreloader})
+const connector = connect(mapStateToProps, {follow, unfollow, showMore, setUsers, selectPage, showPreloader, showDisabledButton})
 export const UsersContainer = connector(UsersClassComponent)
