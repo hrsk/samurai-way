@@ -1,4 +1,7 @@
 import axios from "axios";
+import {GetResponseType} from "../reducers/users-reducer";
+import {AuthResponseType} from "../reducers/auth-reducer";
+import {ProfileResponseType} from "../reducers/profile-reducer";
 
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -9,6 +12,16 @@ const instance = axios.create({
 })
 
 export const API = {
+    getUsers(currentPage: number, usersPerPage: number) {
+        return instance.get<GetResponseType>(`users?page=${currentPage}&count=${usersPerPage}`)
+            .then(response => response.data)
+    },
+    authMe() {
+        return instance.get<AuthResponseType>(`auth/me`).then(response => response.data)
+    },
+    getUserProfile(userId: number) {
+        return instance.get<ProfileResponseType>(`profile/${userId}`).then(response => response.data)
+    },
     follow(userId: number) {
         return instance.post(`follow/${userId}`)
     },
