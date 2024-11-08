@@ -143,14 +143,14 @@ type ActionsType =
     | ShowPreloaderActionType
     | DisableButtonActionType
 
-export const follow = (userId: number): FollowActionType => {
+export const subscribe = (userId: number): FollowActionType => {
     return {
         type: FOLLOW,
         userId,
     }
 }
 
-export const unfollow = (userId: number): UnfollowActionType => {
+export const unsubscribe = (userId: number): UnfollowActionType => {
     return {
         type: UNFOLLOW,
         userId,
@@ -189,10 +189,34 @@ export const showDisabledButton = (userId: number, isDisabled: boolean): Disable
     }
 }
 
-export const setUsersThunkCreator = (currentPage: number, usersPerPage: number) => (dispatch: AppDispatch) => {
-    dispatch(showPreloader(true))
-    return API.getUsers(currentPage, usersPerPage).then(data => {
-        dispatch(setUsers(data.items, data.totalCount))
-        dispatch(showPreloader(false))
-    })
+export const getUsers = (currentPage: number, usersPerPage: number) => {
+    return (dispatch: AppDispatch) => {
+        dispatch(showPreloader(true))
+        API.getUsers(currentPage, usersPerPage).then(data => {
+            dispatch(setUsers(data.items, data.totalCount))
+            dispatch(showPreloader(false))
+        })
+    }
+}
+export const follow = (userId: number) => {
+    return (dispatch: AppDispatch) => {
+        dispatch(showDisabledButton(userId, true))
+        API.follow(userId).then((response) => {
+            if (response.data.resultCode === 0) {
+                dispatch(subscribe(userId))
+            }
+            dispatch(showDisabledButton(userId, false))
+        })
+    }
+}
+export const unfollow = (userId: number) => {
+    return (dispatch: AppDispatch) => {
+        dispatch(showDisabledButton(userId, true))
+        API.unfollow(userId).then((response) => {
+            if (response.data.resultCode === 0) {
+                dispatch(unsubscribe(userId))
+            }
+            dispatch(showDisabledButton(userId, false))
+        })
+    }
 }

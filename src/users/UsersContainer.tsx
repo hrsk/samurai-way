@@ -1,10 +1,12 @@
 import {connect, ConnectedProps} from 'react-redux'
-import {Dispatch} from 'redux'
 import {
     follow,
-    ResponseUserType, selectPage,
-    setUsers, setUsersThunkCreator, showDisabledButton,
-    showMore, showPreloader,
+    getUsers,
+    selectPage,
+    setUsers,
+    showDisabledButton,
+    showMore,
+    showPreloader,
     unfollow,
 } from '../reducers/users-reducer'
 import {AppStateType} from '../redux/redux-store'
@@ -45,5 +47,5 @@ const mapStateToProps = (state: AppStateType) => {
 // }
 
 export type UsersPropsType = ConnectedProps<typeof connector>
-const connector = connect(mapStateToProps, {follow, unfollow, showMore, setUsers, selectPage, showPreloader, showDisabledButton, setUsersThunkCreator})
+const connector = connect(mapStateToProps, {follow, unfollow, showMore, setUsers, selectPage, showPreloader, showDisabledButton, getUsers})
 export const UsersContainer = connector(UsersClassComponent)

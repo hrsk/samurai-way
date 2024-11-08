@@ -8,7 +8,7 @@ import {API} from "../api/API";
 
 export class UsersClassComponent extends React.PureComponent<UsersPropsType, AppStateType> {
     componentDidMount() {
-        this.props.setUsersThunkCreator(this.props.currentPage, this.props.usersPerPage)
+        this.props.getUsers(this.props.currentPage, this.props.usersPerPage)
         // this.props.showPreloader(true)
         // API.getUsers(this.props.currentPage, this.props.usersPerPage).then((data) => {
         //     this.props.setUsers(data.items, data.totalCount)
@@ -31,23 +31,25 @@ export class UsersClassComponent extends React.PureComponent<UsersPropsType, App
     }
 
     follow = (userId: number) => {
-        this.props.showDisabledButton(userId, true)
-        API.follow(userId).then((response) => {
-            if (response.data.resultCode === 0) {
-                this.props.follow(userId)
-            }
-            this.props.showDisabledButton(userId, false)
-        })
+        this.props.follow(userId)
+        // this.props.showDisabledButton(userId, true)
+        // API.follow(userId).then((response) => {
+        //     if (response.data.resultCode === 0) {
+        //         this.props.follow(userId)
+        //     }
+        //     this.props.showDisabledButton(userId, false)
+        // })
     }
 
     unfollow = (userId: number) => {
-        this.props.showDisabledButton(userId, true)
-        API.unfollow(userId).then((response) => {
-            if (response.data.resultCode === 0) {
-                this.props.unfollow(userId)
-            }
-            this.props.showDisabledButton(userId, false)
-        })
+        this.props.unfollow(userId)
+        // this.props.showDisabledButton(userId, true)
+        // API.unfollow(userId).then((response) => {
+        //     if (response.data.resultCode === 0) {
+        //         this.props.unfollow(userId)
+        //     }
+        //     this.props.showDisabledButton(userId, false)
+        // })
     }
 
     render() {

@@ -1,10 +1,9 @@
 import {ProfileClassComponent} from "./ProfileClassComponent";
 import {connect, ConnectedProps} from "react-redux";
 import {AppStateType} from "../redux/redux-store";
-import {Dispatch} from "redux";
-import {ProfileResponseType, setUserProfile} from "../reducers/profile-reducer";
+import {getUserProfile, ProfileResponseType} from "../reducers/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {auth} from "../reducers/auth-reducer";
+import {authMe} from "../reducers/auth-reducer";
 
 type MapStateToPropsType = {
     profile: ProfileResponseType
@@ -47,5 +46,5 @@ export type ProfilePropsType = ConnectedProps<typeof connector>
 
 export type ConnectedPropsType = ProfilePropsType & RouteComponentProps<RouteParams>
 
-const connector = connect(mapStateToProps, {setUserProfile, auth})
+const connector = connect(mapStateToProps, {authMe, getUserProfile})
 export const ProfileContainer = connector(withRouter<ConnectedPropsType, typeof ProfileClassComponent>(ProfileClassComponent))

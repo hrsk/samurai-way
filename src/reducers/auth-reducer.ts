@@ -1,3 +1,6 @@
+import {API} from "../api/API";
+import {AppDispatch} from "../redux/redux-store";
+
 type InitialStateType = {
     data: {
         id: number | null
@@ -61,7 +64,7 @@ type AuthActionType = {
     error: string
 }
 
-export const auth = (data: {
+export const setAuthUserData = (data: {
     id: number | null, email: string | null, login: string | null
 }, isAuth: boolean, error: string): AuthActionType => {
     return {
@@ -69,5 +72,19 @@ export const auth = (data: {
         data,
         isAuth,
         error,
+    }
+}
+
+export const authMe = () => {
+    return (dispatch: AppDispatch) => {
+        API.authMe().then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setAuthUserData({
+                    id: data.data.id,
+                    email: data.data.email,
+                    login: data.data.login
+                }, true, data.messages[0]))
+            }
+        })
     }
 }
