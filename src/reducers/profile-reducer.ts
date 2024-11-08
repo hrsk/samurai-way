@@ -100,10 +100,12 @@ export const setUserProfile = (profile: ProfileResponseType): SetUserProfileType
     }
 }
 
-export const getUserProfile = (userId: number) => {
+export const getUserProfile = (userId: number | null) => {
     return (dispatch: AppDispatch) => {
-        API.getUserProfile(userId).then(data => {
-            dispatch(setUserProfile(data))
-        })
+        if (userId) {
+            API.getUserProfile(userId).then(data => {
+                dispatch(setUserProfile(data))
+            })
+        }
     }
 }

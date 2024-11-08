@@ -11,7 +11,7 @@ export class ProfileClassComponent extends React.PureComponent<ConnectedPropsTyp
         let userId = Number(this.props.match.params.userId)
 
         if (!userId) {
-            this.props.getUserProfile(18933)
+            this.props.getUserProfile(this.props.id)
         }
 
         if (userId) {
@@ -20,6 +20,9 @@ export class ProfileClassComponent extends React.PureComponent<ConnectedPropsTyp
     }
 
     render() {
-        return <Profile {...this.props}/>;
+        //TODO: redirect with use Redirect component
+
+        // if (!this.props.isAuth) return <Redirect to={'/login'}/>
+        return <Profile {...this.props}/>
     }
 }
