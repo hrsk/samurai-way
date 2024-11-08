@@ -27,19 +27,6 @@ export type ResponseUserType = {
     status: string | null
     followed: boolean
 }
-// export type UserType = {
-// 	id: number
-// 	fullName: {
-// 		firstName: string
-// 		lastName: string
-// 	}
-// 	isFollow: boolean
-// 	status: string
-// 	location: {
-// 		country: string
-// 		city: string
-// 	}
-// }
 
 const initialState: InitialStateType = {
     users: [],

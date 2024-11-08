@@ -38,20 +38,6 @@ export const Users = (props: PropsType) => {
                                 return user.followed ? props.unfollow(user.id) : props.follow(user.id)
                             }
                             }>{user.followed ? 'UNSUBSCRIBE' : 'SUBSCRIBE'}</button>
-                        {/*{user.followed ? (*/}
-                        {/*    <button disabled={props.isDisabled.some(id => id === user.id)}*/}
-                        {/*            onClick={() => {*/}
-                        {/*                props.unfollow(user.id)*/}
-                        {/*            }*/}
-                        {/*            }*/}
-                        {/*    >*/}
-                        {/*        UNFOLLOW*/}
-                        {/*    </button>*/}
-                        {/*) : (*/}
-                        {/*    <button disabled={props.isDisabled.some(id => id === user.id)} onClick={() =>*/}
-                        {/*        props.follow(user.id)*/}
-                        {/*    }>FOLLOW</button>*/}
-                        {/*)}*/}
                     </div>
                 </li>
             ))}

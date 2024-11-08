@@ -13,10 +13,6 @@ type MapStateToPropsType = {
     isAuth: boolean
 }
 
-// type MapDispatchToPropsType = {
-//     setUserProfile: (profile: ProfileResponseType) => void
-// }
-
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
@@ -27,16 +23,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 
 }
-
-// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-//     return {
-//         setUserProfile: (profile: ProfileResponseType) => {
-//             dispatch(setUserProfile(profile))
-//         }
-//     }
-//
-// }
-
 
 type RouteParams = {
     userId: string

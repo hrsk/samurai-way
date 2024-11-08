@@ -7,10 +7,6 @@ export type PostType = {
     postText: string
 }
 
-export type ProfilePageType = {
-    posts: PostType[]
-    newPostText: string
-}
 export type PhotosResponseType = {
     small: string | null
     large: string | null
