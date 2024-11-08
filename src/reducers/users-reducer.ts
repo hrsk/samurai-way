@@ -1,5 +1,6 @@
 import {API} from "../api/API";
 import {AppDispatch} from "../redux/redux-store";
+import {ResponseUserType} from "../types";
 
 type InitialStateType = {
     users: ResponseUserType[]
@@ -9,23 +10,6 @@ type InitialStateType = {
     usersPerPage: number
     isLoading: boolean
     isDisabled: number[]
-}
-
-export type GetResponseType = {
-    items: ResponseUserType[]
-    totalCount: number
-    error: string | null
-}
-export type ResponseUserType = {
-    name: string
-    id: number
-    uniqueUrlName: string | null
-    photos: {
-        small: string | null
-        large: string | null
-    }
-    status: string | null
-    followed: boolean
 }
 
 const initialState: InitialStateType = {

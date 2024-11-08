@@ -1,9 +1,10 @@
 import {ProfileClassComponent} from "./ProfileClassComponent";
 import {connect, ConnectedProps} from "react-redux";
 import {AppStateType} from "../redux/redux-store";
-import {getUserProfile, ProfileResponseType} from "../reducers/profile-reducer";
+import {getUserProfile} from "../reducers/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {authMe} from "../reducers/auth-reducer";
+import {ProfileResponseType} from "../types";
 
 type MapStateToPropsType = {
     profile: ProfileResponseType

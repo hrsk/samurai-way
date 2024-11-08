@@ -1,7 +1,5 @@
 import axios from "axios";
-import {GetResponseType} from "../reducers/users-reducer";
-import {AuthResponseType} from "../reducers/auth-reducer";
-import {ProfileResponseType} from "../reducers/profile-reducer";
+import {AuthResponseType, GetResponseType, ProfileResponseType} from "../types";
 
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,

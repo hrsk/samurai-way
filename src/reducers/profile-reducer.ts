@@ -1,36 +1,6 @@
 import {AppDispatch} from "../redux/redux-store";
 import {API} from "../api/API";
-
-export type PostType = {
-    id: number
-    userName: string
-    postText: string
-}
-
-export type PhotosResponseType = {
-    small: string | null
-    large: string | null
-}
-export type ContactsResponseType = {
-    github: string | null
-    vk: string | null
-    facebook: string | null
-    instagram: string | null
-    twitter: string | null
-    website: string | null
-    youtube: string | null
-    mainLink: string | null
-}
-
-export type ProfileResponseType = {
-    aboutMe: string | null
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string | null
-    fullName: string
-    contacts: ContactsResponseType
-    photos: PhotosResponseType
-}
+import {PostType, ProfileResponseType} from "../types";
 
 type InitialStateType = {
     profile: ProfileResponseType

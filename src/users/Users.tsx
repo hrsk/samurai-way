@@ -1,7 +1,7 @@
 import React from 'react';
-import {ResponseUserType} from "../reducers/users-reducer";
 import no_avatar from "../assets/images/avatars/no_avatar.png";
 import {NavLink} from "react-router-dom";
+import {ResponseUserType} from "../types";
 
 type PropsType = {
     users: ResponseUserType[]

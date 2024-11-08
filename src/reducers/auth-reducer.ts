@@ -21,15 +21,7 @@ const initialState: InitialStateType = {
     errors: []
 }
 
-export type AuthResponseType = {
-    resultCode: number
-    messages: string[]
-    data: {
-        id: number | null
-        email: string | null
-        login: string | null
-    }
-}
+//
 
 
 export const authorizationReducer = (

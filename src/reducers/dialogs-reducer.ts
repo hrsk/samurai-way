@@ -1,11 +1,4 @@
-export type DialogType = {
-	id: number
-	userName: string
-}
-export type MessageType = {
-	id: number
-	messageText: string
-}
+import {DialogType, MessageType} from "../types";
 
 type InitialStateType = {
 	dialogs: DialogType[]

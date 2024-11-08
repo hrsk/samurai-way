@@ -2,12 +2,11 @@ import { connect, ConnectedProps } from 'react-redux'
 import { Dispatch } from 'redux'
 import {
 	changeMessageTextAC,
-	DialogType,
-	MessageType,
 	sendMessageAC,
 } from '../reducers/dialogs-reducer'
 import { AppStateType } from '../redux/redux-store'
 import { Messages } from './Messages'
+import {DialogType, MessageType} from "../types";
 
 type MapStateToPropsType = {
 	dialogs: DialogType[]
